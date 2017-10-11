@@ -1,0 +1,17 @@
+.affiliation-indicator {
+  display: flex;
+  flex-direction: column;
+  width: 44px;
+  align-items: center;
+}
+
+.affiliation-indicator__text {
+  font-size: $font-size-xs;
+  font-family: $font-family-base;
+  color: $color-gray-2;
+}
+
+.affiliation-indicator__logo {
+  margin-top: 2px;
+  width: 100%;
+}
