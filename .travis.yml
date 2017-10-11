@@ -8,16 +8,3 @@ cache:
 script:
   - npm test
   - npm run build
-deploy:
-  skip_cleanup: true
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  region: eu-west-1
-  bucket: print.all3dp.com
-  acl: public_read
-  local_dir: dist
-  on:
-    repo: all3dp/printing-engine-client
-    branch: master
-after_deploy: ./bin/purge-cloudflare-cache.sh
