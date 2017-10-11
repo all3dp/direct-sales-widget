@@ -2,9 +2,11 @@
 // ---------------------------------------------------
 
 $font-family-base: 'Roboto', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
 
-$font-size-s: 12px;
-$font-size-base: 15px;
+$font-size-xs: 7px;
+$font-size-s: 14px;
+$font-size-base: 16px;
 $font-size-l: 20px;
 $font-size-xl: 25px;
 $font-size-xxl: 35px;
@@ -23,7 +25,7 @@ $color-gray-0: #333333;
 $color-gray-1: #666666;
 $color-gray-2: #999999;
 $color-gray-3: #cccccc;
-$color-gray-4: #f0f0f0;
+$color-gray-4: #d2d2d2;
 
 $color-blue-dark: #122732;
 $color-blue: #0277bd;
@@ -106,9 +108,9 @@ $mediaqueries: (
 // Misc
 // ---------------------------------------------------
 
-$field-height: 50px;
+$field-height: 32px;
 $compact-field-height: 40px;
-$border-radius: 5px;
+$border-radius: 3px;
 $model-item-height: 127px;
 $color-square-size: 20px;
 

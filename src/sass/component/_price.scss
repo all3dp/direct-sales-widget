@@ -4,16 +4,7 @@
   line-height: $price-height;
   height: $price-height;
   margin-bottom: $space-base;
-
-  &__loading {
-    color: $color-minor;
-    font-style: italic;
-
-    & > .loading-indicator {
-      font-size: $price-height;
-      margin-right: $space-s;
-    }
-  }
+  min-width: 84px;
 
   &__price {
     display: flex;
@@ -21,17 +12,10 @@
   }
 
   &__value {
+    font-family: $font-family-mono;
     font-size: $font-size-l;
     font-weight: $font-weight-bold;
     white-space: nowrap;
-  }
-
-  &__meta {
-    @include scut-truncate();
-    color: $color-minor;
-    font-style: italic;
-    font-size: $font-size-base;
-    font-weight: $font-weight-regular;
-    margin-left: $space-s;
+    color: $color-blue;
   }
 }
