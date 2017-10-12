@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 import propTypes from 'Lib/prop-types'
+import buildClassName from 'Lib/build-class-name'
 
 import Button from 'Component/button'
 import SliderControls from 'Component/slider-controls'
@@ -8,31 +9,88 @@ import AffiliationIndicator from 'Component/affiliation-indicator'
 import ZoomControl from 'Component/zoom-control'
 
 const WidgetFooter = ({
+  modifiers = [],
+  classNames,
   zoomedIn,
+  disabled,
+  minimal,
   buttonLabel,
   material,
   handleChangeMaterialLeft,
   handleChangeMaterialRight,
-  handleButtonClick
-}) => (
-  <div className="widget-footer">
-    <div className="widget-footer__left">
-      <SliderControls
-        label={material}
-        onClickSlideLeft={handleChangeMaterialLeft}
-        onClickSlideRight={handleChangeMaterialRight}
-      />
-      <Button label={buttonLabel} onClick={handleButtonClick} />
+  handleButtonClick,
+  handleToggleZoom
+}) => {
+  const finalModifiers = [
+    ...modifiers,
+    {
+      'zoomed-in': zoomedIn
+    }
+  ]
+
+  if (zoomedIn) {
+    return (
+      <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+        <div className="widget-footer__right">
+          <ZoomControl zoomedIn={zoomedIn} toggleZoom={handleToggleZoom} />
+          <AffiliationIndicator />
+        </div>
+      </div>
+    )
+  }
+
+  if (minimal) {
+    return (
+      <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+        <div className="widget-footer__right">
+          <AffiliationIndicator />
+        </div>
+      </div>
+    )
+  }
+
+  if (disabled) {
+    return (
+      <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+        <div className="widget-footer__left">
+          <Button label={buttonLabel} disabled={disabled} onClick={handleButtonClick} />
+        </div>
+        <div className="widget-footer__right">
+          <AffiliationIndicator />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+      <div className="widget-footer__left">
+        <SliderControls
+          label={material}
+          onClickSlideLeft={handleChangeMaterialLeft}
+          onClickSlideRight={handleChangeMaterialRight}
+        />
+        <Button label={buttonLabel} disabled={disabled} onClick={handleButtonClick} />
+      </div>
+      <div className="widget-footer__right">
+        <ZoomControl zoomedIn={zoomedIn} toggleZoom={handleToggleZoom} />
+        <AffiliationIndicator />
+      </div>
     </div>
-    <div className="widget-footer__right">
-      <ZoomControl zoomedIn={zoomedIn} />
-      <AffiliationIndicator />
-    </div>
-  </div>
-)
+  )
+}
 
 WidgetFooter.propTypes = {
-  ...propTypes.component
+  ...propTypes.component,
+  zoomedIn: PropTypes.bool,
+  disabled: PropTypes.bool,
+  minimal: PropTypes.bool,
+  buttonLabel: PropTypes.string.isRequired,
+  material: PropTypes.string.isRequired,
+  handleChangeMaterialLeft: PropTypes.func.isRequired,
+  handleChangeMaterialRight: PropTypes.func.isRequired,
+  handleButtonClick: PropTypes.func.isRequired,
+  handleToggleZoom: PropTypes.func.isRequired
 }
 
 export default WidgetFooter

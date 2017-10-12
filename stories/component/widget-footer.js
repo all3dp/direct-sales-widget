@@ -12,5 +12,39 @@ storiesOf('Widget Footer', module)
       handleButtonClick={action('click')}
       handleChangeMaterialLeft={action('click')}
       handleChangeMaterialRight={action('click')}
+      handleToggleZoom={action('click')}
+    />
+  ))
+  .add('zoomed', () => (
+    <WidgetFooter
+      zoomedIn
+      material={'PREMIUM PLASTIC "white"'}
+      buttonLabel="$32,50 BUY"
+      handleButtonClick={action('click')}
+      handleChangeMaterialLeft={action('click')}
+      handleChangeMaterialRight={action('click')}
+      handleToggleZoom={action('click')}
+    />
+  ))
+  .add('disabled', () => (
+    <WidgetFooter
+      disabled
+      material={'PREMIUM PLASTIC "white"'}
+      buttonLabel="$32,50 BUY"
+      handleButtonClick={action('click')}
+      handleChangeMaterialLeft={action('click')}
+      handleChangeMaterialRight={action('click')}
+      handleToggleZoom={action('click')}
+    />
+  ))
+  .add('minimal', () => (
+    <WidgetFooter
+      minimal
+      material={'PREMIUM PLASTIC "white"'}
+      buttonLabel="$32,50 BUY"
+      handleButtonClick={action('click')}
+      handleChangeMaterialLeft={action('click')}
+      handleChangeMaterialRight={action('click')}
+      handleToggleZoom={action('click')}
     />
   ))

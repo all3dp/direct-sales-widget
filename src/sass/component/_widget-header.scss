@@ -1,5 +1,10 @@
 .widget-header {
   text-align: center;
   background-color: $color-bg-white-overlay;
-  padding: 0 28px 5px 28px;
+  padding: 5px 28px;
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
