@@ -1,0 +1,15 @@
+.slider-controls {
+  display: flex;
+  align-items: center;
+
+  >div {
+    cursor: pointer;
+  }
+
+  .slider-controls__material {
+    margin: 0 12px;
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+    color: $color-blue;
+  }
+}
