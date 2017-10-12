@@ -4,6 +4,8 @@
 
   >div {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
   }
 
   .slider-controls__material {
@@ -11,5 +13,6 @@
     font-family: $font-family-base;
     font-weight: $font-weight-bold;
     color: $color-blue;
+    font-size: $font-size-s;
   }
 }
