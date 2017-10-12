@@ -1,15 +1,16 @@
 .slider-controls {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
   >div {
     cursor: pointer;
     width: 24px;
-    height: 24px;
+    height: 19px;
   }
 
   .slider-controls__material {
-    margin: 0 12px;
     font-family: $font-family-base;
     font-weight: $font-weight-bold;
     color: $color-blue;
