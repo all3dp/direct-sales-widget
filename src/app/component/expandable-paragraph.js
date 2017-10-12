@@ -3,9 +3,9 @@ import React, {Component} from 'react'
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
 
-import Icon from 'Component/icon'
+import Paragraph from 'Component/paragraph'
 
-import navigationArrow from 'Icon/navigation-arrow.svg'
+import NavigationArrow from 'Component/navigation-arrow'
 
 export default class ExpandableParagraph extends Component {
   static propTypes = {
@@ -37,11 +37,13 @@ export default class ExpandableParagraph extends Component {
 
     return (
       <div className={buildClassName('expandable-paragraph', finalModifiers, classNames)}>
-        <span className="expandable-paragraph__content">{children}</span>
+        <span className="expandable-paragraph__content">
+          <Paragraph>{children}</Paragraph>
+        </span>
         <button className="expandable-paragraph__button" onClick={this.handleExpandToggle}>
           {this.state.expanded ? 'CLOSE ' : 'LEARN MORE '}
           <span className="expandable-paragraph__icon">
-            <Icon source={navigationArrow} />
+            <NavigationArrow orientation={expanded ? 'up' : 'down'} />
           </span>
         </button>
       </div>
