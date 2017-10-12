@@ -20,4 +20,4 @@ deploy:
   on:
     repo: all3dp/direct-sales-widget
     branch: master
-after_deploy: ./bin/purge-cloudflare-cache.sh
+#after_deploy: ./bin/purge-cloudflare-cache.sh
