@@ -8,5 +8,5 @@ storiesOf('Background Image', module)
     <BackgroundImage width="320px" height="280px" src="http://placehold.it/320x280" />
   ))
   .add('zoomed', () => (
-    <BackgroundImage width="320px" height="280px" modifiers={['zoom']} src="http://placehold.it/320x280" />
+    <BackgroundImage width="320px" height="280px" zoom src="http://placehold.it/320x280" />
   ))
