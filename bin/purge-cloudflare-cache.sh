@@ -2,8 +2,8 @@
 
 ZONE="924763cc40afc8b78600536e6eb5c652"
 
-FILES="[\"https://direct-sales-widget.all3dp.com/bundle.js\", \
-        \"https://direct-sales-widget.all3dp.com\"]"
+FILES="[\"https://saleswidget.all3dp.com/bundle.js\", \
+        \"https://saleswidget.all3dp.com\"]"
 
 curl -X DELETE "https://api.cloudflare.com/client/v4/zones/$ZONE/purge_cache" \
 -H "X-Auth-Key:$CLOUDFLARE_API_KEY" \
