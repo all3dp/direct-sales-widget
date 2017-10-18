@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
@@ -34,6 +34,13 @@ const ExpandableParagraph = ({
       </button>
     </div>
   )
+}
+
+ExpandableParagraph.propTypes = {
+  ...propTypes,
+  children: PropTypes.node.isRequired,
+  expanded: PropTypes.bool.isRequired,
+  toggleDescription: PropTypes.func.isRequired
 }
 
 export default ExpandableParagraph

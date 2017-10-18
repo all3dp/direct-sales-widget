@@ -8,9 +8,7 @@ import LocationField from 'Component/location-field'
 
 import config from '../../../config'
 
-const AddressOverlay = ({
-
-}) => (
+const AddressOverlay = () => (
   <div className="address-overlay">
     <Headline label="Shipping address required" />
     <Paragraph modifiers={['centered']}>We need your address to calculate the shipping prices!</Paragraph>

@@ -7,8 +7,8 @@ import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
 import {
-  toggleDescription,
-  toggleBackgroundImageZoom
+  toggleDescription as toggleDescriptionAction,
+  toggleBackgroundImageZoom as toggleBackgroundImageZoomAction
 } from 'Action/display'
 
 const DisplayPage = ({
@@ -42,8 +42,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  toggleDescription,
-  toggleBackgroundImageZoom
+  toggleDescription: toggleDescriptionAction,
+  toggleBackgroundImageZoom: toggleBackgroundImageZoomAction
 }
 
 const enhance = compose(
