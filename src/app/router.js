@@ -3,6 +3,7 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import {Router, Route, browserHistory} from 'react-router'
 
 import DisplayPage from 'Container/display-page'
+import AddressPage from 'Container/address-page'
 
 // const preventDeepLinking = store => (nextState, replace) => {
 //   // It is only possible to reach other routes than the model page
@@ -20,6 +21,7 @@ export default ({store}) => {
   return (
     <Router history={history}>
       <Route component={DisplayPage} path="/" />
+      <Route component={AddressPage} path="/address" />
     </Router>
   )
 }

@@ -24,4 +24,8 @@
   &--zoomed-in {
     background-color: transparent;
   }
+
+  &--thick-background {
+    background-color: $color-bg-white-overlay-thick;
+  }
 }

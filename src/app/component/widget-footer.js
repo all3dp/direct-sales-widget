@@ -14,6 +14,7 @@ const WidgetFooter = ({
   zoomedIn,
   disabled,
   minimal,
+  addressPage,
   buttonLabel,
   material,
   handleChangeMaterialLeft,
@@ -62,6 +63,19 @@ const WidgetFooter = ({
     )
   }
 
+  if (addressPage) {
+    return (
+      <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+        <div className="widget-footer__left">
+          <Button label={buttonLabel} onClick={handleButtonClick} />
+        </div>
+        <div className="widget-footer__right">
+          <AffiliationIndicator />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
       <div className="widget-footer__left">
@@ -85,12 +99,13 @@ WidgetFooter.propTypes = {
   zoomedIn: PropTypes.bool,
   disabled: PropTypes.bool,
   minimal: PropTypes.bool,
-  buttonLabel: PropTypes.string.isRequired,
-  material: PropTypes.string.isRequired,
-  handleChangeMaterialLeft: PropTypes.func.isRequired,
-  handleChangeMaterialRight: PropTypes.func.isRequired,
-  handleButtonClick: PropTypes.func.isRequired,
-  handleToggleZoom: PropTypes.func.isRequired
+  addressPage: PropTypes.bool,
+  buttonLabel: PropTypes.string,
+  material: PropTypes.string,
+  handleChangeMaterialLeft: PropTypes.func,
+  handleChangeMaterialRight: PropTypes.func,
+  handleButtonClick: PropTypes.func,
+  handleToggleZoom: PropTypes.func
 }
 
 export default WidgetFooter

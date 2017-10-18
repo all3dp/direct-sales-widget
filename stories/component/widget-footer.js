@@ -48,3 +48,13 @@ storiesOf('Widget Footer', module)
       handleToggleZoom={action('click')}
     />
   ))
+  .add('address page', () => (
+    <WidgetFooter
+      addressPage
+      buttonLabel="Calculate Price"
+      handleButtonClick={action('click')}
+      handleChangeMaterialLeft={action('click')}
+      handleChangeMaterialRight={action('click')}
+      handleToggleZoom={action('click')}
+    />
+  ))
