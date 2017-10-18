@@ -5,14 +5,14 @@ import Icon from 'Component/icon'
 import zoomIn from 'Icon/zoom-in.svg'
 import zoomOut from 'Icon/zoom-out.svg'
 
-const ZoomControl = ({zoomedOut = true, toggleZoom}) => (
+const ZoomControl = ({zoomedIn, toggleZoom}) => (
   <div className="zoom-control" onClick={toggleZoom}>
-    <Icon source={zoomedOut ? zoomIn : zoomOut} />
+    <Icon source={zoomedIn ? zoomOut : zoomIn} />
   </div>
 )
 
 ZoomControl.propTypes = {
-  zoomedOut: PropTypes.bool.isRequired,
+  zoomedIn: PropTypes.bool.isRequired,
   toggleZoom: PropTypes.func.isRequired
 }
 

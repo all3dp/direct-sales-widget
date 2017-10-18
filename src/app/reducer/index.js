@@ -10,6 +10,7 @@ import material from './material'
 import price from './price'
 import order from './order'
 import configuration from './configuration'
+import display from './display'
 
 const rootReducer = combineReducers({
   app,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   price,
   order,
   configuration,
+  display,
   routing: routerReducer,
   form: formReducer
 })

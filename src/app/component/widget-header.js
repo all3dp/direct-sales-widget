@@ -6,7 +6,15 @@ import buildClassName from 'Lib/build-class-name'
 import Headline from 'Component/headline'
 import ExpandableParagraph from 'Component/expandable-paragraph'
 
-const WidgetHeader = ({title, description, hidden, modifiers = [], classNames}) => {
+const WidgetHeader = ({
+  title,
+  description,
+  hidden,
+  modifiers = [],
+  classNames,
+  descriptionExpanded,
+  toggleDescription
+}) => {
   const finalModifiers = [
     ...modifiers,
     {
@@ -17,7 +25,10 @@ const WidgetHeader = ({title, description, hidden, modifiers = [], classNames}) 
   return (
     <div className={buildClassName('widget-header', finalModifiers, classNames)} >
       <Headline label={title} />
-      <ExpandableParagraph>
+      <ExpandableParagraph
+        expanded={descriptionExpanded}
+        toggleDescription={toggleDescription}
+      >
         {description}
       </ExpandableParagraph>
     </div>
