@@ -1,0 +1,40 @@
+.checkout-line {
+
+  margin-bottom: 9px;
+  padding-bottom: 4px;
+  display: flex;
+  align-items: flex-end;
+
+  &__label {
+    font-size: $font-size-base;
+    color: $color-blue;
+    font-family: $font-family-base;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  &__value {
+    min-width: 60px;
+    display: inline-flex;
+    justify-content: space-between;
+    font-size: $font-size-plus;
+    font-weight: 600;
+    line-height: $line-height-base;
+    color: $color-blue;
+    margin-left: 16px;
+    text-align: right;
+  }
+
+  &--bold {
+
+    .checkout-line__label {
+      font-size: $font-size-l;
+      font-weight: 700;
+      text-transform: unset;
+    }
+  }
+
+  &--summary {
+    border-bottom: 2px solid $color-blue;
+  }
+}

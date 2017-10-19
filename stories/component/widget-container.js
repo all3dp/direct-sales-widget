@@ -6,6 +6,7 @@ import WidgetContainer from 'Component/widget-container'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 import AddressOverlay from 'Component/address-overlay'
+import CheckoutOverlay from 'Component/checkout-overlay'
 
 storiesOf('Widget Container', module)
   .add('default', () => (
@@ -52,7 +53,7 @@ storiesOf('Widget Container', module)
       />
     </WidgetContainer>
   ))
-  .add('Shipping Address Required', () => (
+  .add('Shipping Address', () => (
     <WidgetContainer backgroundImage="http://placehold.it/320x280">
       <AddressOverlay />
       <WidgetFooter
@@ -64,6 +65,17 @@ storiesOf('Widget Container', module)
         handleChangeMaterialLeft={action('click')}
         handleChangeMaterialRight={action('click')}
         handleToggleZoom={action('click')}
+      />
+    </WidgetContainer>
+  ))
+  .add('Checkout', () => (
+    <WidgetContainer backgroundImage="http://placehold.it/320x280">
+      <CheckoutOverlay
+        objectTitle="Raspberry Pi Case"
+        objectPrice={13.50}
+        shippingPrice={6.50}
+        vatPrice={2.58}
+        totalPrice={45.08}
       />
     </WidgetContainer>
   ))

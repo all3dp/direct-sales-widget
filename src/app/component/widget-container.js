@@ -7,11 +7,11 @@ import BackgroundImage from 'Component/background-image'
 const WidgetContainer = ({
   children,
   backgroundImage,
-  zoomedIn = false
+  zoomedIn
 }) => (
   <div className="widget">
     <div className="widget__background">
-      <BackgroundImage zoom={zoomedIn} src={backgroundImage} />
+      <BackgroundImage zoomedIn={zoomedIn} src={backgroundImage} />
     </div>
     <div className="widget__content">
       {children}

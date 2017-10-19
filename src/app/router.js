@@ -4,6 +4,7 @@ import {Router, Route, browserHistory} from 'react-router'
 
 import DisplayPage from 'Container/display-page'
 import AddressPage from 'Container/address-page'
+import CheckOutPage from 'Container/checkout-page'
 
 // const preventDeepLinking = store => (nextState, replace) => {
 //   // It is only possible to reach other routes than the model page
@@ -22,6 +23,7 @@ export default ({store}) => {
     <Router history={history}>
       <Route component={DisplayPage} path="/" />
       <Route component={AddressPage} path="/address" />
+      <Route component={CheckOutPage} path="/checkout" />
     </Router>
   )
 }
