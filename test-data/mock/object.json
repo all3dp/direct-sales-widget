@@ -1,0 +1,30 @@
+{
+  "title": "arbitrary-object-title",
+  "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+  "materials": [
+    {
+      "id": "arbitrary-id-1",
+      "title": "arbitrary-material-title-1",
+      "imageSrc": "arbitrary-material-image-source-1",
+      "price": 10
+    },
+    {
+      "id": "arbitrary-id-2",
+      "title": "arbitrary-material-title-2",
+      "imageSrc": "arbitrary-material-image-source-2",
+      "price": 20
+    },
+    {
+      "id": "arbitrary-id-3",
+      "title": "arbitrary-material-title-3",
+      "imageSrc": "arbitrary-material-image-source-3",
+      "price": 30
+    },
+    {
+      "id": "arbitrary-id-4",
+      "title": "arbitrary-material-title-4",
+      "imageSrc": "arbitrary-material-image-source-4",
+      "price": 40
+    }
+  ]
+}

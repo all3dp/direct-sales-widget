@@ -1,10 +1,10 @@
 import {detectAddress, createUser} from './user'
-import {getMaterials} from './material'
 import {openAddressModal} from './modal'
+import {getProduct} from './product'
 
 export const init = () => dispatch => (
   Promise.all([
-    dispatch(getMaterials()),
+    dispatch(getProduct()),
     dispatch(detectAddress())
       .then(() => dispatch(createUser()))
       .catch(() => dispatch(openAddressModal()))

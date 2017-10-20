@@ -8,6 +8,24 @@ import {
 
 import config from '../../../config'
 
+export const selectSelectedMaterial = (state) => {
+  const {material: {
+    materials,
+    selectedMaterialId
+  }} = state
+
+  return materials[selectedMaterialId]
+}
+
+export const selectSelectedMaterialPrice = (state) => {
+  const {material: {
+    materials,
+    selectedMaterialId
+  }} = state
+
+  return materials[selectedMaterialId].price
+}
+
 export const selectCommonQuantity = (state) => {
   // Common quantity exists only if all models have the same individual quantity
   const {

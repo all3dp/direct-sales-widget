@@ -4,54 +4,59 @@ import TYPE from '../type'
 
 const initialState = {
   materials: undefined,
-  selectedMaterial: undefined,
-  selectedMaterialConfig: undefined,
-  selectedMaterialConfigs: {}
+  materialIds: undefined,
+  selectedMaterialId: undefined
 }
 
-function handleRestoreConfiguration (state, {payload: {materialConfigId}}) {
+export const createMaterialsById = (prev, curr) => {
+  prev[curr.id] = curr
+  return prev
+}
+
+export function handleSetMaterials (state, {payload}) {
+  const materialIds = payload.materials.map(material => material.id)
+  const materials = payload.materials.reduce(createMaterialsById, {})
   return {
     ...state,
-    selectedMaterialConfig: materialConfigId
+    materials,
+    materialIds
   }
 }
 
-function handleReceivedMaterials (state, {payload}) {
+export function handleSelectMaterial (state, {payload}) {
   return {
     ...state,
-    materials: payload
+    selectedMaterialId: payload.materialId
   }
 }
 
-function handleSelectedMaterial (state, {payload}) {
+export function handleSelectNextMaterial (state) {
+  const {materialIds, selectedMaterialId} = state
+  const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
+  const nextMaterialIndex = currentMaterialIndex < materialIds.length - 1 ? currentMaterialIndex + 1 : 0
+  const nextMaterialId = materialIds[nextMaterialIndex]
+
   return {
     ...state,
-    selectedMaterial: payload
+    selectedMaterialId: nextMaterialId
   }
 }
 
-function handleSelectedMaterialConfig (state, {payload}) {
-  return {
-    ...state,
-    selectedMaterialConfig: payload
-  }
-}
+export function handleSelectPreviousMaterial (state) {
+  const {materialIds, selectedMaterialId} = state
+  const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
+  const nextMaterialIndex = currentMaterialIndex > 0 ? currentMaterialIndex - 1 : materialIds.length - 1
+  const nextMaterialId = materialIds[nextMaterialIndex]
 
-function handleSelectedMaterialConfigForFinishGroup (state, {payload}) {
   return {
     ...state,
-    selectedMaterialConfigs: {
-      ...state.selectedMaterialConfigs,
-      ...payload
-    },
-    selectedMaterialConfig: undefined
+    selectedMaterialId: nextMaterialId
   }
 }
 
 export default handleActions({
-  [TYPE.MATERIAL.RECEIVED]: handleReceivedMaterials,
-  [TYPE.MATERIAL.SELECTED]: handleSelectedMaterial,
-  [TYPE.MATERIAL.CONFIG_SELECTED]: handleSelectedMaterialConfig,
-  [TYPE.MATERIAL.CONFIG_FOR_FINISH_GROUP_SELECTED]: handleSelectedMaterialConfigForFinishGroup,
-  [TYPE.DIRECT_SALES.RESTORE_CONFIGURATION]: handleRestoreConfiguration
+  [TYPE.MATERIAL.SET_MATERIALS]: handleSetMaterials,
+  [TYPE.MATERIAL.SELECT_MATERIAL]: handleSelectMaterial,
+  [TYPE.MATERIAL.SELECT_NEXT_MATERIAL]: handleSelectNextMaterial,
+  [TYPE.MATERIAL.SELECT_PREVIOUS_MATERIAL]: handleSelectPreviousMaterial
 }, initialState)

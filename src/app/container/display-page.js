@@ -6,12 +6,21 @@ import WidgetContainer from 'Component/widget-container'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
+import {selectSelectedMaterial} from 'Lib/selector'
+
+import {selectNextMaterial, selectPreviousMaterial} from 'Action/material'
+
 import {
   toggleDescription as toggleDescriptionAction,
   toggleBackgroundImageZoom as toggleBackgroundImageZoomAction
 } from 'Action/display'
 
 const DisplayPage = ({
+  productTitle,
+  productDescription,
+  selectedMaterial,
+  changeMaterialLeft,
+  changeMaterialRight,
   descriptionExpanded,
   backgroundImageZoomed,
   toggleDescription,
@@ -19,31 +28,36 @@ const DisplayPage = ({
 }) => (
   <WidgetContainer zoomedIn={backgroundImageZoomed} backgroundImage="http://placehold.it/320x280">
     <WidgetHeader
-      title="Raspberry Pi Case"
-      description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+      title={productTitle}
+      description={productDescription}
       descriptionExpanded={descriptionExpanded}
       toggleDescription={toggleDescription}
       hidden={backgroundImageZoomed}
     />
     <WidgetFooter
       zoomedIn={backgroundImageZoomed}
-      material={'PREMIUM PLASTIC "white"'}
+      material={selectedMaterial.title}
       buttonLabel="$32,50 BUY"
       handleButtonClick={null}
-      handleChangeMaterialLeft={null}
-      handleChangeMaterialRight={null}
+      handleChangeMaterialLeft={changeMaterialLeft}
+      handleChangeMaterialRight={changeMaterialRight}
       handleToggleZoom={toggleBackgroundImageZoom}
     />
   </WidgetContainer>
   )
 const mapStateToProps = state => ({
+  productTitle: state.product.title,
+  productDescription: state.product.description,
+  selectedMaterial: selectSelectedMaterial(state),
   descriptionExpanded: state.display.descriptionExpanded,
   backgroundImageZoomed: state.display.backgroundImageZoomed
 })
 
 const mapDispatchToProps = {
   toggleDescription: toggleDescriptionAction,
-  toggleBackgroundImageZoom: toggleBackgroundImageZoomAction
+  toggleBackgroundImageZoom: toggleBackgroundImageZoomAction,
+  changeMaterialRight: selectNextMaterial,
+  changeMaterialLeft: selectPreviousMaterial
 }
 
 const enhance = compose(
