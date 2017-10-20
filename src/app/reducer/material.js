@@ -13,6 +13,18 @@ export const createMaterialsById = (prev, curr) => {
   return prev
 }
 
+export const moveIndexUp = (i, a) => {
+  const newIndex = i === a.length - 1 ? 0 : i + 1
+
+  return newIndex
+}
+
+export const moveIndexDown = (i, a) => {
+  const newIndex = i === 0 ? a.length - 1 : i - 1
+
+  return newIndex
+}
+
 export function handleSetMaterials (state, {payload}) {
   const materialIds = payload.materials.map(material => material.id)
   const materials = payload.materials.reduce(createMaterialsById, {})
@@ -33,7 +45,7 @@ export function handleSelectMaterial (state, {payload}) {
 export function handleSelectNextMaterial (state) {
   const {materialIds, selectedMaterialId} = state
   const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
-  const nextMaterialIndex = currentMaterialIndex < materialIds.length - 1 ? currentMaterialIndex + 1 : 0
+  const nextMaterialIndex = moveIndexUp(currentMaterialIndex, materialIds)
   const nextMaterialId = materialIds[nextMaterialIndex]
 
   return {
@@ -45,7 +57,7 @@ export function handleSelectNextMaterial (state) {
 export function handleSelectPreviousMaterial (state) {
   const {materialIds, selectedMaterialId} = state
   const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
-  const nextMaterialIndex = currentMaterialIndex > 0 ? currentMaterialIndex - 1 : materialIds.length - 1
+  const nextMaterialIndex = moveIndexDown(currentMaterialIndex, materialIds)
   const nextMaterialId = materialIds[nextMaterialIndex]
 
   return {
