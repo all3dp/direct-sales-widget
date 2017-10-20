@@ -37,7 +37,11 @@ CheckoutOverlay.propTypes = {
   objectPrice: PropTypes.number.isRequired,
   shippingPrice: PropTypes.number.isRequired,
   vatPrice: PropTypes.number.isRequired,
-  totalPrice: PropTypes.number.isRequired
+  totalPrice: PropTypes.number.isRequired,
+  handleCheckoutClick: PropTypes.func,
+  handleCheckoutAuthorize: PropTypes.func,
+  handleCheckoutCancel: PropTypes.func,
+  handleCheckoutError: PropTypes.func
 }
 
 export default CheckoutOverlay
