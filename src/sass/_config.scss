@@ -125,5 +125,6 @@ $box-shadow-error: 0px 0px 4px 0 $color-error;
 
 $transition-duration: .4s;
 $transition-duration-fast: .15s;
+$transition-easing: cubic-bezier(.19,.99,.17,.99);
 
 $global-stacking: app, select-menu, tooltip, overlay;
