@@ -9,7 +9,7 @@ import {track as trackGoogleAnalytics} from 'Service/google-analytics'
 
 import rootReducer from './reducer'
 
-const fatalErrorHandler = store => next => (action) => {
+const fatalErrorHandler = () => next => (action) => {
   const promise = next(action)
 
   if (promise && promise.catch) {
