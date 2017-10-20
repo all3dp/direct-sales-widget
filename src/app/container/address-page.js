@@ -7,13 +7,22 @@ import AddressOverlay from 'Component/address-overlay'
 import WidgetFooter from 'Component/widget-footer'
 
 import {
-  toggleDescription,
-  toggleBackgroundImageZoom
-} from 'Action/display'
+  updateLocation
+} from 'Action/user'
 
-const DisplayPage = () => (
+import {
+  convertPlaceToLocation
+} from 'Lib/geolocation'
+
+const AddressPage = ({
+  address,
+  onUpdateLocation
+}) => (
   <WidgetContainer backgroundImage="http://placehold.it/320x280">
-    <AddressOverlay />
+    <AddressOverlay
+      address={address}
+      onChange={place => onUpdateLocation(convertPlaceToLocation(place))}
+    />
     <WidgetFooter
       modifiers={['thick-background']}
       addressPage
@@ -25,17 +34,15 @@ const DisplayPage = () => (
   </WidgetContainer>
   )
 const mapStateToProps = state => ({
-  descriptionExpanded: state.display.descriptionExpanded,
-  backgroundImageZoomed: state.display.backgroundImageZoomed
+  address: state.user.user.shippingAddress
 })
 
 const mapDispatchToProps = {
-  toggleDescription,
-  toggleBackgroundImageZoom
+  onUpdateLocation: updateLocation
 }
 
 const enhance = compose(
     connect(mapStateToProps, mapDispatchToProps)
   )
 
-export default enhance(DisplayPage)
+export default enhance(AddressPage)
