@@ -28,8 +28,6 @@ const AddressPage = ({
       addressPage
       buttonLabel="Calculate Price"
       handleButtonClick={null}
-      handleChangeMaterialLeft={null}
-      handleChangeMaterialRight={null}
     />
   </WidgetContainer>
   )

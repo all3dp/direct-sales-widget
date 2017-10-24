@@ -23,12 +23,14 @@ const CheckoutOverlay = ({
         <CheckoutLine modifiers={['summary']} label="TOTAL" priceValue={totalPrice} />
       </div>
     </div>
-    <PaypalButton
-      onClick={handleCheckoutClick}
-      onAuthorize={handleCheckoutAuthorize}
-      onCancel={handleCheckoutCancel}
-      onError={handleCheckoutError}
-    />
+    <div className="checkout-overlay__paypal-button">
+      <PaypalButton
+        onClick={handleCheckoutClick}
+        onAuthorize={handleCheckoutAuthorize}
+        onCancel={handleCheckoutCancel}
+        onError={handleCheckoutError}
+      />
+    </div>
   </div>
 )
 

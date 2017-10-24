@@ -1,7 +1,4 @@
 .checkout-line {
-
-  margin-bottom: 9px;
-  padding-bottom: 4px;
   display: flex;
   align-items: flex-end;
 
@@ -18,7 +15,7 @@
     display: inline-flex;
     justify-content: space-between;
     font-size: $font-size-plus;
-    font-weight: 600;
+    font-weight: $font-weight-bold;
     line-height: $line-height-base;
     color: $color-blue;
     margin-left: 16px;
@@ -28,13 +25,17 @@
   &--bold {
 
     .checkout-line__label {
+      hyphens: auto;
       font-size: $font-size-l;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
       text-transform: unset;
     }
   }
 
   &--summary {
     border-bottom: 2px solid $color-blue;
+    padding-bottom: 4px;
+    margin-bottom: 24px;
+    margin-top: 24px;
   }
 }

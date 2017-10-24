@@ -18,6 +18,8 @@ const DisplayPage = ({
       shippingPrice={6.50}
       vatPrice={2.58}
       totalPrice={45.08}
+      handleCheckoutClick={() => null}
+      handleCheckoutAuthorize={() => null}
     />
   </WidgetContainer>
 )
