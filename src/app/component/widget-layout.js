@@ -4,7 +4,7 @@ import propTypes from 'Lib/prop-types'
 
 import Image from 'Component/image'
 
-const WidgetContainer = ({
+const WidgetLayout = ({
   children,
   backgroundImage,
   zoomedIn
@@ -19,8 +19,8 @@ const WidgetContainer = ({
   </div>
 )
 
-WidgetContainer.propTypes = {
+WidgetLayout.propTypes = {
   ...propTypes.component
 }
 
-export default WidgetContainer
+export default WidgetLayout

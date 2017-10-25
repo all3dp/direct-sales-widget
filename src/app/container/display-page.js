@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import WidgetContainer from 'Component/widget-container'
+import WidgetLayout from 'Component/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
@@ -28,7 +28,7 @@ const DisplayPage = ({
   toggleDescription,
   toggleBackgroundImageZoom
 }) => (
-  <WidgetContainer zoomedIn={backgroundImageZoomed} backgroundImage="http://placehold.it/320x280">
+  <WidgetLayout zoomedIn={backgroundImageZoomed} backgroundImage="http://placehold.it/320x280">
     <WidgetHeader
       title={productTitle}
       description={productDescription}
@@ -46,7 +46,7 @@ const DisplayPage = ({
       handleChangeMaterialRight={changeMaterialRight}
       handleToggleZoom={toggleBackgroundImageZoom}
     />
-  </WidgetContainer>
+  </WidgetLayout>
   )
 const mapStateToProps = state => ({
   productTitle: state.product.title,

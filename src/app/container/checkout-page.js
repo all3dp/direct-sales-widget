@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import WidgetContainer from 'Component/widget-container'
+import WidgetLayout from 'Component/widget-layout'
 import CheckoutOverlay from 'Component/checkout-overlay'
 
 import {selectSelectedMaterialPrice} from 'Lib/selector'
@@ -13,7 +13,7 @@ const DisplayPage = ({
   productTitle,
   productPrice
 }) => (
-  <WidgetContainer backgroundImage="http://placehold.it/320x280">
+  <WidgetLayout backgroundImage="http://placehold.it/320x280">
     <Modal />
     <CheckoutOverlay
       objectTitle={productTitle}
@@ -24,7 +24,7 @@ const DisplayPage = ({
       handleCheckoutClick={() => null}
       handleCheckoutAuthorize={() => null}
     />
-  </WidgetContainer>
+  </WidgetLayout>
 )
 
 const mapStateToProps = state => ({

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import WidgetContainer from 'Component/widget-container'
+import WidgetLayout from 'Component/widget-layout'
 import AddressOverlay from 'Component/address-overlay'
 import WidgetFooter from 'Component/widget-footer'
 
@@ -20,7 +20,7 @@ const AddressPage = ({
   address,
   onUpdateLocation
 }) => (
-  <WidgetContainer backgroundImage="http://placehold.it/320x280">
+  <WidgetLayout backgroundImage="http://placehold.it/320x280">
     <AddressOverlay
       address={address}
       onChange={place => onUpdateLocation(convertPlaceToLocation(place))}
@@ -32,7 +32,7 @@ const AddressPage = ({
       buttonLabel="Calculate Price"
       handleButtonClick={null}
     />
-  </WidgetContainer>
+  </WidgetLayout>
   )
 const mapStateToProps = state => ({
   address: state.user.user.shippingAddress
