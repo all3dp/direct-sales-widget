@@ -14,6 +14,8 @@ import {
   convertPlaceToLocation
 } from 'Lib/geolocation'
 
+import Modal from './modal'
+
 const AddressPage = ({
   address,
   onUpdateLocation
@@ -23,6 +25,7 @@ const AddressPage = ({
       address={address}
       onChange={place => onUpdateLocation(convertPlaceToLocation(place))}
     />
+    <Modal />
     <WidgetFooter
       modifiers={['thick-background']}
       addressPage

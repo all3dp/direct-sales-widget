@@ -7,14 +7,16 @@ import {captureException} from 'Service/logging'
 import {track as trackMixpanel} from 'Service/mixpanel'
 import {track as trackGoogleAnalytics} from 'Service/google-analytics'
 
+import {openFatalErrorModal} from 'Action/modal'
 import rootReducer from './reducer'
 
-const fatalErrorHandler = () => next => (action) => {
+const fatalErrorHandler = store => next => (action) => {
   const promise = next(action)
 
   if (promise && promise.catch) {
     return promise.catch((error) => {
       captureException(error) // log in sentry
+      store.dispatch(openFatalErrorModal(error))
       throw error  // Throw error again
     })
   }

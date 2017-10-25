@@ -1,12 +1,13 @@
 import {detectAddress, createUser} from './user'
-import {openAddressModal} from './modal'
+import {openFatalErrorModal} from './modal'
 import {getProduct} from './product'
 
 export const init = () => dispatch => (
   Promise.all([
-    dispatch(getProduct()),
+    dispatch(getProduct())
+      .catch(error => dispatch(openFatalErrorModal(error))),
     dispatch(detectAddress())
       .then(() => dispatch(createUser()))
-      .catch(() => dispatch(openAddressModal()))
+      .catch(error => dispatch(openFatalErrorModal(error)))
   ])
 )

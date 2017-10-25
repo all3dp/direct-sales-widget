@@ -15,6 +15,8 @@ import {
   toggleBackgroundImageZoom as toggleBackgroundImageZoomAction
 } from 'Action/display'
 
+import Modal from './modal'
+
 const DisplayPage = ({
   productTitle,
   productDescription,
@@ -34,6 +36,7 @@ const DisplayPage = ({
       toggleDescription={toggleDescription}
       hidden={backgroundImageZoomed}
     />
+    <Modal />
     <WidgetFooter
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}

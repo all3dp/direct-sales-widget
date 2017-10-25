@@ -7,11 +7,14 @@ import CheckoutOverlay from 'Component/checkout-overlay'
 
 import {selectSelectedMaterialPrice} from 'Lib/selector'
 
+import Modal from './modal'
+
 const DisplayPage = ({
   productTitle,
   productPrice
 }) => (
   <WidgetContainer backgroundImage="http://placehold.it/320x280">
+    <Modal />
     <CheckoutOverlay
       objectTitle={productTitle}
       objectPrice={productPrice}

@@ -10,6 +10,7 @@ import order from './order'
 import configuration from './configuration'
 import display from './display'
 import product from './product'
+import modal from './modal'
 
 const rootReducer = combineReducers({
   app,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   material,
   price,
   order,
+  modal,
   configuration,
   display,
   product,

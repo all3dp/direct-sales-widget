@@ -24,5 +24,6 @@ export const getProduct = () => async (dispatch) => {
   }))
   dispatch(setMaterials(product.materials))
   dispatch(selectMaterial(product.materials[0].id))
+  // throw new Error('error')
 }
 
