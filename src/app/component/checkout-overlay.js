@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react'
 
 import CheckoutLine from 'Component/checkout-line'
-import PaypalButton from 'Component/paypal-button'
 
 const CheckoutOverlay = ({
   objectTitle,
@@ -9,10 +8,7 @@ const CheckoutOverlay = ({
   shippingPrice,
   vatPrice,
   totalPrice,
-  handleCheckoutClick,
-  handleCheckoutAuthorize,
-  handleCheckoutCancel,
-  handleCheckoutError
+  paypalButton
 }) => (
   <div className="checkout-overlay">
     <div className="checkout-overlay__pricing">
@@ -24,12 +20,7 @@ const CheckoutOverlay = ({
       </div>
     </div>
     <div className="checkout-overlay__paypal-button">
-      <PaypalButton
-        onClick={handleCheckoutClick}
-        onAuthorize={handleCheckoutAuthorize}
-        onCancel={handleCheckoutCancel}
-        onError={handleCheckoutError}
-      />
+      {paypalButton}
     </div>
   </div>
 )
@@ -40,10 +31,7 @@ CheckoutOverlay.propTypes = {
   shippingPrice: PropTypes.number.isRequired,
   vatPrice: PropTypes.number.isRequired,
   totalPrice: PropTypes.number.isRequired,
-  handleCheckoutClick: PropTypes.func,
-  handleCheckoutAuthorize: PropTypes.func,
-  handleCheckoutCancel: PropTypes.func,
-  handleCheckoutError: PropTypes.func
+  paypalButton: PropTypes.node.isRequired
 }
 
 export default CheckoutOverlay

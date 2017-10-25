@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import WidgetLayout from 'Component/widget-layout'
+import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
@@ -52,6 +52,8 @@ const mapStateToProps = state => ({
   productTitle: state.product.title,
   productDescription: state.product.description,
   selectedMaterial: selectSelectedMaterial(state),
+  selectedMaterialId: state.material.selectedMaterialId,
+  materials: state.material.materials,
   descriptionExpanded: state.display.descriptionExpanded,
   backgroundImageZoomed: state.display.backgroundImageZoomed
 })

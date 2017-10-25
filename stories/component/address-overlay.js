@@ -5,5 +5,12 @@ import AddressOverlay from 'Component/address-overlay'
 
 storiesOf('Address Overlay', module)
   .add('default', () => (
-    <AddressOverlay />
+    <AddressOverlay
+      address={{
+        city: 'Augsburg',
+        countryCode: 'DE',
+        stateCode: 'BY',
+        zipCode: '86150'
+      }}
+    />
   ))

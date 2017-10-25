@@ -8,6 +8,12 @@ import {
 
 import config from '../../../config'
 
+export const selectMaterialsAsArray = (state) => {
+  const materials = Object.keys(state.material.materials).map(key => state.material.materials[key])
+
+  return materials
+}
+
 export const selectSelectedMaterial = (state) => {
   const {material: {
     materials,

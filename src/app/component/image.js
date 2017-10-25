@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react'
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
 
-const Image = ({modifiers = [], classNames, zoomedIn, src, alt = ''}) => {
+const Image = ({modifiers = [], classNames, zoomedIn, src, alt = '', key}) => {
   const finalModifiers = [
     ...modifiers,
     {
@@ -12,7 +12,7 @@ const Image = ({modifiers = [], classNames, zoomedIn, src, alt = ''}) => {
   ]
 
   return (
-    <div className="image-container">
+    <div className="image-container" key={key}>
       <img className={buildClassName('image', finalModifiers, classNames)} src={src} alt={alt} />
     </div>
   )

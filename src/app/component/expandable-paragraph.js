@@ -3,8 +3,6 @@ import React, {PropTypes} from 'react'
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
 
-import Paragraph from 'Component/paragraph'
-
 import NavigationArrow from 'Component/navigation-arrow'
 
 const ExpandableParagraph = ({
@@ -24,7 +22,7 @@ const ExpandableParagraph = ({
   return (
     <div className={buildClassName('expandable-paragraph', finalModifiers, classNames)}>
       <span className="expandable-paragraph__content">
-        <Paragraph>{children}</Paragraph>
+        {children}
       </span>
       <button className="expandable-paragraph__button" onClick={toggleDescription}>
         {expanded ? 'CLOSE ' : 'LEARN MORE '}

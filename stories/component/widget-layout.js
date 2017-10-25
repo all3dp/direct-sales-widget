@@ -8,12 +8,19 @@ import WidgetFooter from 'Component/widget-footer'
 import AddressOverlay from 'Component/address-overlay'
 import CheckoutOverlay from 'Component/checkout-overlay'
 
+import product from '../../test-data/mock/object.json'
+
+const sliderProps = {
+  materials: product.materials,
+  selectedMaterialId: product.materials[0].id
+}
+
 storiesOf('Widget Layout', module)
   .add('default', () => (
     <WidgetLayout backgroundImage="http://placehold.it/320x280" />
   ))
   .add('display', () => (
-    <WidgetLayout backgroundImage="http://placehold.it/320x280">
+    <WidgetLayout {...sliderProps} >
       <WidgetHeader title="Raspberry Pi Case" description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." />
       <WidgetFooter
         material={'PREMIUM PLASTIC "white"'}
@@ -26,7 +33,7 @@ storiesOf('Widget Layout', module)
     </WidgetLayout>
   ))
   .add('display zoomed', () => (
-    <WidgetLayout backgroundImage="http://placehold.it/320x280">
+    <WidgetLayout {...sliderProps} >
       <WidgetHeader hidden title="Raspberry Pi Case" description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." />
       <WidgetFooter
         zoomedIn
@@ -40,7 +47,7 @@ storiesOf('Widget Layout', module)
     </WidgetLayout>
   ))
   .add('disabled footer', () => (
-    <WidgetLayout backgroundImage="http://placehold.it/320x280">
+    <WidgetLayout {...sliderProps} >
       <WidgetHeader hidden title="Raspberry Pi Case" description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." />
       <WidgetFooter
         disabled
@@ -54,7 +61,7 @@ storiesOf('Widget Layout', module)
     </WidgetLayout>
   ))
   .add('Shipping Address', () => (
-    <WidgetLayout backgroundImage="http://placehold.it/320x280">
+    <WidgetLayout {...sliderProps} >
       <AddressOverlay />
       <WidgetFooter
         modifiers={['thick-background']}
@@ -69,7 +76,7 @@ storiesOf('Widget Layout', module)
     </WidgetLayout>
   ))
   .add('Checkout', () => (
-    <WidgetLayout backgroundImage="http://placehold.it/320x280">
+    <WidgetLayout {...sliderProps} >
       <CheckoutOverlay
         objectTitle="Raspberry Pi Case"
         objectPrice={13.50}

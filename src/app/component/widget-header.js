@@ -5,6 +5,7 @@ import buildClassName from 'Lib/build-class-name'
 
 import Headline from 'Component/headline'
 import ExpandableParagraph from 'Component/expandable-paragraph'
+import Paragraph from 'Component/paragraph'
 
 const WidgetHeader = ({
   title,
@@ -29,7 +30,7 @@ const WidgetHeader = ({
         expanded={descriptionExpanded}
         toggleDescription={toggleDescription}
       >
-        {description}
+        <Paragraph>{description}</Paragraph>
       </ExpandableParagraph>
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import WidgetLayout from 'Component/widget-layout'
+import WidgetLayout from 'Container/widget-layout'
 import AddressOverlay from 'Component/address-overlay'
 import WidgetFooter from 'Component/widget-footer'
 
@@ -14,18 +14,15 @@ import {
   convertPlaceToLocation
 } from 'Lib/geolocation'
 
-import Modal from './modal'
-
 const AddressPage = ({
   address,
   onUpdateLocation
 }) => (
-  <WidgetLayout backgroundImage="http://placehold.it/320x280">
+  <WidgetLayout>
     <AddressOverlay
       address={address}
       onChange={place => onUpdateLocation(convertPlaceToLocation(place))}
     />
-    <Modal />
     <WidgetFooter
       modifiers={['thick-background']}
       addressPage
