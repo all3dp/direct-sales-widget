@@ -68,8 +68,5 @@ describe('Init action integration test', () => {
         }
       }
     })
-
-    // it generates some material ids
-    expect(store.getState().material.materials.materialStructure[0].id, 'to be ok')
   })
 })

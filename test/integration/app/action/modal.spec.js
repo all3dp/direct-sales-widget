@@ -1,9 +1,7 @@
 import {
   open,
   close,
-  openAddressModal,
-  openFetchingPriceModal,
-  openMaterialModal
+  openFatalErrorModal
 } from '../../../../src/app/action/modal'
 import Store from '../../../../src/app/store'
 
@@ -60,42 +58,14 @@ describe('Modal Integration Test', () => {
     })
   })
 
-  describe('openAddressModal()', () => {
-    it('opens address modal', () => {
-      store.dispatch(openAddressModal())
+  describe('openFatalErrorModal()', () => {
+    it('opens fatal error modal', () => {
+      store.dispatch(openFatalErrorModal())
       expect(store.getState().modal, 'to equal', {
         isOpen: true,
         isCloseable: false,
-        contentType: MODAL_TYPE.SHIPPING_ADDRESS,
+        contentType: MODAL_TYPE.FATAL_ERROR,
         contentProps: {}
-      })
-    })
-
-    it('opens fetch price modal', () => {
-      store.dispatch(openFetchingPriceModal())
-      expect(store.getState().modal, 'to equal', {
-        isOpen: true,
-        isCloseable: true,
-        contentType: MODAL_TYPE.FETCHING_PRICE,
-        contentProps: {}
-      })
-    })
-  })
-
-  describe('openMaterialModal()', () => {
-    it('opens material modal', () => {
-      store.dispatch(openMaterialModal({
-        materialId: 'some-material',
-        finishGroupId: 'some-finish-group'
-      }))
-      expect(store.getState().modal, 'to equal', {
-        isOpen: true,
-        isCloseable: true,
-        contentType: MODAL_TYPE.MATERIAL,
-        contentProps: {
-          materialId: 'some-material',
-          finishGroupId: 'some-finish-group'
-        }
       })
     })
   })
