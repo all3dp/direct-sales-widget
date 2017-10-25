@@ -2,7 +2,7 @@ import {
   getProduct,
   setProductInformation
 } from 'Action/product'
-import product from '../../../../test-data/mock/object'
+import product from '../../../../test-data/mock/object.json'
 import Store from '../../../../src/app/store'
 
 describe('Product Integration Test', () => {
