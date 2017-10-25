@@ -14,6 +14,12 @@
     align-items: center;
     color: $color-blue;
     cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   .expandable-paragraph__icon {
