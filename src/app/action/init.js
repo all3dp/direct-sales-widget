@@ -4,10 +4,9 @@ import {getProduct} from './product'
 
 export const init = () => dispatch => (
   Promise.all([
-    dispatch(getProduct())
-      .catch(error => dispatch(openFatalErrorModal(error))),
+    dispatch(getProduct()),
     dispatch(detectAddress())
-      .then(() => dispatch(createUser()))
-      .catch(error => dispatch(openFatalErrorModal(error)))
+    .then(() => dispatch(createUser()))
+    .catch(error => dispatch(openFatalErrorModal(error)))
   ])
 )
