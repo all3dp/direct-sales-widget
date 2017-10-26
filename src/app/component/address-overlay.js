@@ -15,9 +15,7 @@ import config from '../../../config'
 const AddressOverlay = ({
   onChange,
   address
-}) => {
-  console.log(address)
-  return (
+}) => (
     <div className="address-overlay">
       <Headline label="Shipping address required" />
       <Paragraph modifiers={['centered']}>We need your address to calculate the shipping prices!</Paragraph>
@@ -29,7 +27,6 @@ const AddressOverlay = ({
       />
     </div>
   )
-}
 
 AddressOverlay.propTypes = {
   ...propTypes.component
