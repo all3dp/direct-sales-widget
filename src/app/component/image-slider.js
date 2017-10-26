@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react'
 import propTypes from 'Lib/prop-types'
 import Image from 'Component/image'
 
-export default class ImageContainer extends Component {
+export default class ImageSlider extends Component {
   static propTypes = {
     ...propTypes.component,
     materials: PropTypes.arrayOf(PropTypes.shape({
@@ -30,9 +30,9 @@ export default class ImageContainer extends Component {
 
   renderImages () {
     const {materials, zoomedIn} = this.props
-    return materials.map((material, index) => (
-      <div className="image-slider__image">
-        <Image key={index} src={material.imageSrc} zoomedIn={zoomedIn} alt={material.title} />
+    return materials.map(material => (
+      <div key={material.id} className="image-slider__image">
+        <Image src={material.imageSrc} zoomedIn={zoomedIn} alt={material.title} />
       </div>
     )
     )
