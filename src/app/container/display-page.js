@@ -6,9 +6,10 @@ import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
-import {selectSelectedMaterial} from 'Lib/selector'
+import {selectSelectedMaterial, selectTotalPrice} from 'Lib/selector'
 
-import {selectNextMaterial, selectPreviousMaterial} from 'Action/material'
+import {changeToNextMaterial, changeToPreviousMaterial} from 'Action/material'
+import {goToCheckout} from 'Action/navigation'
 
 import {
   toggleDescription as toggleDescriptionAction,
@@ -20,13 +21,15 @@ import Modal from './modal'
 const DisplayPage = ({
   productTitle,
   productDescription,
+  totalPrice,
   selectedMaterial,
   changeMaterialLeft,
   changeMaterialRight,
   descriptionExpanded,
   backgroundImageZoomed,
   toggleDescription,
-  toggleBackgroundImageZoom
+  toggleBackgroundImageZoom,
+  handleGoToCheckout
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
@@ -40,8 +43,10 @@ const DisplayPage = ({
     <WidgetFooter
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}
-      buttonLabel={`$${selectedMaterial.price} BUY`}
-      handleButtonClick={null}
+      buttonLabel={`$${totalPrice} BUY`}
+      handleButtonClick={() => {
+        handleGoToCheckout()
+      }}
       handleChangeMaterialLeft={changeMaterialLeft}
       handleChangeMaterialRight={changeMaterialRight}
       handleToggleZoom={toggleBackgroundImageZoom}
@@ -51,6 +56,7 @@ const DisplayPage = ({
 const mapStateToProps = state => ({
   productTitle: state.product.title,
   productDescription: state.product.description,
+  totalPrice: selectTotalPrice(state),
   selectedMaterial: selectSelectedMaterial(state),
   selectedMaterialId: state.material.selectedMaterialId,
   materials: state.material.materials,
@@ -61,8 +67,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   toggleDescription: toggleDescriptionAction,
   toggleBackgroundImageZoom: toggleBackgroundImageZoomAction,
-  changeMaterialRight: selectNextMaterial,
-  changeMaterialLeft: selectPreviousMaterial
+  changeMaterialRight: changeToNextMaterial,
+  changeMaterialLeft: changeToPreviousMaterial,
+  handleGoToCheckout: goToCheckout
 }
 
 const enhance = compose(

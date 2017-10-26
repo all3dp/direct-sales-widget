@@ -5,8 +5,14 @@ import {
 import {
   formatPrice
 } from 'Lib/formatter'
+import {roundToCents} from 'Lib/util'
 
 import config from '../../../config'
+
+export const selectTotalPrice = (state) => {
+  const {materialPrice, shippingPrice, vatPrice} = state.price
+  return roundToCents(materialPrice + shippingPrice + vatPrice)
+}
 
 export const selectMaterialsAsArray = (state) => {
   const materials = Object.keys(state.material.materials).map(key => state.material.materials[key])

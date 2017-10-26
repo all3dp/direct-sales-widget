@@ -1,87 +1,44 @@
 import {handleActions} from 'redux-actions'
-import cloneDeep from 'lodash/cloneDeep'
 
 import TYPE from '../type'
 
 const initialState = {
-  priceId: null,
-  offers: null,
-  printingServiceComplete: null,
-  selectedOffer: null,
-  error: null
+  materialPrice: 0,
+  shippingPrice: 0,
+  vatPrice: 0
 }
 
-function handleClearOffers (state) {
+function handleSetMaterialPrice (state, {payload: {materialPrice}}) {
   return {
     ...state,
-    offers: null,
-    printingServiceComplete: null,
-    error: null
+    materialPrice
   }
 }
 
-function handleSelectOffer (state, {payload: {offer}}) {
+function handleSetShippingPrice (state, {payload: {shippingPrice}}) {
   return {
     ...state,
-    selectedOffer: cloneDeep(offer)
+    shippingPrice
   }
 }
 
-function handlePriceRequested (state, {payload: {priceId}}) {
+function handleSetVatPrice (state, {payload: {vatPrice}}) {
   return {
     ...state,
-    priceId
+    vatPrice
   }
 }
 
-function handlePriceReceived (state, {payload, error}) {
-  if (error) {
-    return {
-      ...initialState,
-      error: payload
-    }
-  }
-
-  const {
-    offers,
-    printingServiceComplete
-  } = payload.price
-
+function handleSetVatPercentage (state, {payload: {vatPercentage}}) {
   return {
     ...state,
-    offers,
-    printingServiceComplete,
-    error: null
-  }
-}
-
-function handlePriceTimeout (state) {
-  const {offers, printingServiceComplete} = state
-
-  // Remove estimated offers
-  const finalOffers = offers
-    ? offers.filter(offer => !offer.priceEstimated)
-    : null
-
-  const finalPrintingServiceComplete = printingServiceComplete
-    ? Object.keys(printingServiceComplete).reduce((aggr, provider) => {
-      aggr[provider] = true
-      return aggr
-    }, {})
-    : null
-
-  return {
-    ...state,
-    offers: finalOffers,
-    printingServiceComplete: finalPrintingServiceComplete,
-    error: null
+    vatPercentage
   }
 }
 
 export default handleActions({
-  [TYPE.PRICE.CLEAR_OFFERS]: handleClearOffers,
-  [TYPE.PRICE.SELECT_OFFER]: handleSelectOffer,
-  [TYPE.PRICE.REQUESTED]: handlePriceRequested,
-  [TYPE.PRICE.RECEIVED]: handlePriceReceived,
-  [TYPE.PRICE.TIMEOUT]: handlePriceTimeout
+  [TYPE.PRICE.SET_MATERIAL_PRICE]: handleSetMaterialPrice,
+  [TYPE.PRICE.SET_SHIPPING_PRICE]: handleSetShippingPrice,
+  [TYPE.PRICE.SET_VAT_PRICE]: handleSetVatPrice,
+  [TYPE.PRICE.SET_VAT_PERCENTAGE]: handleSetVatPercentage
 }, initialState)

@@ -5,26 +5,30 @@
     {
       "id": "arbitrary-id-1",
       "title": "arbitrary-material-title-1",
-      "imageSrc": "http://via.placeholder.com/320x280/009933",
-      "price": 10
+      "imageSrc": "http://via.placeholder.com/640x560/009933",
+      "price": 10,
+      "provider": "Shapeways"
     },
     {
       "id": "arbitrary-id-2",
       "title": "arbitrary-material-title-2",
-      "imageSrc": "http://via.placeholder.com/320x280/233982",
-      "price": 20
+      "imageSrc": "http://via.placeholder.com/640x560/233982",
+      "price": 20,
+      "provider": "Immaterialise"
     },
     {
       "id": "arbitrary-id-3",
       "title": "arbitrary-material-title-3",
-      "imageSrc": "http://via.placeholder.com/320x280/EB0A54",
-      "price": 30
+      "imageSrc": "http://via.placeholder.com/640x560/EB0A54",
+      "price": 30,
+      "provider": "Shapeways"
     },
     {
       "id": "arbitrary-id-4",
       "title": "arbitrary-material-title-4",
-      "imageSrc": "http://via.placeholder.com/320x280/293e6a",
-      "price": 40
+      "imageSrc": "http://via.placeholder.com/640x560/293e6a",
+      "price": 40,
+      "provider": "Sculpteo"
     }
   ]
 }

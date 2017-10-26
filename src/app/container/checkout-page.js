@@ -6,19 +6,22 @@ import WidgetLayout from 'Container/widget-layout'
 import CheckoutOverlay from 'Component/checkout-overlay'
 import PaypalButton from 'Component/paypal-button'
 
-import {selectSelectedMaterialPrice} from 'Lib/selector'
+import {selectSelectedMaterialPrice, selectTotalPrice} from 'Lib/selector'
 
 const CheckoutPage = ({
   productTitle,
-  productPrice
+  materialPrice,
+  shippingPrice,
+  vatPrice,
+  totalPrice
 }) => (
   <WidgetLayout>
     <CheckoutOverlay
       objectTitle={productTitle}
-      objectPrice={productPrice}
-      shippingPrice={6.50}
-      vatPrice={2.58}
-      totalPrice={45.08}
+      objectPrice={materialPrice}
+      shippingPrice={shippingPrice}
+      vatPrice={vatPrice}
+      totalPrice={totalPrice}
       paypalButton={(
         <PaypalButton
           onClick={() => null}
@@ -33,7 +36,10 @@ const CheckoutPage = ({
 
 const mapStateToProps = state => ({
   productTitle: state.product.title,
-  productPrice: selectSelectedMaterialPrice(state)
+  materialPrice: selectSelectedMaterialPrice(state),
+  shippingPrice: state.price.shippingPrice,
+  vatPrice: state.price.vatPrice,
+  totalPrice: selectTotalPrice(state)
 })
 
 const mapDispatchToProps = {
