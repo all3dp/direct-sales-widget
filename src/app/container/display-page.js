@@ -28,7 +28,7 @@ const DisplayPage = ({
   toggleDescription,
   toggleBackgroundImageZoom
 }) => (
-  <WidgetLayout zoomedIn={backgroundImageZoomed} backgroundImage="http://placehold.it/320x280">
+  <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
       title={productTitle}
       description={productDescription}
@@ -40,7 +40,7 @@ const DisplayPage = ({
     <WidgetFooter
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}
-      buttonLabel="$32,50 BUY"
+      buttonLabel={`$${selectedMaterial.price} BUY`}
       handleButtonClick={null}
       handleChangeMaterialLeft={changeMaterialLeft}
       handleChangeMaterialRight={changeMaterialRight}
