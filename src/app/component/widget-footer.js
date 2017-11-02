@@ -31,7 +31,7 @@ const WidgetFooter = ({
 
   if (zoomedIn) {
     return (
-      <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
+      <div className={buildClassName('widget-footer', ['zoomed-in'], classNames)} >
         <div className="widget-footer__right">
           <ZoomControl zoomedIn={zoomedIn} toggleZoom={handleToggleZoom} />
           <AffiliationIndicator />
