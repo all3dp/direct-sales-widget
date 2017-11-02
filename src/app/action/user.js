@@ -17,7 +17,7 @@ import {
   openPriceLocationChangedModal,
   openFetchingPriceModal
 } from './modal'
-import {createPriceRequest, recalculateSelectedOffer} from './price'
+import {recalculateSelectedOffer} from './price'
 
 // Private actions
 

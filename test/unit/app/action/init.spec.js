@@ -21,9 +21,7 @@ describe('Init actions', () => {
     sandbox.stub(productActions, 'getProduct')
     sandbox.stub(userActions, 'detectAddress')
     sandbox.stub(userActions, 'createUser')
-    sandbox.stub(priceActions, 'getMaterialPrice')
-    sandbox.stub(priceActions, 'getShippingPrice')
-    sandbox.stub(priceActions, 'getVatPrice')
+    sandbox.stub(priceActions, 'getPrices')
   })
 
   afterEach(() => {
@@ -44,17 +42,9 @@ describe('Init actions', () => {
         .withArgs()
         .returns(resolveAsyncThunk('some-user-created'))
 
-      priceActions.getMaterialPrice
+      priceActions.getPrices
         .withArgs()
-        .returns({type: 'got-some-material-price'})
-
-      priceActions.getShippingPrice
-        .withArgs()
-        .returns({type: 'got-some-shippng-price'})
-
-      priceActions.getVatPrice
-        .withArgs()
-        .returns({type: 'got-some-vat-price'})
+        .returns({type: 'got-some-prices'})
 
       await store.dispatch(init())
 
@@ -62,9 +52,7 @@ describe('Init actions', () => {
         {type: 'got-some-product'},
         {type: 'some-address-deteced'},
         {type: 'some-user-created'},
-        {type: 'got-some-material-price'},
-        {type: 'got-some-shippng-price'},
-        {type: 'got-some-vat-price'}
+        {type: 'got-some-prices'}
       ])
     })
 

@@ -3,7 +3,7 @@ import {routerActions} from 'react-router-redux'
 import {
   goToAddress,
   goToCheckout,
-  goToHome
+  goToDisplay
 } from 'Action/navigation'
 import * as userActions from 'Action/user'
 
@@ -50,13 +50,13 @@ describe('Navigation actions', () => {
     })
   })
 
-  describe('goToHome()', () => {
+  describe('goToDisplay()', () => {
     it('calls router push with expected route', () => {
       routerActions.push
         .withArgs('/')
         .returns({type: 'push'})
 
-      store.dispatch(goToHome())
+      store.dispatch(goToDisplay())
       expect(store.getActions(), 'to equal', [
         {type: 'push'}
       ])
