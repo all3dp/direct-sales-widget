@@ -35,7 +35,7 @@ const ExpandableParagraph = ({
 }
 
 ExpandableParagraph.propTypes = {
-  ...propTypes,
+  ...propTypes.component,
   children: PropTypes.node.isRequired,
   expanded: PropTypes.bool.isRequired,
   toggleDescription: PropTypes.func.isRequired
