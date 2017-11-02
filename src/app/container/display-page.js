@@ -33,6 +33,7 @@ const DisplayPage = ({
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
+      modifiers={['thick-background']}
       title={productTitle}
       description={productDescription}
       descriptionExpanded={descriptionExpanded}
@@ -41,6 +42,7 @@ const DisplayPage = ({
     />
     <Modal />
     <WidgetFooter
+      modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}
       buttonLabel={`$${totalPrice} BUY`}

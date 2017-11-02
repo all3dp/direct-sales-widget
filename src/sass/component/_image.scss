@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
 }
+
 @supports (object-fit: cover) {
   .image {
     position: absolute;
@@ -14,6 +15,23 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform $transition-duration $transition-easing;
+
+    &--zoomed-in {
+      transform: scale(1.25)
+    }
+  }
+}
+// IE specific selector
+@media all and (-ms-high-contrast:none) {
+  .image {
+    // cross browser alternative to object-fit: cover
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
     transition: transform $transition-duration $transition-easing;
 
     &--zoomed-in {
