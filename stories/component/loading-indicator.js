@@ -12,3 +12,8 @@ storiesOf('Loading Indicator', module)
       <LoadingIndicator modifiers={['invert']} />
     </div>
   ))
+  .add('white', () => (
+    <div style={{width: '100%', height: '100%'}}>
+      <LoadingIndicator modifiers={['white']} />
+    </div>
+  ))

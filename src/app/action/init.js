@@ -1,6 +1,6 @@
 import {detectAddress, createUser} from './user'
 import {getProduct} from './product'
-import {getMaterialPrice, getShippingPrice, getVatPrice} from './price'
+import {getPrices} from './price'
 
 export const init = () => dispatch => (
   Promise.all([
@@ -9,9 +9,7 @@ export const init = () => dispatch => (
       .then(() => {
         dispatch(createUser())
           .then(() => {
-            dispatch(getMaterialPrice())
-            dispatch(getShippingPrice())
-            dispatch(getVatPrice())
+            dispatch(getPrices())
           })
       })
   ])

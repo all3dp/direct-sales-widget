@@ -22,12 +22,35 @@ export const setVatPercentage = createAction(
   vatPercentage => ({vatPercentage})
 )
 
+export const setPrices = createAction(
+  TYPE.PRICE.SET_PRICES,
+  prices => ({...prices})
+)
+
 // Public actions
 
 export const setMaterialPrice = createAction(
   TYPE.PRICE.SET_MATERIAL_PRICE,
   materialPrice => ({materialPrice})
 )
+
+export const getPrices = () => (dispatch, getState) => {
+  const {user: {user}, material: {selectedMaterialId, materials}} = getState()
+  const selectedMaterial = materials[selectedMaterialId]
+  const materialPrice = selectedMaterial.price
+  const provider = selectedMaterial.provider.toLowerCase()
+  const countryCode = user.shippingAddress.countryCode
+  const shippingMethod = shipping[countryCode][provider].methods[0]
+  const shippingPrice = shippingMethod.price || shippingMethod.price_less10
+  const vatPercentage = getVatPercentage({user})
+  const vatPrice = getVat(materialPrice, shippingPrice, vatPercentage)
+
+  dispatch(setPrices({
+    materialPrice,
+    shippingPrice,
+    vatPrice
+  }))
+}
 
 export const getMaterialPrice = () => (dispatch, getState) => {
   const {material: {selectedMaterialId, materials}} = getState()

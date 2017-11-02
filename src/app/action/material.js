@@ -1,7 +1,7 @@
 import {createAction} from 'redux-actions'
 import TYPE from '../type'
 
-import {getMaterialPrice} from './price'
+import {getPrices} from './price'
 
 export const setMaterials = createAction(
   TYPE.MATERIAL.SET_MATERIALS,
@@ -23,10 +23,10 @@ export const selectPreviousMaterial = createAction(
 
 export const changeToNextMaterial = () => (dispatch) => {
   dispatch(selectNextMaterial())
-  dispatch(getMaterialPrice())
+  dispatch(getPrices())
 }
 
 export const changeToPreviousMaterial = () => (dispatch) => {
   dispatch(selectPreviousMaterial())
-  dispatch(getMaterialPrice())
+  dispatch(getPrices())
 }

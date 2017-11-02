@@ -100,7 +100,10 @@ WidgetFooter.propTypes = {
   disabled: PropTypes.bool,
   minimal: PropTypes.bool,
   addressPage: PropTypes.bool,
-  buttonLabel: PropTypes.string,
+  buttonLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]),
   material: PropTypes.string,
   handleChangeMaterialLeft: PropTypes.func,
   handleChangeMaterialRight: PropTypes.func,

@@ -5,6 +5,7 @@ import {compose} from 'recompose'
 import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
+import LoadingIndicator from 'Component/loading-indicator'
 
 import {selectSelectedMaterial, selectTotalPrice} from 'Lib/selector'
 
@@ -45,7 +46,7 @@ const DisplayPage = ({
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}
-      buttonLabel={`$${totalPrice} BUY`}
+      buttonLabel={totalPrice ? `$${totalPrice} BUY` : <LoadingIndicator modifiers={['white']} />}
       handleButtonClick={() => {
         handleGoToCheckout()
       }}

@@ -45,6 +45,10 @@
     opacity: 0.5;
   }
 
+  &--white {
+    color: $color-white;
+  }
+
   @keyframes loading-indicator-spin {
     100% { transform: rotate(360deg); }
   }
