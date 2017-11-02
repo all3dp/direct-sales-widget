@@ -44,7 +44,7 @@ export const createUser = () => async (dispatch, getState) => {
   setUserContext({
     id: userId
   })
-  return dispatch(userCreated(userId))
+  dispatch(userCreated(userId))
 }
 
 export const updateUser = user => async (dispatch, getState) => {

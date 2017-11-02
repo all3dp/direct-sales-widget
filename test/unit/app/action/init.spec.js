@@ -1,6 +1,7 @@
 import {init} from 'Action/init'
 import * as userActions from 'Action/user'
 import * as productActions from 'Action/product'
+import * as priceActions from 'Action/price'
 import {AppError} from 'Lib/error'
 
 import {resolveAsyncThunk, rejectAsyncThunk} from '../../../helper'
@@ -17,9 +18,12 @@ describe('Init actions', () => {
     store = mockStore(initialStoreData)
 
     sandbox = sinon.sandbox.create()
+    sandbox.stub(productActions, 'getProduct')
     sandbox.stub(userActions, 'detectAddress')
     sandbox.stub(userActions, 'createUser')
-    sandbox.stub(productActions, 'getProduct')
+    sandbox.stub(priceActions, 'getMaterialPrice')
+    sandbox.stub(priceActions, 'getShippingPrice')
+    sandbox.stub(priceActions, 'getVatPrice')
   })
 
   afterEach(() => {
@@ -38,13 +42,29 @@ describe('Init actions', () => {
 
       userActions.createUser
         .withArgs()
-        .returns({type: 'some-user-created'})
+        .returns(resolveAsyncThunk('some-user-created'))
+
+      priceActions.getMaterialPrice
+        .withArgs()
+        .returns({type: 'got-some-material-price'})
+
+      priceActions.getShippingPrice
+        .withArgs()
+        .returns({type: 'got-some-shippng-price'})
+
+      priceActions.getVatPrice
+        .withArgs()
+        .returns({type: 'got-some-vat-price'})
 
       await store.dispatch(init())
+
       expect(store.getActions(), 'to equal', [
         {type: 'got-some-product'},
         {type: 'some-address-deteced'},
-        {type: 'some-user-created'}
+        {type: 'some-user-created'},
+        {type: 'got-some-material-price'},
+        {type: 'got-some-shippng-price'},
+        {type: 'got-some-vat-price'}
       ])
     })
 
