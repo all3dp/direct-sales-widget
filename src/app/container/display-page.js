@@ -5,12 +5,11 @@ import {compose} from 'recompose'
 import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
-import LoadingIndicator from 'Component/loading-indicator'
 
 import {selectSelectedMaterial, selectTotalPrice} from 'Lib/selector'
 
 import {changeToNextMaterial, changeToPreviousMaterial} from 'Action/material'
-import {goToCheckout} from 'Action/navigation'
+import {goToCheckout, goToAddress} from 'Action/navigation'
 
 import {
   toggleDescription as toggleDescriptionAction,
@@ -30,7 +29,8 @@ const DisplayPage = ({
   backgroundImageZoomed,
   toggleDescription,
   toggleBackgroundImageZoom,
-  handleGoToCheckout
+  handleGoToCheckout,
+  handleGoToAddress
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
@@ -46,10 +46,8 @@ const DisplayPage = ({
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
       material={selectedMaterial.title}
-      buttonLabel={totalPrice ? `$${totalPrice} BUY` : <LoadingIndicator modifiers={['white']} />}
-      handleButtonClick={() => {
-        handleGoToCheckout()
-      }}
+      buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Address'}
+      handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
       handleChangeMaterialLeft={changeMaterialLeft}
       handleChangeMaterialRight={changeMaterialRight}
       handleToggleZoom={toggleBackgroundImageZoom}
@@ -72,7 +70,8 @@ const mapDispatchToProps = {
   toggleBackgroundImageZoom: toggleBackgroundImageZoomAction,
   changeMaterialRight: changeToNextMaterial,
   changeMaterialLeft: changeToPreviousMaterial,
-  handleGoToCheckout: goToCheckout
+  handleGoToCheckout: goToCheckout,
+  handleGoToAddress: goToAddress
 }
 
 const enhance = compose(
