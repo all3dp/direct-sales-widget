@@ -12,7 +12,7 @@ import config from '../../../config'
 export const selectTotalPrice = (state) => {
   const {materialPrice, shippingPrice, vatPrice} = state.price
 
-  if (!materialPrice || !shippingPrice || !vatPrice) {
+  if (!materialPrice || !shippingPrice || vatPrice === null) {
     return null
   }
   return roundToCents(materialPrice + shippingPrice + vatPrice)
