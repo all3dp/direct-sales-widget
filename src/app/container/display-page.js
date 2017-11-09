@@ -6,9 +6,9 @@ import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
-import {selectSelectedMaterial, selectTotalPrice} from 'Lib/selector'
+import {selectSelectedModel, selectTotalPrice, selectMaterialByMaterialConfigId} from 'Lib/selector'
 
-import {changeToNextMaterial, changeToPreviousMaterial} from 'Action/material'
+import {selectPreviousModel, selectNextModel} from 'Action/model'
 import {goToCheckout, goToAddress} from 'Action/navigation'
 
 import {
@@ -19,48 +19,49 @@ import {
 import Modal from './modal'
 
 const DisplayPage = ({
-  productTitle,
-  productDescription,
   totalPrice,
-  selectedMaterial,
-  changeMaterialLeft,
-  changeMaterialRight,
+  selectedModel,
+  changeModelLeft,
+  changeModelRight,
   descriptionExpanded,
   backgroundImageZoomed,
   toggleDescription,
   toggleBackgroundImageZoom,
   handleGoToCheckout,
-  handleGoToAddress
+  handleGoToAddress,
+  material,
+  models
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
       modifiers={['thick-background']}
-      title={productTitle}
-      description={productDescription}
+      title={selectedModel.title}
+      description={selectedModel.description}
       descriptionExpanded={descriptionExpanded}
       toggleDescription={toggleDescription}
       hidden={backgroundImageZoomed}
     />
     <Modal />
     <WidgetFooter
+      showControls={models.length > 1}
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
-      material={selectedMaterial.title}
+      material={material.material.name}
       buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Address'}
       handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
-      handleChangeMaterialLeft={changeMaterialLeft}
-      handleChangeMaterialRight={changeMaterialRight}
+      handleChangeMaterialLeft={changeModelLeft}
+      handleChangeMaterialRight={changeModelRight}
       handleToggleZoom={toggleBackgroundImageZoom}
     />
   </WidgetLayout>
   )
+
 const mapStateToProps = state => ({
-  productTitle: state.product.title,
-  productDescription: state.product.description,
   totalPrice: selectTotalPrice(state),
-  selectedMaterial: selectSelectedMaterial(state),
-  selectedMaterialId: state.material.selectedMaterialId,
-  materials: state.material.materials,
+  selectedModel: selectSelectedModel(state),
+  selectedModelId: state.model.selectedModelId,
+  models: state.model.models,
+  material: selectMaterialByMaterialConfigId(state, state.material.selectedMaterialConfig),
   descriptionExpanded: state.display.descriptionExpanded,
   backgroundImageZoomed: state.display.backgroundImageZoomed
 })
@@ -68,8 +69,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   toggleDescription: toggleDescriptionAction,
   toggleBackgroundImageZoom: toggleBackgroundImageZoomAction,
-  changeMaterialRight: changeToNextMaterial,
-  changeMaterialLeft: changeToPreviousMaterial,
+  changeModelLeft: selectPreviousModel,
+  changeModelRight: selectNextModel,
   handleGoToCheckout: goToCheckout,
   handleGoToAddress: goToAddress
 }

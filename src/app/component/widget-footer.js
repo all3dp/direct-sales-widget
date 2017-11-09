@@ -20,7 +20,8 @@ const WidgetFooter = ({
   handleChangeMaterialLeft,
   handleChangeMaterialRight,
   handleButtonClick,
-  handleToggleZoom
+  handleToggleZoom,
+  showControls
 }) => {
   const finalModifiers = [
     ...modifiers,
@@ -80,6 +81,7 @@ const WidgetFooter = ({
     <div className={buildClassName('widget-footer', finalModifiers, classNames)} >
       <div className="widget-footer__left">
         <SliderControls
+          showControls={showControls}
           label={material}
           onClickSlideLeft={handleChangeMaterialLeft}
           onClickSlideRight={handleChangeMaterialRight}
@@ -108,7 +110,8 @@ WidgetFooter.propTypes = {
   handleChangeMaterialLeft: PropTypes.func,
   handleChangeMaterialRight: PropTypes.func,
   handleButtonClick: PropTypes.func,
-  handleToggleZoom: PropTypes.func
+  handleToggleZoom: PropTypes.func,
+  showControls: PropTypes.bool
 }
 
 export default WidgetFooter

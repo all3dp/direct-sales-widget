@@ -1,32 +1,37 @@
+// @flow
+
+import cloneDeep from 'lodash/cloneDeep'
 import {createAction} from 'redux-actions'
-import TYPE from '../type'
 
-import {getPrices} from './price'
+import * as printingEngine from 'Lib/printing-engine'
+import {generateMaterialIds} from 'Lib/material'
 
-export const setMaterials = createAction(
-  TYPE.MATERIAL.SET_MATERIALS,
-  materials => ({materials})
-)
+import TYPE from '../action-type'
 
+// Sync actions
 export const selectMaterial = createAction(
-  TYPE.MATERIAL.SELECT_MATERIAL,
-  materialId => ({materialId})
+  TYPE.MATERIAL.SELECTED,
+  materialId => materialId
 )
-
-export const selectNextMaterial = createAction(
-  TYPE.MATERIAL.SELECT_NEXT_MATERIAL
+export const selectMaterialConfigForFinishGroup = createAction(
+  TYPE.MATERIAL.CONFIG_FOR_FINISH_GROUP_SELECTED,
+  ({
+    materialConfigId,
+    finishGroupId
+  }) => ({
+    [finishGroupId]: materialConfigId
+  })
 )
-
-export const selectPreviousMaterial = createAction(
-  TYPE.MATERIAL.SELECT_PREVIOUS_MATERIAL
+export const selectMaterialConfig = createAction(
+  TYPE.MATERIAL.CONFIG_SELECTED,
+  materialConfigId => materialConfigId
 )
+const materialReceived = createAction(TYPE.MATERIAL.RECEIVED, materials => materials)
 
-export const changeToNextMaterial = () => (dispatch) => {
-  dispatch(selectNextMaterial())
-  dispatch(getPrices())
-}
+// Async actions
+export const getMaterials = () => async (dispatch) => {
+  const materials = cloneDeep(await printingEngine.listMaterials())
+  generateMaterialIds(materials)
 
-export const changeToPreviousMaterial = () => (dispatch) => {
-  dispatch(selectPreviousMaterial())
-  dispatch(getPrices())
+  return dispatch(materialReceived(materials))
 }

@@ -1,13 +1,13 @@
 import {handleActions} from 'redux-actions'
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 const initialState = {
   configurationId: null,
   isDirectSales: false
 }
 
-function handleConfigurationRestored (state, {payload}) {
+function handleConfigurationUsed (state, {payload}) {
   return {
     ...state,
     configurationId: payload._id, // eslint-disable-line no-underscore-dangle
@@ -16,5 +16,5 @@ function handleConfigurationRestored (state, {payload}) {
 }
 
 export default handleActions({
-  [TYPE.DIRECT_SALES.RESTORE_CONFIGURATION]: handleConfigurationRestored
+  [TYPE.CONFIGURATION.USE_CONFIGURATION]: handleConfigurationUsed
 }, initialState)

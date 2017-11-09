@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions'
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 export const toggleDescription = createAction(
   TYPE.DISPLAY.TOGGLE_DESCRIPTION

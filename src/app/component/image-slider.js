@@ -6,19 +6,30 @@ import Image from 'Component/image'
 export default class ImageSlider extends Component {
   static propTypes = {
     ...propTypes.component,
-    materials: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
+    models: PropTypes.arrayOf(PropTypes.shape({
+      modelId: PropTypes.string.isRequired,
+      fileName: PropTypes.string.isRequired,
+      fileUnit: PropTypes.string.isRequired,
+      area: PropTypes.number.isRequired,
+      volume: PropTypes.number.isRequired,
+      dimensions: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+        z: PropTypes.number.isRequired
+      }).isRequired,
+      thumbnailUrl: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      imageSrc: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired
+      description: PropTypes.string.isRequired,
+      displayImageUrl: PropTypes.string.isRequired
     })).isRequired,
-    selectedMaterialId: PropTypes.string.isRequired
+    selectedModelId: PropTypes.string.isRequired
   }
 
   calculateActiveIndex () {
-    const {materials, selectedMaterialId} = this.props
+    const {models, selectedModelId} = this.props
 
-    return materials.findIndex(m => m.id === selectedMaterialId)
+    return models.findIndex(m => m.modelId === selectedModelId)
   }
 
   calculatePosition () {
@@ -29,10 +40,10 @@ export default class ImageSlider extends Component {
   }
 
   renderImages () {
-    const {materials, zoomedIn} = this.props
-    return materials.map(material => (
-      <div key={material.id} className="image-slider__image">
-        <Image src={material.imageSrc} zoomedIn={zoomedIn} alt={material.title} />
+    const {models, zoomedIn} = this.props
+    return models.map(model => (
+      <div key={model.modelId} className="image-slider__image">
+        <Image src={model.displayImageUrl} zoomedIn={zoomedIn} alt={model.title} />
       </div>
     )
     )

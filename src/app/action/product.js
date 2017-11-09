@@ -4,7 +4,7 @@ import {setMaterials, selectMaterial} from 'Action/material'
 
 import productMock from '../../../test-data/mock/object.json'
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 // Private actions
 

@@ -6,15 +6,15 @@ import ImageSlider from 'Component/image-slider'
 
 const WidgetLayout = ({
   children,
-  materials,
-  selectedMaterialId,
+  models,
+  selectedModelId,
   zoomedIn
 }) => (
   <div className="widget">
     <div className="widget__background">
       <ImageSlider
-        materials={materials}
-        selectedMaterialId={selectedMaterialId}
+        models={models}
+        selectedModelId={selectedModelId}
         zoomedIn={zoomedIn}
       />
     </div>

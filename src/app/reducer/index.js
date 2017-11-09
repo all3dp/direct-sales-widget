@@ -9,8 +9,8 @@ import price from './price'
 import order from './order'
 import configuration from './configuration'
 import display from './display'
-import product from './product'
 import modal from './modal'
+import model from './model'
 
 const rootReducer = combineReducers({
   app,
@@ -21,9 +21,9 @@ const rootReducer = combineReducers({
   modal,
   configuration,
   display,
-  product,
   routing: routerReducer,
-  form: formReducer
+  form: formReducer,
+  model
 })
 
 export default rootReducer

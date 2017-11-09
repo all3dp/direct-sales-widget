@@ -1,74 +1,69 @@
-import {handleActions} from 'redux-actions'
+// @flow
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 const initialState = {
   materials: undefined,
-  materialIds: undefined,
-  selectedMaterialId: undefined
+  selectedMaterial: undefined,
+  selectedMaterialConfig: undefined,
+  selectedMaterialConfigs: {}
 }
 
-export const createMaterialsById = (prev, curr) => {
-  prev[curr.id] = curr
-  return prev
-}
-
-export const moveIndexUp = (i, a) => {
-  const newIndex = i === a.length - 1 ? 0 : i + 1
-
-  return newIndex
-}
-
-export const moveIndexDown = (i, a) => {
-  const newIndex = i === 0 ? a.length - 1 : i - 1
-
-  return newIndex
-}
-
-export function handleSetMaterials (state, {payload}) {
-  const materialIds = payload.materials.map(material => material.id)
-  const materials = payload.materials.reduce(createMaterialsById, {})
+function handleUseConfiguration (state, {payload: {materialConfigId}}) {
   return {
     ...state,
-    materials,
-    materialIds
+    selectedMaterialConfig: materialConfigId
   }
 }
 
-export function handleSelectMaterial (state, {payload}) {
+function handleReceivedMaterials (state, {payload}) {
   return {
     ...state,
-    selectedMaterialId: payload.materialId
+    materials: payload
   }
 }
 
-export function handleSelectNextMaterial (state) {
-  const {materialIds, selectedMaterialId} = state
-  const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
-  const nextMaterialIndex = moveIndexUp(currentMaterialIndex, materialIds)
-  const nextMaterialId = materialIds[nextMaterialIndex]
-
+function handleSelectedMaterial (state, {payload}) {
   return {
     ...state,
-    selectedMaterialId: nextMaterialId
+    selectedMaterial: payload
   }
 }
 
-export function handleSelectPreviousMaterial (state) {
-  const {materialIds, selectedMaterialId} = state
-  const currentMaterialIndex = materialIds.indexOf(selectedMaterialId)
-  const nextMaterialIndex = moveIndexDown(currentMaterialIndex, materialIds)
-  const nextMaterialId = materialIds[nextMaterialIndex]
-
+function handleSelectedMaterialConfig (state, {payload}) {
   return {
     ...state,
-    selectedMaterialId: nextMaterialId
+    selectedMaterialConfig: payload
   }
 }
 
-export default handleActions({
-  [TYPE.MATERIAL.SET_MATERIALS]: handleSetMaterials,
-  [TYPE.MATERIAL.SELECT_MATERIAL]: handleSelectMaterial,
-  [TYPE.MATERIAL.SELECT_NEXT_MATERIAL]: handleSelectNextMaterial,
-  [TYPE.MATERIAL.SELECT_PREVIOUS_MATERIAL]: handleSelectPreviousMaterial
-}, initialState)
+function handleSelectedMaterialConfigForFinishGroup (state, {payload}) {
+  return {
+    ...state,
+    selectedMaterialConfigs: {
+      ...state.selectedMaterialConfigs,
+      ...payload
+    },
+    selectedMaterialConfig: undefined
+  }
+}
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case TYPE.MATERIAL.RECEIVED:
+      return handleReceivedMaterials(state, action)
+    case TYPE.MATERIAL.SELECTED:
+      return handleSelectedMaterial(state, action)
+    case TYPE.MATERIAL.CONFIG_SELECTED:
+      return handleSelectedMaterialConfig(state, action)
+    case TYPE.MATERIAL.CONFIG_FOR_FINISH_GROUP_SELECTED:
+      return handleSelectedMaterialConfigForFinishGroup(state, action)
+    case TYPE.CONFIGURATION.USE_CONFIGURATION:
+      return handleUseConfiguration(state, action)
+
+    default:
+      return state
+  }
+}
+
+export default reducer

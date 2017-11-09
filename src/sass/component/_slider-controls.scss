@@ -1,7 +1,7 @@
 .slider-controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   margin-bottom: 4px;
 
@@ -17,5 +17,7 @@
     font-weight: $font-weight-bold;
     color: $color-blue;
     font-size: $font-size-s;
+    flex: 2;
+    text-align: center;
   }
 }

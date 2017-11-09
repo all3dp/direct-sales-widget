@@ -18,19 +18,13 @@ export const selectTotalPrice = (state) => {
   return roundToCents(materialPrice + shippingPrice + vatPrice)
 }
 
-export const selectMaterialsAsArray = (state) => {
-  const materials = Object.keys(state.material.materials).map(key => state.material.materials[key])
-
-  return materials
-}
-
-export const selectSelectedMaterial = (state) => {
-  const {material: {
-    materials,
-    selectedMaterialId
+export const selectSelectedModel = (state) => {
+  const {model: {
+    models,
+    selectedModelId
   }} = state
 
-  return materials[selectedMaterialId]
+  return models.find(m => m.modelId === selectedModelId)
 }
 
 export const selectSelectedMaterialPrice = (state) => {

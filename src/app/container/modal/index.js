@@ -4,7 +4,7 @@ import Portal from 'react-portal'
 
 import {close} from 'Action/modal'
 
-import {MODAL_TYPE} from '../../type'
+import {MODAL_TYPE} from '../../action-type'
 import FatalErrorModal from './fatal-error'
 
 const modals = {

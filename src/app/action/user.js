@@ -7,7 +7,7 @@ import * as printingEngine from 'Lib/printing-engine'
 import {identify} from 'Service/mixpanel'
 import {setUserContext} from 'Service/logging'
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 // Private actions
 

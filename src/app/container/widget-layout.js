@@ -2,26 +2,25 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
-import {selectMaterialsAsArray} from 'Lib/selector'
-
-import WLayout from 'Component/widget-layout'
+import Wlayout from 'Component/widget-layout'
 
 import Modal from './modal'
 
 const WidgetLayout = ({
-  materials,
-  selectedMaterialId,
+  models,
+  selectedModelId,
   zoomedIn,
   children
 }) => (
-  <WLayout materials={materials} selectedMaterialId={selectedMaterialId} zoomedIn={zoomedIn}>
+  <Wlayout models={models} selectedModelId={selectedModelId} zoomedIn={zoomedIn}>
     <Modal />
     {children}
-  </WLayout>
+  </Wlayout>
   )
+
 const mapStateToProps = state => ({
-  selectedMaterialId: state.material.selectedMaterialId,
-  materials: selectMaterialsAsArray(state),
+  selectedModelId: state.model.selectedModelId,
+  models: state.model.models,
   zoomedIn: state.display.backgroundImageZoomed
 })
 
