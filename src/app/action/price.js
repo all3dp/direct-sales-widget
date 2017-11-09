@@ -101,7 +101,7 @@ export const createPriceRequest = ({
       items
     }
 
-    dispatch(clearOffers({modelId}))
+    dispatch(clearOffers(modelId))
 
     const usePoll = debounce ? debouncedPoll : poll
     return usePoll(`${POLL_NAME}-${modelId}`, async (priceId) => {

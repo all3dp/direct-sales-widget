@@ -10,8 +10,13 @@ import config from '../../../config'
 
 export const selectTotalPrice = (state) => {
   const {model: {selectedModelId}, price: {pricesByModelId}} = state
+  const price = pricesByModelId[selectedModelId]
 
-  return pricesByModelId[selectedModelId].bestOffer.totalPrice
+  if (!price.bestOffer) {
+    return null
+  }
+
+  return price.bestOffer.totalPrice
 }
 
 export const selectOffer = (state) => {

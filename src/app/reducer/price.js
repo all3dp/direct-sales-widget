@@ -3,18 +3,13 @@
 import cloneDeep from 'lodash/cloneDeep'
 
 import TYPE from '../action-type'
-// priceId: null,
-// offers: null,
-// printingServiceComplete: null,
-// selectedOffer: null,
-// error: null
 
 const initialState = {
   pricesByModelId: {}
 }
 
 function handleClearOffers (state, {payload: {modelId}}) {
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   const newState = {
     ...currentState,
@@ -33,7 +28,7 @@ function handleClearOffers (state, {payload: {modelId}}) {
 }
 
 function handleSelectOffer (state, {payload: {offer, modelId}}) {
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   const newState = {
     ...currentState,
@@ -48,7 +43,7 @@ function handleSelectOffer (state, {payload: {offer, modelId}}) {
 }
 
 function handlePriceRequested (state, {payload: {priceId, modelId}}) {
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   const newState = {
     ...currentState,
@@ -62,7 +57,7 @@ function handlePriceRequested (state, {payload: {priceId, modelId}}) {
 }
 
 function handleGotError (state, {payload: {error, modelId}}) {
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   const newState = {
     ...currentState,
@@ -77,7 +72,7 @@ function handleGotError (state, {payload: {error, modelId}}) {
 
 function handlePriceReceived (state, {payload: {modelId, price}}) {
   const {offers, printingServiceComplete} = price
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   const newState = {
     ...currentState,
@@ -95,7 +90,7 @@ function handlePriceReceived (state, {payload: {modelId, price}}) {
 
 function handlePriceTimeout (state, {payload: {modelId}}) {
   const {offers, printingServiceComplete} = state
-  const currentState = state.pricesByModelId[modelId] || {}
+  const currentState = state.pricesByModelId[modelId]
 
   // Remove estimated offers
   const finalOffers = offers ? offers.filter(offer => !offer.priceEstimated) : null

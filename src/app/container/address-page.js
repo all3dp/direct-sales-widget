@@ -11,7 +11,7 @@ import {
   updateLocation
 } from 'Action/user'
 import {goToDisplay} from 'Action/navigation'
-import {getPrices} from 'Action/price'
+import {createPriceRequest} from 'Action/price'
 
 import {
   convertPlaceToLocation
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   onUpdateLocation: updateLocation,
   handleGoToDisplay: goToDisplay,
-  handleGetPrices: getPrices
+  handleGetPrices: createPriceRequest
 }
 
 const enhance = compose(
