@@ -5,17 +5,25 @@ import {
 import {
   formatPrice
 } from 'Lib/formatter'
-import {roundToCents} from 'Lib/util'
 
 import config from '../../../config'
 
 export const selectTotalPrice = (state) => {
-  const {materialPrice, shippingPrice, vatPrice} = state.price
+  const {model: {selectedModelId}, price: {pricesByModelId}} = state
 
-  if (!materialPrice || !shippingPrice || vatPrice === null) {
-    return null
-  }
-  return roundToCents(materialPrice + shippingPrice + vatPrice)
+  return pricesByModelId[selectedModelId].bestOffer.totalPrice
+}
+
+export const selectOffer = (state) => {
+  const {model: {selectedModelId}, price: {pricesByModelId}} = state
+
+  return pricesByModelId[selectedModelId].bestOffer
+}
+
+export const selectModelTitle = (state) => {
+  const {model: {models, selectedModelId}} = state
+
+  return models.find(m => m.modelId === selectedModelId).title
 }
 
 export const selectSelectedModel = (state) => {

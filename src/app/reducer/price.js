@@ -121,6 +121,21 @@ function handlePriceTimeout (state, {payload: {modelId}}) {
   }
 }
 
+function handleSetBestOffer (state, {payload: {offer, modelId}}) {
+  const currentState = state.pricesByModelId[modelId] || {}
+
+  const newState = {
+    ...currentState,
+    bestOffer: offer
+  }
+
+  state.pricesByModelId[modelId] = newState
+
+  return {
+    ...state
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case TYPE.PRICE.CLEAR_OFFERS:
@@ -135,6 +150,8 @@ const reducer = (state = initialState, action) => {
       return handlePriceTimeout(state, action)
     case TYPE.PRICE.GOT_ERROR:
       return handleGotError(state, action)
+    case TYPE.PRICE.SET_BEST_OFFER:
+      return handleSetBestOffer(state, action)
     default:
       return state
   }

@@ -3,6 +3,7 @@ import {createAction} from 'redux-actions'
 import * as printingEngine from 'Lib/printing-engine'
 import {getUpdatedOffer} from 'Lib/offer'
 import {poll, debouncedPoll, stopPoll} from 'Lib/poll'
+import {getBestOfferForMaterialConfig} from 'Lib/material'
 import TYPE, {ERROR_TYPE} from '../action-type'
 
 const POLL_NAME = 'price'
@@ -28,12 +29,23 @@ const gotError = createAction(
 )
 const priceTimeout = createAction(TYPE.PRICE.TIMEOUT)
 
+const setBestOffer = createAction(
+  TYPE.PRICE.SET_BEST_OFFER,
+  (offer, modelId) => ({offer, modelId})
+)
+
 // Public actions
 
 export const selectOffer = createAction(
   TYPE.PRICE.SELECT_OFFER,
   (offer, modelId) => ({offer, modelId})
 )
+
+export const selectBestOffer = (offers, materialConfig, modelId) => (dispatch) => {
+  const offer = getBestOfferForMaterialConfig(offers, materialConfig)
+
+  dispatch(setBestOffer(offer, modelId))
+}
 
 export const refreshSelectedOffer = modelId => (dispatch, getState) => {
   const {
@@ -95,6 +107,7 @@ export const createPriceRequest = ({
     return usePoll(`${POLL_NAME}-${modelId}`, async (priceId) => {
       const {price, isComplete} = await printingEngine.getPriceWithStatus({priceId})
       dispatch(priceReceived(price, modelId))
+      dispatch(selectBestOffer(price.offers, selectedMaterialConfig, modelId))
       return isComplete
     }, async () => {
       const {priceId} = await printingEngine.createPriceRequest(options)
