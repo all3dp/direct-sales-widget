@@ -1,36 +1,16 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 
-import config from '../../../config'
-
-class PaypalButton extends Component {
-  componentDidMount () {
-    const {onClick, onAuthorize, onCancel, onError} = this.props
-
-    const options = {
-      ...config.paypal,
-      payment: onClick,
-      onAuthorize,
-      onCancel,
-      onError,
-      commit: true,  // Show 'Pay Now' button during checkout
-      style: {size: 'responsive', color: 'gold', shape: 'rect'}
-    }
-
-    global.paypal.Button.render(options, this.paypalButton)
-  }
-
-  render () {
-    return (
-      <div ref={(el) => { this.paypalButton = el }} />
-    )
-  }
-}
+const PaypalButton = ({onClick}) => (
+  <button onClick={onClick} className="paypal-button">
+    <img
+      src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png"
+      alt="Check out with PayPal"
+    />
+  </button>
+)
 
 PaypalButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  onAuthorize: PropTypes.func.isRequired,
-  onCancel: PropTypes.func,
-  onError: PropTypes.func
+  onClick: PropTypes.func.isRequired
 }
 
 export default PaypalButton
