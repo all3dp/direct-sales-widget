@@ -19,7 +19,7 @@ const CheckoutLine = ({
 )
 
 CheckoutLine.propTypes = {
-  ...propTypes,
+  ...propTypes.component,
   label: PropTypes.string.isRequired,
   priceValue: PropTypes.number.isRequired
 }
