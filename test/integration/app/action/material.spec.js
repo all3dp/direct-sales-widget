@@ -1,8 +1,8 @@
 import {
+  getMaterials,
   selectMaterial,
-  setMaterials,
-  selectNextMaterial,
-  selectPreviousMaterial
+  selectMaterialConfig,
+  selectMaterialConfigForFinishGroup
 } from 'Action/material'
 import * as printingEngine from 'Lib/printing-engine'
 import * as materialLib from 'Lib/material'
@@ -24,105 +24,53 @@ describe('Material Integration Test', () => {
     sandbox.restore()
   })
 
-  describe('setMaterials()', () => {
-    it('should work', () => {
-      const materials = [
-        {
-          id: 'some-material-id-1',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-2',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-3',
-          title: 'some-material-title'
-        }
-      ]
-      store.dispatch(setMaterials(materials))
-      expect(store.getState().material.materials, 'to equal', {
-        'some-material-id-1': {
-          id: 'some-material-id-1',
-          title: 'some-material-title'
-        },
-        'some-material-id-2': {
-          id: 'some-material-id-2',
-          title: 'some-material-title'
-        },
-        'some-material-id-3': {
-          id: 'some-material-id-3',
-          title: 'some-material-title'
-        }
-      })
-      expect(store.getState().material.materialIds, 'to equal', [
-        'some-material-id-1',
-        'some-material-id-2',
-        'some-material-id-3'
-      ])
-    })
-  })
+  describe('getMaterials()', () => {
+    it('should work', async () => {
+      printingEngine.listMaterials.resolves('some-materials')
 
-  describe('selectNextMaterial()', () => {
-    it('should work', () => {
-      const materials = [
-        {
-          id: 'some-material-id-1',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-2',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-3',
-          title: 'some-material-title'
-        }
-      ]
-      store.dispatch(setMaterials(materials))
+      await store.dispatch(getMaterials())
 
-      store.dispatch(selectMaterial('some-material-id-1'))
-
-      expect(store.getState().material.selectedMaterialId, 'to equal', 'some-material-id-1')
-
-      store.dispatch(selectNextMaterial())
-
-      expect(store.getState().material.selectedMaterialId, 'to equal', 'some-material-id-2')
-    })
-  })
-
-  describe('selectPreviousMaterial()', () => {
-    it('should work', () => {
-      const materials = [
-        {
-          id: 'some-material-id-1',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-2',
-          title: 'some-material-title'
-        },
-        {
-          id: 'some-material-id-3',
-          title: 'some-material-title'
-        }
-      ]
-      store.dispatch(setMaterials(materials))
-
-      store.dispatch(selectMaterial('some-material-id-1'))
-
-      expect(store.getState().material.selectedMaterialId, 'to equal', 'some-material-id-1')
-
-      store.dispatch(selectPreviousMaterial())
-
-      expect(store.getState().material.selectedMaterialId, 'to equal', 'some-material-id-3')
+      expect(materialLib.generateMaterialIds, 'to have a call satisfying', ['some-materials'])
+      expect(store.getState().material.materials, 'to equal', 'some-materials')
     })
   })
 
   describe('selectMaterial()', () => {
     it('should work', () => {
       store.dispatch(selectMaterial('some-material-id'))
-      expect(store.getState().material.selectedMaterialId, 'to equal', 'some-material-id')
+      expect(store.getState().material.selectedMaterial, 'to equal', 'some-material-id')
+    })
+  })
+
+  describe('selectMaterialConfigForFinishGroup()', () => {
+    it('should work', () => {
+      store = Store({
+        material: {
+          selectedMaterialConfig: 'some-config-id'
+        }
+      })
+
+      store.dispatch(selectMaterialConfigForFinishGroup({
+        materialConfigId: 'some-config-id',
+        finishGroupId: 'some-finish-group-id'
+      }))
+
+      expect(
+        store.getState().material.selectedMaterialConfigs,
+        'to have own property',
+        'some-finish-group-id',
+        'some-config-id'
+      )
+
+      // Has to reset selectedMaterialConfig
+      expect(store.getState().material.selectedMaterialConfig, 'to be undefined')
+    })
+  })
+
+  describe('selectMaterialConfig()', () => {
+    it('should work', () => {
+      store.dispatch(selectMaterialConfig('some-config-id'))
+      expect(store.getState().material.selectedMaterialConfig, 'to equal', 'some-config-id')
     })
   })
 })

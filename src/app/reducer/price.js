@@ -89,7 +89,7 @@ function handlePriceReceived (state, {payload: {modelId, price}}) {
 }
 
 function handlePriceTimeout (state, {payload: {modelId}}) {
-  const {offers, printingServiceComplete} = state
+  const {offers, printingServiceComplete} = state.pricesByModelId[modelId]
   const currentState = state.pricesByModelId[modelId]
 
   // Remove estimated offers

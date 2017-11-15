@@ -1,4 +1,4 @@
-import * as printingEngine from 'Lib/printing-engine'
+// import * as printingEngine from 'Lib/printing-engine'
 import {createAction} from 'redux-actions'
 
 import {createPriceRequest} from './price'
@@ -11,7 +11,7 @@ const useConfiguration = createAction(
   configuration => configuration
 )
 
-export const getConfiguration = configurationId => async (
+export const getConfiguration = () => async (
   dispatch,
   getState
 ) => {

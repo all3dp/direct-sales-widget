@@ -1,7 +1,9 @@
 import {init} from 'Action/init'
 import * as userActions from 'Action/user'
-import * as productActions from 'Action/product'
 import * as priceActions from 'Action/price'
+import * as configurationActions from 'Action/configuration'
+import * as materialActions from 'Action/material'
+import * as navigationActions from 'Action/navigation'
 import {AppError} from 'Lib/error'
 
 import {resolveAsyncThunk, rejectAsyncThunk} from '../../../helper'
@@ -18,10 +20,12 @@ describe('Init actions', () => {
     store = mockStore(initialStoreData)
 
     sandbox = sinon.sandbox.create()
-    sandbox.stub(productActions, 'getProduct')
+    sandbox.stub(configurationActions, 'getConfiguration')
+    sandbox.stub(materialActions, 'getMaterials')
     sandbox.stub(userActions, 'detectAddress')
     sandbox.stub(userActions, 'createUser')
-    sandbox.stub(priceActions, 'getPrices')
+    sandbox.stub(priceActions, 'createPriceRequest')
+    sandbox.stub(navigationActions, 'goToAddress')
   })
 
   afterEach(() => {
@@ -30,9 +34,13 @@ describe('Init actions', () => {
 
   describe('init()', () => {
     it('dispatches expected actions, when everything succeeds', async () => {
-      productActions.getProduct
+      configurationActions.getConfiguration
         .withArgs()
-        .returns({type: 'got-some-product'})
+        .returns(resolveAsyncThunk('got-some-configuration'))
+
+      materialActions.getMaterials
+        .withArgs()
+        .returns(resolveAsyncThunk('got-some-materials'))
 
       userActions.detectAddress
         .withArgs()
@@ -42,25 +50,22 @@ describe('Init actions', () => {
         .withArgs()
         .returns(resolveAsyncThunk('some-user-created'))
 
-      priceActions.getPrices
+      priceActions.createPriceRequest
         .withArgs()
-        .returns({type: 'got-some-prices'})
+        .returns(resolveAsyncThunk('some-prices-requested'))
 
       await store.dispatch(init())
 
       expect(store.getActions(), 'to equal', [
-        {type: 'got-some-product'},
+        {type: 'got-some-configuration'},
+        {type: 'got-some-materials'},
         {type: 'some-address-deteced'},
         {type: 'some-user-created'},
-        {type: 'got-some-prices'}
+        {type: 'some-prices-requested'}
       ])
     })
 
     it('does not create a user, when address detection fails', () => {
-      productActions.getProduct
-        .withArgs()
-        .returns({type: 'got-some-product'})
-
       userActions.detectAddress
         .withArgs()
         .returns(rejectAsyncThunk('some-address-deteced', new AppError(ERROR_TYPE.DETECT_ADDRESS_FAILED)))
