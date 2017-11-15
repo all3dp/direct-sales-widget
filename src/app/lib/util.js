@@ -6,7 +6,3 @@ export const updateArrayItems = curry((array, test, changes) =>
     ...changes
   } : element))
 )
-
-export function roundToCents (price) {
-  return Math.round(price * 100) / 100
-}
