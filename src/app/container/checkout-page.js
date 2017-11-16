@@ -7,10 +7,17 @@ import CheckoutOverlay from 'Component/checkout-overlay'
 import PaypalButton from 'Component/paypal-button'
 
 import {selectModelTitle, selectOffer} from 'Lib/selector'
+import {createOrder, createPaymentWithPaypal} from 'Action/order'
+import {goToDisplay} from 'Action/navigation'
+import {paymentCreated} from 'Action/payment'
 
 const CheckoutPage = ({
   productTitle,
-  offer
+  offer,
+  handleCreateOrder,
+  handleCreatePaymentWithPaypal,
+  handlePaymentCreated,
+  payment
 }) => (
   <WidgetLayout>
     <CheckoutOverlay
@@ -21,22 +28,34 @@ const CheckoutPage = ({
       totalPrice={offer.totalPrice}
       paypalButton={(
         <PaypalButton
-          onClick={() => null}
-          onAuthorize={() => null}
-          onCancel={() => null}
-          onError={() => null}
+          onClick={() => {
+            const paypalWindow = window.open('', '_blank')
+            paypalWindow.document.write('You are being redirected to PayPal...')
+            handleCreateOrder()
+              .then(() => handleCreatePaymentWithPaypal())
+              .then((paymentResponse) => {
+                handlePaymentCreated(paymentResponse)
+                paypalWindow.location.href = paymentResponse.providerFields.redirectLink
+              })
+          }}
         />
       )}
+      payment={payment}
     />
   </WidgetLayout>
 )
 
 const mapStateToProps = state => ({
   productTitle: selectModelTitle(state),
-  offer: selectOffer(state)
+  offer: selectOffer(state),
+  payment: state.payment.payment
 })
 
 const mapDispatchToProps = {
+  handleGoToDisplay: goToDisplay,
+  handleCreateOrder: createOrder,
+  handleCreatePaymentWithPaypal: createPaymentWithPaypal,
+  handlePaymentCreated: paymentCreated
 }
 
 const enhance = compose(

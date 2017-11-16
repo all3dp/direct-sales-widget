@@ -1,6 +1,7 @@
 .checkout-line {
   display: flex;
   align-items: flex-end;
+  margin-bottom: 4px;
 
   &__label {
     font-size: $font-size-base;
@@ -29,6 +30,10 @@
       font-size: $font-size-l;
       font-weight: $font-weight-bold;
       text-transform: unset;
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

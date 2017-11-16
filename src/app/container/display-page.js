@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {compose} from 'recompose'
+import {compose, lifecycle} from 'recompose'
 
 import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
@@ -76,7 +76,12 @@ const mapDispatchToProps = {
 }
 
 const enhance = compose(
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps),
+    lifecycle({
+      componentDidMount () {
+        // store.dispatch(init())
+      }
+    })
   )
 
 export default enhance(DisplayPage)

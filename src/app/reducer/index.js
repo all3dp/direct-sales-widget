@@ -11,6 +11,7 @@ import configuration from './configuration'
 import display from './display'
 import modal from './modal'
 import model from './model'
+import payment from './payment'
 
 const rootReducer = combineReducers({
   app,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   display,
   routing: routerReducer,
   form: formReducer,
-  model
+  model,
+  payment
 })
 
 export default rootReducer
