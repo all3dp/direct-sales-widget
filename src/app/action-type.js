@@ -47,6 +47,9 @@ export default {
   },
   PAYMENT: {
     CREATED: 'PAYMENT.CREATED'
+  },
+  INIT: {
+    DONE: 'INIT.DONE'
   }
 }
 

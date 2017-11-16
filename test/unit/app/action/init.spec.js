@@ -1,9 +1,9 @@
-import {init} from 'Action/init'
 import * as userActions from 'Action/user'
 import * as priceActions from 'Action/price'
 import * as configurationActions from 'Action/configuration'
 import * as materialActions from 'Action/material'
 import * as navigationActions from 'Action/navigation'
+import * as initActions from 'Action/init'
 import {AppError} from 'Lib/error'
 
 import {resolveAsyncThunk, rejectAsyncThunk} from '../../../helper'
@@ -22,6 +22,7 @@ describe('Init actions', () => {
     sandbox = sinon.sandbox.create()
     sandbox.stub(configurationActions, 'getConfiguration')
     sandbox.stub(materialActions, 'getMaterials')
+    sandbox.stub(initActions, 'initDone')
     sandbox.stub(userActions, 'detectAddress')
     sandbox.stub(userActions, 'createUser')
     sandbox.stub(priceActions, 'createPriceRequest')
@@ -42,6 +43,10 @@ describe('Init actions', () => {
         .withArgs()
         .returns(resolveAsyncThunk('got-some-materials'))
 
+      initActions.initDone
+        .withArgs()
+        .returns('init-done')
+
       userActions.detectAddress
         .withArgs()
         .returns(resolveAsyncThunk('some-address-deteced'))
@@ -54,11 +59,12 @@ describe('Init actions', () => {
         .withArgs()
         .returns(resolveAsyncThunk('some-prices-requested'))
 
-      await store.dispatch(init())
+      await store.dispatch(initActions.init())
 
       expect(store.getActions(), 'to equal', [
         {type: 'got-some-configuration'},
         {type: 'got-some-materials'},
+        {type: 'INIT.DONE'},
         {type: 'some-address-deteced'},
         {type: 'some-user-created'},
         {type: 'some-prices-requested'}
@@ -70,7 +76,7 @@ describe('Init actions', () => {
         .withArgs()
         .returns(rejectAsyncThunk('some-address-deteced', new AppError(ERROR_TYPE.DETECT_ADDRESS_FAILED)))
 
-      return store.dispatch(init()).catch(() => {
+      return store.dispatch(initActions.init()).catch(() => {
         expect(userActions.createUser, 'was not called')
       })
     })

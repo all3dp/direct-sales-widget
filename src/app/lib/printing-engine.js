@@ -6,27 +6,27 @@ const baseUrl = config.printingEngineBaseUrl
 export const uploadModel = (file, params, onProgress) =>
   upload(`${baseUrl}/model`, file, params, onProgress)
 
-export const listMaterials = () => requestJson(`${baseUrl}/v1/material`)
+export const listMaterials = () => requestJson(`${baseUrl}/material`)
 
-export const createUser = ({user}) => requestJson(`${baseUrl}/v1/user`, {method: 'POST', body: user})
+export const createUser = ({user}) => requestJson(`${baseUrl}/user`, {method: 'POST', body: user})
 
-export const updateUser = ({userId, user}) => requestJson(`${baseUrl}/v1/user/${userId}`, {method: 'PUT', body: user})
+export const updateUser = ({userId, user}) => requestJson(`${baseUrl}/user/${userId}`, {method: 'PUT', body: user})
 
 export const createPriceRequest = options =>
-  requestJson(`${baseUrl}/v1/price`, {
+  requestJson(`${baseUrl}/price`, {
     method: 'POST',
     body: options
   })
 
-export const getPrice = ({priceId}) => requestJson(`${baseUrl}/v1/price/${priceId}`)
+export const getPrice = ({priceId}) => requestJson(`${baseUrl}/price/${priceId}`)
 
 export const getPriceStatus = async ({priceId}) => {
-  const response = await fetch(`${baseUrl}/v1/price/${priceId}`)
+  const response = await fetch(`${baseUrl}/price/${priceId}`)
   return response.status === 200
 }
 
 export const getPriceWithStatus = async ({priceId}) => {
-  const response = await requestWithResponse(`${baseUrl}/v1/price/${priceId}`)
+  const response = await requestWithResponse(`${baseUrl}/price/${priceId}`)
   return {
     price: response.data,
     isComplete: response.rawResponse.status === 200
@@ -34,16 +34,16 @@ export const getPriceWithStatus = async ({priceId}) => {
 }
 
 export const createShoppingCart = cart =>
-  requestJson(`${baseUrl}/v1/cart`, {
+  requestJson(`${baseUrl}/cart`, {
     method: 'POST',
     body: cart
   })
 
 export const getFinalCartPrice = ({cartId}) =>
-  requestJson(`${baseUrl}/v1/cart/${cartId}`)
+  requestJson(`${baseUrl}/cart/${cartId}`)
 
 export const order = ({userId, priceId, offerId}) =>
-  requestJson(`${baseUrl}/v2/order`, {
+  requestJson(`${baseUrl}/order`, {
     method: 'POST',
     body: {
       userId,
@@ -53,7 +53,7 @@ export const order = ({userId, priceId, offerId}) =>
   })
 
 export const createPaypalPayment = ({orderId, transactions}) => {
-  const payment = requestJson(`${baseUrl}/v2/payment/paypal`, {
+  const payment = requestJson(`${baseUrl}/payment/paypal`, {
     method: 'POST',
     body: {
       orderId,
@@ -65,10 +65,10 @@ export const createPaypalPayment = ({orderId, transactions}) => {
 }
 
 export const createConfiguration = configuration =>
-  requestJson(`${baseUrl}/v1/configuration`, {
+  requestJson(`${baseUrl}/configuration`, {
     method: 'POST',
     body: configuration
   })
 
 export const getConfiguration = configurationId =>
-  requestJson(`${baseUrl}/v1/configuration/${configurationId}`)
+  requestJson(`${baseUrl}/configuration/${configurationId}`)
