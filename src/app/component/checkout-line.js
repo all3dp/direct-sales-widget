@@ -7,11 +7,13 @@ const CheckoutLine = ({
   label,
   priceValue,
   modifiers,
-  classNames
+  classNames,
+  valueWidth
 }) => (
   <div className={buildClassName('checkout-line', modifiers, classNames)} >
-    <span className="checkout-line__label">{label}:</span>
-    <span className="checkout-line__value">
+    <span className="checkout-line__label">{label}</span>
+    <span className="checkout-line__colon">:</span>
+    <span className="checkout-line__value" style={{minWidth: `${valueWidth}px`}}>
       <span className="checkout-line__currency">$</span>
       <span className="checkout-line__price">{priceValue.toString()}</span>
     </span>
@@ -21,7 +23,8 @@ const CheckoutLine = ({
 CheckoutLine.propTypes = {
   ...propTypes.component,
   label: PropTypes.string.isRequired,
-  priceValue: PropTypes.number.isRequired
+  priceValue: PropTypes.number.isRequired,
+  valueWidth: PropTypes.string.isRequired
 }
 
 export default CheckoutLine

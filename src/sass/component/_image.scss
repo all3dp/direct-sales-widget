@@ -18,7 +18,7 @@
     transition: transform $transition-duration $transition-easing;
 
     &--zoomed-in {
-      transform: scale(1.25)
+      transform: scale(1.15)
     }
   }
 }
@@ -35,7 +35,7 @@
     transition: transform $transition-duration $transition-easing;
 
     &--zoomed-in {
-      transform: scale(1.25)
+      transform: scale(1.15)
     }
   }
 }
@@ -56,8 +56,8 @@
 
 
     &--zoomed-in {
-      min-width: 125%;
-      min-height: 125%;
+      min-width: 115%;
+      min-height: 115%;
     }
   }
 }
