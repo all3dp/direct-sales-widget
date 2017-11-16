@@ -79,7 +79,6 @@ const enhance = compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
       componentDidMount () {
-        console.log('mount', this.props)
         // store.dispatch(init())
       }
     })
