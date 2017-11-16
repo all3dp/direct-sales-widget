@@ -12,7 +12,7 @@ export const selectTotalPrice = (state) => {
   const {model: {selectedModelId}, price: {pricesByModelId}} = state
   const price = pricesByModelId[selectedModelId]
 
-  if (!price.bestOffer) {
+  if (!price || !price.bestOffer) {
     return null
   }
 

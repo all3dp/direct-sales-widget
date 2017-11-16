@@ -1,8 +1,7 @@
-// import * as printingEngine from 'Lib/printing-engine'
+import * as printingEngine from 'Lib/printing-engine'
 import {createAction} from 'redux-actions'
 
 import {createPriceRequest} from './price'
-import configurationMock from '../../../test-data/mock/object.json'
 
 import TYPE from '../action-type'
 
@@ -11,12 +10,11 @@ const useConfiguration = createAction(
   configuration => configuration
 )
 
-export const getConfiguration = () => async (
+export const getConfiguration = configurationId => async (
   dispatch,
   getState
 ) => {
-  // const configuration = await printingEngine.getConfiguration(configurationId)
-  const configuration = configurationMock
+  const configuration = await printingEngine.getConfiguration(configurationId)
   dispatch(useConfiguration(configuration))
   if (getState().user.userId) {
     dispatch(createPriceRequest())

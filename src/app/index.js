@@ -17,20 +17,19 @@ import {init} from './action/init'
 if (process.env.NODE_ENV === 'development-with-stubs') require('../../test-data/server-stubs') // eslint-disable-line
 
 const store = Store()
-store.dispatch(init()).then(() => {
-  render(
-    <Provider store={store}>
-      <Router store={store} />
-    </Provider>,
+
+render(
+  <Provider store={store}>
+    <Router store={store} />
+  </Provider>,
     global.document.getElementById('root')
   )
 
-  const bootsplash = global.document.getElementById('bootsplash')
+const bootsplash = global.document.getElementById('bootsplash')
   // TODO: lets fade out the bootsplash, looks nicer
-  if (bootsplash) { // Otherwise hot reloading breaks
-    bootsplash.remove()
-  }
-})
+if (bootsplash) { // Otherwise hot reloading breaks
+  bootsplash.remove()
+}
 
 // Webpack (uglify) will remove this code in the production build
 if (process.env.NODE_ENV !== 'production') {

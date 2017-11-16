@@ -2,7 +2,7 @@ import defaultsDeep from 'lodash/defaultsDeep'
 import defaultConfig from './default'
 
 export default defaultsDeep({
-  printingEngineBaseUrl: 'http://localhost:8000',
+  printingEngineBaseUrl: 'http://localhost:8000/v2',
   stripePublicKey: 'pk_test_vgy9WdRy48FnhegkMYXMQXit',
   paypal: {
     locale: 'en_US',

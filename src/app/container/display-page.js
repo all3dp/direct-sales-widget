@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {compose, lifecycle} from 'recompose'
+import {compose} from 'recompose'
 
 import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
@@ -47,7 +47,7 @@ const DisplayPage = ({
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
       material={material.material.name}
-      buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Address'}
+      buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Price'}
       handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
       handleChangeMaterialLeft={changeModelLeft}
       handleChangeMaterialRight={changeModelRight}
@@ -77,11 +77,6 @@ const mapDispatchToProps = {
 
 const enhance = compose(
     connect(mapStateToProps, mapDispatchToProps),
-    lifecycle({
-      componentDidMount () {
-        // store.dispatch(init())
-      }
-    })
   )
 
 export default enhance(DisplayPage)
