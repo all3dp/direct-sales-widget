@@ -11,8 +11,6 @@ import Router from './router'
 
 import '../sass/main.scss'
 
-import {init} from './action/init'
-
 // Stub backend during development. Webpack will remove this in production
 if (process.env.NODE_ENV === 'development-with-stubs') require('../../test-data/server-stubs') // eslint-disable-line
 
