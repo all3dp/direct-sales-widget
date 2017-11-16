@@ -37,6 +37,9 @@ const CheckoutPage = ({
                 handlePaymentCreated(paymentResponse)
                 paypalWindow.location.href = paymentResponse.providerFields.redirectLink
               })
+              .catch(() => {
+                paypalWindow.close()
+              })
           }}
         />
       )}
