@@ -24,7 +24,7 @@ CheckoutLine.propTypes = {
   ...propTypes.component,
   label: PropTypes.string.isRequired,
   priceValue: PropTypes.number.isRequired,
-  valueWidth: PropTypes.string.isRequired
+  valueWidth: PropTypes.number.isRequired
 }
 
 export default CheckoutLine
