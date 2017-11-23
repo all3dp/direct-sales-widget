@@ -24,7 +24,10 @@ export default class ImageSlider extends Component {
     const {materialOptions, zoomedIn} = this.props
     return materialOptions.map(materialOption => (
       <div key={materialOption.materialConfigId} className="image-slider__image">
-        <Image src={materialOption.displayImageUrl} zoomedIn={zoomedIn} alt={materialOption.materialConfigId} />
+        <Image
+          src={materialOption.displayImageUrl}
+          zoomedIn={zoomedIn} alt={materialOption.materialConfigId}
+        />
       </div>
     )
     )

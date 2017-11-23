@@ -1,6 +1,5 @@
 import {createAction} from 'redux-actions'
 
-import {createUser} from 'Action/user'
 import * as printingEngine from 'Lib/printing-engine'
 import {getUpdatedOffer} from 'Lib/offer'
 import {poll, debouncedPoll, stopPoll} from 'Lib/poll'

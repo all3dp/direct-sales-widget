@@ -2,7 +2,6 @@ import * as userActions from 'Action/user'
 import * as priceActions from 'Action/price'
 import * as configurationActions from 'Action/configuration'
 import * as materialActions from 'Action/material'
-import * as navigationActions from 'Action/navigation'
 import * as initActions from 'Action/init'
 import {AppError} from 'Lib/error'
 
@@ -26,7 +25,6 @@ describe('Init actions', () => {
     sandbox.stub(userActions, 'detectAddress')
     sandbox.stub(userActions, 'createUser')
     sandbox.stub(priceActions, 'createPriceRequest')
-    sandbox.stub(navigationActions, 'goToAddress')
   })
 
   afterEach(() => {
@@ -64,10 +62,10 @@ describe('Init actions', () => {
       expect(store.getActions(), 'to equal', [
         {type: 'got-some-configuration'},
         {type: 'got-some-materials'},
-        {type: 'INIT.DONE'},
         {type: 'some-address-deteced'},
         {type: 'some-user-created'},
-        {type: 'some-prices-requested'}
+        {type: 'some-prices-requested'},
+        {type: 'INIT.DONE'}
       ])
     })
 

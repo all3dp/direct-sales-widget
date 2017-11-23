@@ -10,7 +10,11 @@ const WidgetLayout = ({
   zoomedIn,
   children
 }) => (
-  <Wlayout materialOptions={materialOptions} selectedMaterialOptionIndex={selectedMaterialOptionIndex} zoomedIn={zoomedIn}>
+  <Wlayout
+    materialOptions={materialOptions}
+    selectedMaterialOptionIndex={selectedMaterialOptionIndex}
+    zoomedIn={zoomedIn}
+  >
     {children}
   </Wlayout>
   )
