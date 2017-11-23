@@ -5,6 +5,7 @@ import DisplayPage from 'Container/display-page'
 import AddressPage from 'Container/address-page'
 import CheckOutPage from 'Container/checkout-page'
 import Initializer from 'Container/initializer'
+import ErrorPage from 'Container/error-page'
 
 /* eslint-disable react/prop-types */
 export default ({store}) => {
@@ -18,6 +19,7 @@ export default ({store}) => {
         <Route component={AddressPage} path="/address" />
         <Route component={CheckOutPage} path="/checkout" />
       </Route>
+      <Route component={ErrorPage} path="/error" />
     </Router>
   )
 }

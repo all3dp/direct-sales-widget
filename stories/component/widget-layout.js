@@ -8,11 +8,11 @@ import WidgetFooter from 'Component/widget-footer'
 import AddressOverlay from 'Component/address-overlay'
 import CheckoutOverlay from 'Component/checkout-overlay'
 
-import product from '../../test-data/mock/object.json'
+import configuration from '../../test-data/mock/object.json'
 
 const sliderProps = {
-  materials: product.materials,
-  selectedMaterialId: product.materials[0].id
+  models: configuration.items,
+  selectedMaterialId: configuration.items[0].id
 }
 
 storiesOf('Widget Layout', module)

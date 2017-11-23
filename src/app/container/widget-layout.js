@@ -4,8 +4,6 @@ import {compose} from 'recompose'
 
 import Wlayout from 'Component/widget-layout'
 
-import Modal from './modal'
-
 const WidgetLayout = ({
   models,
   selectedModelId,
@@ -13,7 +11,6 @@ const WidgetLayout = ({
   children
 }) => (
   <Wlayout models={models} selectedModelId={selectedModelId} zoomedIn={zoomedIn}>
-    <Modal />
     {children}
   </Wlayout>
   )

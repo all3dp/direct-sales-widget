@@ -9,10 +9,10 @@ import price from './price'
 import order from './order'
 import configuration from './configuration'
 import display from './display'
-import modal from './modal'
 import model from './model'
 import payment from './payment'
 import init from './init'
+import error from './error'
 
 const rootReducer = combineReducers({
   app,
@@ -20,14 +20,14 @@ const rootReducer = combineReducers({
   material,
   price,
   order,
-  modal,
   configuration,
   display,
   routing: routerReducer,
   form: formReducer,
   model,
   payment,
-  init
+  init,
+  error
 })
 
 export default rootReducer

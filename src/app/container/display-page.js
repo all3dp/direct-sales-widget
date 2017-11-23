@@ -16,8 +16,6 @@ import {
   toggleBackgroundImageZoom as toggleBackgroundImageZoomAction
 } from 'Action/display'
 
-import Modal from './modal'
-
 const DisplayPage = ({
   totalPrice,
   selectedModel,
@@ -41,7 +39,6 @@ const DisplayPage = ({
       toggleDescription={toggleDescription}
       hidden={backgroundImageZoomed}
     />
-    <Modal />
     <WidgetFooter
       showControls={models.length > 1}
       modifiers={['thick-background']}

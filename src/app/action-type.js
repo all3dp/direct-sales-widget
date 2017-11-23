@@ -50,6 +50,10 @@ export default {
   },
   INIT: {
     DONE: 'INIT.DONE'
+  },
+  ERROR: {
+    SET: 'ERROR.SET',
+    CLEAR: 'ERROR.CLEAR'
   }
 }
 
