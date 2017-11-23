@@ -7,6 +7,12 @@ import CheckOutPage from 'Container/checkout-page'
 import Initializer from 'Container/initializer'
 import ErrorPage from 'Container/error-page'
 
+const preventDeepLinking = store => (nextState, replace) => {
+  if (!store.getState().error.message) {
+    replace('/')
+  }
+}
+
 /* eslint-disable react/prop-types */
 export default ({store}) => {
   // Create an enhanced history that syncs navigation events with the store
@@ -19,7 +25,7 @@ export default ({store}) => {
         <Route component={AddressPage} path="/address" />
         <Route component={CheckOutPage} path="/checkout" />
       </Route>
-      <Route component={ErrorPage} path="/error" />
+      <Route component={ErrorPage} path="/error" onEnter={preventDeepLinking(store)} />
     </Router>
   )
 }

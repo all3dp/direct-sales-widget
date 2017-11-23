@@ -14,6 +14,9 @@ export const getConfiguration = configurationId => async (
   dispatch,
   getState
 ) => {
+  if (!configurationId) {
+    throw new Error('No configuration id specified.')
+  }
   const configuration = await printingEngine.getConfiguration(configurationId)
   dispatch(useConfiguration(configuration))
   if (getState().user.userId) {
