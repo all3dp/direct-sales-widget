@@ -25,7 +25,7 @@ export const createOrder = () => async (dispatch, getState) => {
   const {bestOffer: {offerId}, priceId} = pricesByModelId[selectedModelId]
 
   try {
-    const {orderId} = await printingEngine.order({userId, priceId, offerId})
+    const {orderId} = await printingEngine.order({userId, priceId, offerIds: [offerId]})
     dispatch(ordered(orderId))
   } catch (error) {
     dispatch(ordered(error))
@@ -34,15 +34,30 @@ export const createOrder = () => async (dispatch, getState) => {
 
 export const createPaymentWithPaypal = () => async (dispatch, getState) => {
   const state = getState()
-  const {order: {orderId}, model: {selectedModelId}} = state
-  const {bestOffer: {totalPrice, currency, offerId}} = state.price.pricesByModelId[selectedModelId]
+  const {order: {orderId}, model: {selectedModelId, models}} = state
+  const {bestOffer: {items, totalPrice, currency, offerId, subTotalPrice, vatPrice, shipping: {price: shipping}}} = state.price.pricesByModelId[selectedModelId]
 
   const transactions = [
     {
       custom: offerId,
       amount: {
         total: totalPrice.toString(),
-        currency
+        currency,
+        details: {
+          subtotal: String(subTotalPrice),
+          tax: String(vatPrice),
+          shipping: String(shipping)
+        }
+      },
+      item_list: {
+        items: [
+          {
+            quantity: 1,
+            currency,
+            name: `${models.find(m => m.modelId === selectedModelId).title}`,
+            price: items[0].price
+          }
+        ]
       }
     }
   ]
