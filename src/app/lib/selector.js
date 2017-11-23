@@ -1,6 +1,7 @@
 import {
   hasMaterialMultipleConfigs,
-  getBestOfferForMaterial
+  getBestOfferForMaterial,
+  getBestOfferForMaterialConfig
 } from 'Lib/material'
 import {
   formatPrice
@@ -8,36 +9,41 @@ import {
 
 import config from '../../../config'
 
-export const selectTotalPrice = (state) => {
-  const {model: {selectedModelId}, price: {pricesByModelId}} = state
-  const price = pricesByModelId[selectedModelId]
+export const selectSelectedMaterialOption = (state) => {
+  const {material: materialOptions, selectedMaterialOptionIndex} = state
 
-  if (!price || !price.bestOffer) {
+  return materialOptions[selectedMaterialOptionIndex]
+}
+
+export const selectBestOfferForSelectedMaterialOption = (state) => {
+  const {
+    material: {materialOptions, selectedMaterialOptionIndex},
+    price: {offers}
+  } = state
+
+  if (!offers) {
     return null
   }
 
-  return price.bestOffer.totalPrice
+  const selectedMaterialConfigId = materialOptions[selectedMaterialOptionIndex].materialConfigId
+
+  return getBestOfferForMaterialConfig(offers, selectedMaterialConfigId)
+}
+
+export const selectTotalPrice = (state) => {
+  const bestOffer = selectBestOfferForSelectedMaterialOption(state)
+
+  if (!bestOffer) {
+    return null
+  }
+
+  return bestOffer.totalPrice
 }
 
 export const selectOffer = (state) => {
   const {model: {selectedModelId}, price: {pricesByModelId}} = state
 
   return pricesByModelId[selectedModelId].bestOffer
-}
-
-export const selectModelTitle = (state) => {
-  const {model: {models, selectedModelId}} = state
-
-  return models.find(m => m.modelId === selectedModelId).title
-}
-
-export const selectSelectedModel = (state) => {
-  const {model: {
-    models,
-    selectedModelId
-  }} = state
-
-  return models.find(m => m.modelId === selectedModelId)
 }
 
 export const selectSelectedMaterialPrice = (state) => {
@@ -153,13 +159,16 @@ export const selectMaterialByName = (state, name) => {
   return material
 }
 
-export const selectMaterialByMaterialConfigId = (state, materialConfigId) => {
+export const selectMaterialByMaterialConfigId = (state) => {
   const {
     material: {
-      materials
+      materials,
+      materialOptions,
+      selectedMaterialOptionIndex
     }
   } = state
 
+  const materialConfigId = materialOptions[selectedMaterialOptionIndex].materialConfigId
   let selectedMaterial
   let selectedFinishGroup
   let selectedMaterialConfig

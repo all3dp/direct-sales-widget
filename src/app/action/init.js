@@ -12,13 +12,12 @@ export const initDone = createAction(
 export const init = configurationId => async (dispatch) => {
   await dispatch(getConfiguration(configurationId))
   await dispatch(getMaterials())
-  await dispatch(initDone())
-  await dispatch(detectAddress())
-  await dispatch(createUser())
-  await dispatch(createPriceRequest())
-  // try {
-  //   throw new Error('Whaaaaat')
-  // } catch (error) {
-  //   throw error
-  // }
+  try {
+    await dispatch(detectAddress())
+    await dispatch(createUser())
+    await dispatch(createPriceRequest())
+    await dispatch(initDone())
+  } catch (err) {
+    await dispatch(initDone())
+  }
 }

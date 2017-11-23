@@ -1,6 +1,7 @@
 import {createAction} from 'redux-actions'
 
 import * as printingEngine from 'Lib/printing-engine'
+import {selectBestOfferForSelectedMaterialOption} from 'Lib/selector'
 
 import TYPE from '../action-type'
 
@@ -11,18 +12,16 @@ const ordered = createAction(
 )
 
 export const createOrder = () => async (dispatch, getState) => {
+  const state = getState()
   const {
-    model: {
-      selectedModelId
-    },
     user: {
       userId
     },
     price: {
-      pricesByModelId
+      priceId
     }
-  } = getState()
-  const {bestOffer: {offerId}, priceId} = pricesByModelId[selectedModelId]
+  } = state
+  const {offerId} = selectBestOfferForSelectedMaterialOption(state)
 
   try {
     const {orderId} = await printingEngine.order({userId, priceId, offerIds: [offerId]})
@@ -34,8 +33,16 @@ export const createOrder = () => async (dispatch, getState) => {
 
 export const createPaymentWithPaypal = () => async (dispatch, getState) => {
   const state = getState()
-  const {order: {orderId}, model: {selectedModelId, models}} = state
-  const {bestOffer: {items, totalPrice, currency, offerId, subTotalPrice, vatPrice, shipping: {price: shipping}}} = state.price.pricesByModelId[selectedModelId]
+  const {order: {orderId}, model: {title}} = state
+  const {
+    items,
+    totalPrice,
+    currency,
+    offerId,
+    subTotalPrice,
+    vatPrice,
+    shipping: {price: shipping}
+  } = selectBestOfferForSelectedMaterialOption(state)
 
   const transactions = [
     {
@@ -54,7 +61,7 @@ export const createPaymentWithPaypal = () => async (dispatch, getState) => {
           {
             quantity: 1,
             currency,
-            name: `${models.find(m => m.modelId === selectedModelId).title}`,
+            name: `${title}`,
             price: items[0].price
           }
         ]

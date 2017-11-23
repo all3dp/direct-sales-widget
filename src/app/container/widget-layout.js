@@ -5,19 +5,19 @@ import {compose} from 'recompose'
 import Wlayout from 'Component/widget-layout'
 
 const WidgetLayout = ({
-  models,
-  selectedModelId,
+  materialOptions,
+  selectedMaterialOptionIndex,
   zoomedIn,
   children
 }) => (
-  <Wlayout models={models} selectedModelId={selectedModelId} zoomedIn={zoomedIn}>
+  <Wlayout materialOptions={materialOptions} selectedMaterialOptionIndex={selectedMaterialOptionIndex} zoomedIn={zoomedIn}>
     {children}
   </Wlayout>
   )
 
 const mapStateToProps = state => ({
-  selectedModelId: state.model.selectedModelId,
-  models: state.model.models,
+  selectedMaterialOptionIndex: state.material.selectedMaterialOptionIndex,
+  materialOptions: state.material.materialOptions,
   zoomedIn: state.display.backgroundImageZoomed
 })
 

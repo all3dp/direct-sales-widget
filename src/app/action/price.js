@@ -1,5 +1,6 @@
 import {createAction} from 'redux-actions'
 
+import {createUser} from 'Action/user'
 import * as printingEngine from 'Lib/printing-engine'
 import {getUpdatedOffer} from 'Lib/offer'
 import {poll, debouncedPoll, stopPoll} from 'Lib/poll'
@@ -12,42 +13,41 @@ const RECALC_POLL_NAME = 'price_recalc'
 // Private actions
 
 const clearOffers = createAction(
-  TYPE.PRICE.CLEAR_OFFERS,
-  modelId => ({modelId})
+  TYPE.PRICE.CLEAR_OFFERS
 )
 const priceRequested = createAction(
   TYPE.PRICE.REQUESTED,
-  (priceId, modelId) => ({modelId, priceId})
+  priceId => ({priceId})
 )
 const priceReceived = createAction(
   TYPE.PRICE.RECEIVED,
-  (price, modelId) => ({price, modelId})
+  price => ({price})
 )
 const gotError = createAction(
   TYPE.PRICE.GOT_ERROR,
-  (error, modelId) => ({error, modelId})
+  error => ({error})
 )
 const priceTimeout = createAction(TYPE.PRICE.TIMEOUT)
 
 const setBestOffer = createAction(
   TYPE.PRICE.SET_BEST_OFFER,
-  (offer, modelId) => ({offer, modelId})
+  offer => ({offer})
 )
 
 // Public actions
 
 export const selectOffer = createAction(
   TYPE.PRICE.SELECT_OFFER,
-  (offer, modelId) => ({offer, modelId})
+  offer => ({offer})
 )
 
-export const selectBestOffer = (offers, materialConfig, modelId) => (dispatch) => {
+export const selectBestOffer = (offers, materialConfig) => (dispatch) => {
   const offer = getBestOfferForMaterialConfig(offers, materialConfig)
 
-  dispatch(setBestOffer(offer, modelId))
+  dispatch(setBestOffer(offer))
 }
 
-export const refreshSelectedOffer = modelId => (dispatch, getState) => {
+export const refreshSelectedOffer = () => (dispatch, getState) => {
   const {
     price: {
       offers,
@@ -58,7 +58,7 @@ export const refreshSelectedOffer = modelId => (dispatch, getState) => {
   if (selectedOffer) {
     const offer = offers ? getUpdatedOffer(selectedOffer, offers) : null
     // if (!offer) // TODO: show that offer is no longer available
-    dispatch(selectOffer(offer, modelId))
+    dispatch(selectOffer(offer))
   }
 }
 
@@ -68,31 +68,31 @@ export const createPriceRequest = ({
 } = {}) => (dispatch, getState) => {
   const {
     material: {
-      selectedMaterialConfig
+      materialOptions
     },
     model: {
-      models
+      modelId,
+      quantity
     },
     user: {
       userId
     }
   } = getState()
 
-  // Abort if user did not upload any models yet
-  if (models.length === 0) {
-    // Just to be sure, stop any running price polls
+  if (!modelId) {
     stopPoll(POLL_NAME)
     return Promise.resolve()
   }
 
-  const itemArrays = models.map(({modelId, quantity}) => [{
-    modelId,
-    materialConfigIds: [selectedMaterialConfig],
-    quantity
-  }])
+  const itemArrays = [
+    [{
+      modelId,
+      materialConfigIds: materialOptions.map(o => o.materialConfigId),
+      quantity
+    }]
+  ]
 
   return Promise.all(itemArrays.map((items) => {
-    const modelId = items[0].modelId
     const options = {
       isEstimate: false, // always fetch real prices
       caching: true, // cache prices for next user
@@ -101,27 +101,26 @@ export const createPriceRequest = ({
       items
     }
 
-    dispatch(clearOffers(modelId))
+    dispatch(clearOffers())
 
     const usePoll = debounce ? debouncedPoll : poll
     return usePoll(`${POLL_NAME}-${modelId}`, async (priceId) => {
       const {price, isComplete} = await printingEngine.getPriceWithStatus({priceId})
-      dispatch(priceReceived(price, modelId))
-      dispatch(selectBestOffer(price.offers, selectedMaterialConfig, modelId))
+      dispatch(priceReceived(price))
       return isComplete
     }, async () => {
       const {priceId} = await printingEngine.createPriceRequest(options)
-      dispatch(priceRequested(priceId, modelId))
+      dispatch(priceRequested(priceId))
       return priceId
     })
     .then(() => {
       // We need to update the selectedOffer if applicable
-      dispatch(refreshSelectedOffer(modelId))
+      dispatch(refreshSelectedOffer())
     })
     .catch((error) => {
       // Handle timeout separately
       if (error.type === ERROR_TYPE.POLL_TIMEOUT) {
-        dispatch(priceTimeout(error, modelId))
+        dispatch(priceTimeout(error))
         return
       }
 
@@ -131,7 +130,7 @@ export const createPriceRequest = ({
         return
       }
 
-      dispatch(gotError(error, modelId))
+      dispatch(gotError(error))
 
       // Throw again to trigger fatal error modal
       throw error

@@ -6,9 +6,9 @@ import WidgetLayout from 'Container/widget-layout'
 import WidgetHeader from 'Component/widget-header'
 import WidgetFooter from 'Component/widget-footer'
 
-import {selectSelectedModel, selectTotalPrice, selectMaterialByMaterialConfigId} from 'Lib/selector'
+import {selectTotalPrice, selectMaterialByMaterialConfigId} from 'Lib/selector'
 
-import {selectPreviousModel, selectNextModel} from 'Action/model'
+import {selectNextMaterialOption, selectPreviousMaterialOption} from 'Action/material'
 import {goToCheckout, goToAddress} from 'Action/navigation'
 
 import {
@@ -18,36 +18,37 @@ import {
 
 const DisplayPage = ({
   totalPrice,
-  selectedModel,
-  changeModelLeft,
-  changeModelRight,
+  modelTitle,
+  modelDescription,
+  materialOptions,
+  changeMaterialLeft,
+  changeMaterialRight,
   descriptionExpanded,
   backgroundImageZoomed,
   toggleDescription,
   toggleBackgroundImageZoom,
   handleGoToCheckout,
   handleGoToAddress,
-  material,
-  models
+  material
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
       modifiers={['thick-background']}
-      title={selectedModel.title}
-      description={selectedModel.description}
+      title={modelTitle}
+      description={modelDescription}
       descriptionExpanded={descriptionExpanded}
       toggleDescription={toggleDescription}
       hidden={backgroundImageZoomed}
     />
     <WidgetFooter
-      showControls={models.length > 1}
+      showControls={materialOptions.length > 1}
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
       material={material.material.name}
       buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Price'}
       handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
-      handleChangeMaterialLeft={changeModelLeft}
-      handleChangeMaterialRight={changeModelRight}
+      handleChangeMaterialLeft={changeMaterialLeft}
+      handleChangeMaterialRight={changeMaterialRight}
       handleToggleZoom={toggleBackgroundImageZoom}
     />
   </WidgetLayout>
@@ -55,9 +56,10 @@ const DisplayPage = ({
 
 const mapStateToProps = state => ({
   totalPrice: selectTotalPrice(state),
-  selectedModel: selectSelectedModel(state),
-  selectedModelId: state.model.selectedModelId,
-  models: state.model.models,
+  modelTitle: state.model.title,
+  modelDescription: state.model.description,
+  selectedMaterial: state.model.selectedModelId,
+  materialOptions: state.material.materialOptions,
   material: selectMaterialByMaterialConfigId(state, state.material.selectedMaterialConfig),
   descriptionExpanded: state.display.descriptionExpanded,
   backgroundImageZoomed: state.display.backgroundImageZoomed
@@ -66,8 +68,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   toggleDescription: toggleDescriptionAction,
   toggleBackgroundImageZoom: toggleBackgroundImageZoomAction,
-  changeModelLeft: selectPreviousModel,
-  changeModelRight: selectNextModel,
+  changeMaterialLeft: selectPreviousMaterialOption,
+  changeMaterialRight: selectNextMaterialOption,
   handleGoToCheckout: goToCheckout,
   handleGoToAddress: goToAddress
 }

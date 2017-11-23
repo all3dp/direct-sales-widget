@@ -1,4 +1,5 @@
 import React from 'react'
+import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {compose} from 'recompose'
 
@@ -6,7 +7,7 @@ import WidgetLayout from 'Container/widget-layout'
 import CheckoutOverlay from 'Component/checkout-overlay'
 import PaypalButton from 'Component/paypal-button'
 
-import {selectModelTitle, selectOffer} from 'Lib/selector'
+import {selectBestOfferForSelectedMaterialOption} from 'Lib/selector'
 import {createOrder, createPaymentWithPaypal} from 'Action/order'
 import {goToDisplay} from 'Action/navigation'
 import {paymentCreated} from 'Action/payment'
@@ -36,6 +37,7 @@ const CheckoutPage = ({
               .then((paymentResponse) => {
                 handlePaymentCreated(paymentResponse)
                 paypalWindow.location.href = paymentResponse.providerFields.redirectLink
+                browserHistory.goBack()
               })
               .catch(() => {
                 paypalWindow.close()
@@ -49,8 +51,8 @@ const CheckoutPage = ({
 )
 
 const mapStateToProps = state => ({
-  productTitle: selectModelTitle(state),
-  offer: selectOffer(state),
+  productTitle: state.model.title,
+  offer: selectBestOfferForSelectedMaterialOption(state),
   payment: state.payment.payment
 })
 

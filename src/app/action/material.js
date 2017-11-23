@@ -13,6 +13,15 @@ export const selectMaterial = createAction(
   TYPE.MATERIAL.SELECTED,
   materialId => materialId
 )
+
+export const selectNextMaterialOption = createAction(
+  TYPE.MATERIAL.SELECT_NEXT_MATERIAL_OPTION
+)
+
+export const selectPreviousMaterialOption = createAction(
+  TYPE.MATERIAL.SELECT_PREVIOUS_MATERIAL_OPTION
+)
+
 export const selectMaterialConfigForFinishGroup = createAction(
   TYPE.MATERIAL.CONFIG_FOR_FINISH_GROUP_SELECTED,
   ({
@@ -22,10 +31,12 @@ export const selectMaterialConfigForFinishGroup = createAction(
     [finishGroupId]: materialConfigId
   })
 )
+
 export const selectMaterialConfig = createAction(
   TYPE.MATERIAL.CONFIG_SELECTED,
   materialConfigId => materialConfigId
 )
+
 const materialReceived = createAction(TYPE.MATERIAL.RECEIVED, materials => materials)
 
 // Async actions

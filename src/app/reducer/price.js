@@ -5,93 +5,58 @@ import cloneDeep from 'lodash/cloneDeep'
 import TYPE from '../action-type'
 
 const initialState = {
-  pricesByModelId: {}
+  priceId: null,
+  offers: null,
+  printingServiceComplete: null,
+  selectedOffer: null,
+  error: null,
+  bestOffer: null
 }
 
-function handleClearOffers (state, {payload: {modelId}}) {
-  const currentState = state.pricesByModelId[modelId]
-
-  const newState = {
-    ...currentState,
+function handleClearOffers (state) {
+  return {
+    ...state,
     priceId: null,
     offers: null,
     printingServiceComplete: null,
     selectedOffer: null,
     error: null
   }
-
-  state.pricesByModelId[modelId] = newState
-
-  return {
-    ...state
-  }
 }
 
-function handleSelectOffer (state, {payload: {offer, modelId}}) {
-  const currentState = state.pricesByModelId[modelId]
-
-  const newState = {
-    ...currentState,
+function handleSelectOffer (state, {payload: {offer}}) {
+  return {
+    ...state,
     selectedOffer: cloneDeep(offer)
   }
-
-  state.pricesByModelId[modelId] = newState
-
-  return {
-    ...state
-  }
 }
 
-function handlePriceRequested (state, {payload: {priceId, modelId}}) {
-  const currentState = state.pricesByModelId[modelId]
-
-  const newState = {
-    ...currentState,
+function handlePriceRequested (state, {payload: {priceId}}) {
+  return {
+    ...state,
     priceId
   }
-
-  state.pricesByModelId[modelId] = newState
-  return {
-    ...state
-  }
 }
 
-function handleGotError (state, {payload: {error, modelId}}) {
-  const currentState = state.pricesByModelId[modelId]
-
-  const newState = {
-    ...currentState,
+function handleGotError (state, {payload: {error}}) {
+  return {
+    ...state,
     error
   }
-
-  state.pricesByModelId[modelId] = newState
-  return {
-    ...state
-  }
 }
 
-function handlePriceReceived (state, {payload: {modelId, price}}) {
+function handlePriceReceived (state, {payload: {price}}) {
   const {offers, printingServiceComplete} = price
-  const currentState = state.pricesByModelId[modelId]
-
-  const newState = {
-    ...currentState,
+  return {
+    ...state,
     offers,
     printingServiceComplete,
     error: null
   }
-
-  state.pricesByModelId[modelId] = newState
-
-  return {
-    ...state
-  }
 }
 
-function handlePriceTimeout (state, {payload: {modelId}}) {
-  const {offers, printingServiceComplete} = state.pricesByModelId[modelId]
-  const currentState = state.pricesByModelId[modelId]
-
+function handlePriceTimeout (state) {
+  const {offers, printingServiceComplete} = state
   // Remove estimated offers
   const finalOffers = offers ? offers.filter(offer => !offer.priceEstimated) : null
 
@@ -102,32 +67,18 @@ function handlePriceTimeout (state, {payload: {modelId}}) {
   }, {})
   : null
 
-  const newState = {
-    ...currentState,
+  return {
+    ...state,
     offers: finalOffers,
     printingServiceComplete: finalPrintingServiceComplete,
     error: null
   }
-
-  state.pricesByModelId[modelId] = newState
-
-  return {
-    ...state
-  }
 }
 
-function handleSetBestOffer (state, {payload: {offer, modelId}}) {
-  const currentState = state.pricesByModelId[modelId] || {}
-
-  const newState = {
-    ...currentState,
-    bestOffer: offer
-  }
-
-  state.pricesByModelId[modelId] = newState
-
+function handleSetBestOffer (state, {payload: {offer}}) {
   return {
-    ...state
+    ...state,
+    bestOffer: offer
   }
 }
 

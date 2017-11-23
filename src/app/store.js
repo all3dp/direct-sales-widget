@@ -17,8 +17,8 @@ const fatalErrorHandler = store => next => (action) => {
   if (promise && promise.catch) {
     return promise.catch((error) => {
       captureException(error) // log in sentry
-      store.dispatch(setError({error}))
-      store.dispatch(goToError())
+      // store.dispatch(setError({error}))
+      // store.dispatch(goToError())
       throw error  // Throw error again
     })
   }

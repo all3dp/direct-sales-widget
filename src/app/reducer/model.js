@@ -3,30 +3,26 @@
 import TYPE from '../action-type'
 
 const initialState = {
-  selectedModelId: null,
-  models: []
+  modelId: null,
+  title: null,
+  description: null,
+  quantity: null
 }
 
-function handleSetModels (state, {payload: {items}}) {
+function handleSetModel (state, {payload: {items}}) {
   return {
     ...state,
-    models: items,
-    selectedModelId: items[0].modelId
+    modelId: items[0].modelId,
+    quantity: items[0].quantity,
+    title: items[0].title,
+    description: items[0].description
   }
 }
 
-function handleSelectModel (state, {payload: {modelId}}) {
-  return {
-    ...state,
-    selectedModelId: modelId
-  }
-}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case TYPE.CONFIGURATION.USE_CONFIGURATION:
-      return handleSetModels(state, action)
-    case TYPE.MODEL.SELECT_MODEL:
-      return handleSelectModel(state, action)
+      return handleSetModel(state, action)
     default:
       return state
   }
