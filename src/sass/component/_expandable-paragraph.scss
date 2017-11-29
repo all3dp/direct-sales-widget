@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 0;
 
   .expandable-paragraph__content {
     opacity: 0;
-    overflow-y: hidden;
     height: 0;
+    overflow-y: hidden;
     transition: height $transition-duration $transition-easing, opacity $transition-duration-fast $transition-easing
   }
   .expandable-paragraph__button {
@@ -31,10 +32,11 @@
   }
 
   &--expanded {
+    flex: 1;
+
     .expandable-paragraph__content {
       opacity: 1;
-      height: 128px;
-
+      flex: 1;
     }
   }
 }
