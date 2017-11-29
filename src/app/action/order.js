@@ -1,7 +1,7 @@
 import {createAction} from 'redux-actions'
 
 import * as printingEngine from 'Lib/printing-engine'
-import {selectBestOfferForSelectedMaterialOption} from 'Lib/selector'
+import {selectBestOfferForSelectedMaterialOption, selectMaterialByMaterialConfigId} from 'Lib/selector'
 
 import TYPE from '../action-type'
 
@@ -43,6 +43,7 @@ export const createPaymentWithPaypal = () => async (dispatch, getState) => {
     vatPrice,
     shipping: {price: shipping}
   } = selectBestOfferForSelectedMaterialOption(state)
+  const material = selectMaterialByMaterialConfigId(state)
 
   const transactions = [
     {
@@ -61,7 +62,7 @@ export const createPaymentWithPaypal = () => async (dispatch, getState) => {
           {
             quantity: 1,
             currency,
-            name: `${title}`,
+            name: `${title} ${material.materialConfig.name}`,
             price: items[0].price
           }
         ]
