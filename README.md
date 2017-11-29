@@ -1,6 +1,6 @@
-# Printing Engine Client
+# Direct Sales Widget
 
-Frontend Application for the Printing Engine
+Direct sales widget intended for embedding via oEmbed.
 
 ## Requirements
 
