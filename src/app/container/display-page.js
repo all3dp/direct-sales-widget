@@ -33,7 +33,7 @@ const DisplayPage = ({
 }) => (
   <WidgetLayout zoomedIn={backgroundImageZoomed}>
     <WidgetHeader
-      modifiers={['thick-background']}
+      modifiers={['thick-background'].concat(descriptionExpanded ? ['expanded'] : undefined)}
       title={modelTitle}
       description={modelDescription}
       descriptionExpanded={descriptionExpanded}
@@ -44,7 +44,7 @@ const DisplayPage = ({
       showControls={materialOptions.length > 1}
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
-      material={material.material.name}
+      material={material.materialConfig.name}
       buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Price'}
       handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
       handleChangeMaterialLeft={changeMaterialLeft}
