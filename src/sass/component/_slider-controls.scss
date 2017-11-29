@@ -1,0 +1,23 @@
+.slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 4px;
+
+  >div {
+    cursor: pointer;
+    width: 24px;
+    height: 19px;
+    user-select: none;
+  }
+
+  .slider-controls__material {
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+    color: $color-blue;
+    font-size: $font-size-s;
+    flex: 2;
+    text-align: center;
+  }
+}

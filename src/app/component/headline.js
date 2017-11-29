@@ -3,20 +3,11 @@ import React, {PropTypes} from 'react'
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
 
-import Icon from 'Component/icon'
-
-import warningIcon from 'Icon/warning.svg'
-
-const Headline = ({modifiers = [], classNames, label, tag = 'h1', icon}) => {
-  const finalIcon = modifiers.indexOf('warning') >= 0 ? warningIcon : icon
-
-  return React.createElement(tag, {
-    className: buildClassName('headline', modifiers, classNames)
-  }, [
-    finalIcon ? <Icon key="icon" source={finalIcon} /> : null,
-    label
-  ])
-}
+const Headline = ({modifiers = [], classNames, label, tag = 'h1'}) => React.createElement(tag, {
+  className: buildClassName('headline', modifiers, classNames)
+}, [
+  label
+])
 
 Headline.propTypes = {
   ...propTypes.component,

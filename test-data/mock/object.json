@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "modelId": "c38263cc5ad8ffc05bd745ee1238a4421b00befd84f784720d7ceef1ed05f5ca",
+      "fileName": "testmodel.stl",
+      "fileUnit": "mm",
+      "area": 6919.494140625,
+      "volume": 36753.34375,
+      "dimensions": {
+        "x": 69.88224792480469,
+        "y": 34.520084381103516,
+        "z": 34.52690124511719
+      },
+      "thumbnailUrl": "some-url",
+      "quantity": 1,
+      "title": "Multijet Fusion Helmet",
+      "description": "Bla bla bla blablabalbalbablababla b abla babal abalbalbalbab a l abllb alb ablaba.",
+      "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/hp_multijet_fusion.jpg"
+    },
+    {
+      "modelId": "bb7247d33e4c4b4255fabb662e0380e133ddf7a6d13972cc59cd128451466260",
+      "fileName": "testmodel.stl",
+      "fileUnit": "mm",
+      "area": 6919.494140625,
+      "volume": 36753.34375,
+      "dimensions": {
+        "x": 69.88224792480469,
+        "y": 34.520084381103516,
+        "z": 34.52690124511719
+      },
+      "thumbnailUrl": "some-url",
+      "quantity": 1,
+      "title": "Colorful iPhone Case",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+      "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/14217847518_3566648abd_o.jpg"
+    }
+  ],
+  "materialConfigId": "108"
+}

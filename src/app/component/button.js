@@ -33,7 +33,7 @@ const Button = ({
 
 Button.propTypes = {
   ...propTypes.component,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   source: React.PropTypes.shape({
     id: React.PropTypes.string
   }),

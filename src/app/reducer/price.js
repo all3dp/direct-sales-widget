@@ -1,21 +1,25 @@
-import {handleActions} from 'redux-actions'
+// @flow
+
 import cloneDeep from 'lodash/cloneDeep'
 
-import TYPE from '../type'
+import TYPE from '../action-type'
 
 const initialState = {
   priceId: null,
   offers: null,
   printingServiceComplete: null,
   selectedOffer: null,
-  error: null
+  error: null,
+  bestOffer: null
 }
 
 function handleClearOffers (state) {
   return {
     ...state,
+    priceId: null,
     offers: null,
     printingServiceComplete: null,
+    selectedOffer: null,
     error: null
   }
 }
@@ -34,19 +38,15 @@ function handlePriceRequested (state, {payload: {priceId}}) {
   }
 }
 
-function handlePriceReceived (state, {payload, error}) {
-  if (error) {
-    return {
-      ...initialState,
-      error: payload
-    }
+function handleGotError (state, {payload: {error}}) {
+  return {
+    ...state,
+    error
   }
+}
 
-  const {
-    offers,
-    printingServiceComplete
-  } = payload.price
-
+function handlePriceReceived (state, {payload: {price}}) {
+  const {offers, printingServiceComplete} = price
   return {
     ...state,
     offers,
@@ -57,18 +57,15 @@ function handlePriceReceived (state, {payload, error}) {
 
 function handlePriceTimeout (state) {
   const {offers, printingServiceComplete} = state
-
   // Remove estimated offers
-  const finalOffers = offers
-    ? offers.filter(offer => !offer.priceEstimated)
-    : null
+  const finalOffers = offers ? offers.filter(offer => !offer.priceEstimated) : null
 
   const finalPrintingServiceComplete = printingServiceComplete
-    ? Object.keys(printingServiceComplete).reduce((aggr, provider) => {
-      aggr[provider] = true
-      return aggr
-    }, {})
-    : null
+  ? Object.keys(printingServiceComplete).reduce((aggr, provider) => {
+    aggr[provider] = true
+    return aggr
+  }, {})
+  : null
 
   return {
     ...state,
@@ -78,10 +75,32 @@ function handlePriceTimeout (state) {
   }
 }
 
-export default handleActions({
-  [TYPE.PRICE.CLEAR_OFFERS]: handleClearOffers,
-  [TYPE.PRICE.SELECT_OFFER]: handleSelectOffer,
-  [TYPE.PRICE.REQUESTED]: handlePriceRequested,
-  [TYPE.PRICE.RECEIVED]: handlePriceReceived,
-  [TYPE.PRICE.TIMEOUT]: handlePriceTimeout
-}, initialState)
+function handleSetBestOffer (state, {payload: {offer}}) {
+  return {
+    ...state,
+    bestOffer: offer
+  }
+}
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case TYPE.PRICE.CLEAR_OFFERS:
+      return handleClearOffers(state, action)
+    case TYPE.PRICE.SELECT_OFFER:
+      return handleSelectOffer(state, action)
+    case TYPE.PRICE.REQUESTED:
+      return handlePriceRequested(state, action)
+    case TYPE.PRICE.RECEIVED:
+      return handlePriceReceived(state, action)
+    case TYPE.PRICE.TIMEOUT:
+      return handlePriceTimeout(state, action)
+    case TYPE.PRICE.GOT_ERROR:
+      return handleGotError(state, action)
+    case TYPE.PRICE.SET_BEST_OFFER:
+      return handleSetBestOffer(state, action)
+    default:
+      return state
+  }
+}
+
+export default reducer

@@ -3,23 +3,35 @@ import {createAction} from 'redux-actions'
 import * as printingEngine from 'Lib/printing-engine'
 import {getUpdatedOffer} from 'Lib/offer'
 import {poll, debouncedPoll, stopPoll} from 'Lib/poll'
-import TYPE, {ERROR_TYPE} from '../type'
+import {getBestOfferForMaterialConfig} from 'Lib/material'
+import TYPE, {ERROR_TYPE} from '../action-type'
 
 const POLL_NAME = 'price'
 const RECALC_POLL_NAME = 'price_recalc'
 
 // Private actions
 
-const clearOffers = createAction(TYPE.PRICE.CLEAR_OFFERS)
+const clearOffers = createAction(
+  TYPE.PRICE.CLEAR_OFFERS
+)
 const priceRequested = createAction(
   TYPE.PRICE.REQUESTED,
   priceId => ({priceId})
 )
 const priceReceived = createAction(
   TYPE.PRICE.RECEIVED,
-  (price, isComplete) => ({price, isComplete})
+  price => ({price})
+)
+const gotError = createAction(
+  TYPE.PRICE.GOT_ERROR,
+  error => ({error})
 )
 const priceTimeout = createAction(TYPE.PRICE.TIMEOUT)
+
+const setBestOffer = createAction(
+  TYPE.PRICE.SET_BEST_OFFER,
+  offer => ({offer})
+)
 
 // Public actions
 
@@ -27,6 +39,12 @@ export const selectOffer = createAction(
   TYPE.PRICE.SELECT_OFFER,
   offer => ({offer})
 )
+
+export const selectBestOffer = (offers, materialConfig) => (dispatch) => {
+  const offer = getBestOfferForMaterialConfig(offers, materialConfig)
+
+  dispatch(setBestOffer(offer))
+}
 
 export const refreshSelectedOffer = () => (dispatch, getState) => {
   const {
@@ -47,76 +65,76 @@ export const createPriceRequest = ({
   refresh = false,
   debounce = false
 } = {}) => (dispatch, getState) => {
-  dispatch(clearOffers())
-
   const {
     material: {
-      materials: {
-        materialConfigs
-      }
+      materialOptions
     },
     model: {
-      models
+      modelId,
+      quantity
     },
     user: {
       userId
     }
   } = getState()
 
-  // Abort if user did not upload any models yet
-  if (models.length === 0) {
-    // Just to be sure, stop any running price polls
+  if (!modelId) {
     stopPoll(POLL_NAME)
     return Promise.resolve()
   }
 
-  const materialConfigIds = Object.keys(materialConfigs)
-  const items = models.map(({modelId, quantity}) => ({
-    modelId,
-    materialConfigIds,
-    quantity
+  const itemArrays = [
+    [{
+      modelId,
+      materialConfigIds: materialOptions.map(o => o.materialConfigId),
+      quantity
+    }]
+  ]
+
+  return Promise.all(itemArrays.map((items) => {
+    const options = {
+      isEstimate: false, // always fetch real prices
+      caching: true, // cache prices for next user
+      refresh, // force refresh when requested
+      userId,
+      items
+    }
+
+    dispatch(clearOffers())
+
+    const usePoll = debounce ? debouncedPoll : poll
+    return usePoll(`${POLL_NAME}-${modelId}`, async (priceId) => {
+      const {price, isComplete} = await printingEngine.getPriceWithStatus({priceId})
+      dispatch(priceReceived(price))
+      return isComplete
+    }, async () => {
+      const {priceId} = await printingEngine.createPriceRequest(options)
+      dispatch(priceRequested(priceId))
+      return priceId
+    })
+    .then(() => {
+      // We need to update the selectedOffer if applicable
+      dispatch(refreshSelectedOffer())
+    })
+    .catch((error) => {
+      // Handle timeout separately
+      if (error.type === ERROR_TYPE.POLL_TIMEOUT) {
+        dispatch(priceTimeout(error))
+        return
+      }
+
+      // Ignore special error when price request was overwritten or stopped
+      if (error.type === ERROR_TYPE.POLL_OVERWRITTEN ||
+        error.type === ERROR_TYPE.POLL_STOPPED) {
+        return
+      }
+
+      dispatch(gotError(error))
+
+      // Throw again to trigger fatal error modal
+      throw error
+    })
   }))
-
-  const options = {
-    isEstimate: false, // always fetch real prices
-    caching: true, // cache prices for next user
-    refresh, // force refresh when requested
-    userId,
-    items
-  }
-
-  const usePoll = debounce ? debouncedPoll : poll
-  return usePoll(POLL_NAME, async (priceId) => {
-    const {price, isComplete} = await printingEngine.getPriceWithStatus({priceId})
-    dispatch(priceReceived(price))
-    return isComplete
-  }, async () => {
-    const {priceId} = await printingEngine.createPriceRequest(options)
-    dispatch(priceRequested(priceId))
-    return priceId
-  })
-  .then(() => {
-    // We need to update the selectedOffer if applicable
-    dispatch(refreshSelectedOffer())
-  })
-  .catch((error) => {
-    // Handle timeout separately
-    if (error.type === ERROR_TYPE.POLL_TIMEOUT) {
-      dispatch(priceTimeout(error))
-      return
-    }
-
-    // Ignore special error when price request was overwritten or stopped
-    if (error.type === ERROR_TYPE.POLL_OVERWRITTEN ||
-      error.type === ERROR_TYPE.POLL_STOPPED) {
-      return
-    }
-
-    dispatch(priceReceived(error))
-
-    // Throw again to trigger fatal error modal
-    throw error
-  })
 }
 
 export const recalculateSelectedOffer = () => (dispatch, getState) => {

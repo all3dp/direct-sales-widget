@@ -4,20 +4,10 @@ import {
   isAddressValid
 } from 'Lib/geolocation'
 import * as printingEngine from 'Lib/printing-engine'
-import {identify, peopleSet} from 'Service/mixpanel'
+import {identify} from 'Service/mixpanel'
 import {setUserContext} from 'Service/logging'
-import {normalizeTelephoneNumber} from 'Lib/normalize'
 
-import TYPE from '../type'
-import {goToCart} from './navigation'
-
-import {
-  openAddressModal,
-  openPriceChangedModal,
-  openPriceLocationChangedModal,
-  openFetchingPriceModal
-} from './modal'
-import {createPriceRequest, recalculateSelectedOffer} from './price'
+import TYPE from '../action-type'
 
 // Private actions
 
@@ -44,7 +34,7 @@ export const createUser = () => async (dispatch, getState) => {
   setUserContext({
     id: userId
   })
-  return dispatch(userCreated(userId))
+  dispatch(userCreated(userId))
 }
 
 export const updateUser = user => async (dispatch, getState) => {
@@ -58,54 +48,10 @@ export const updateLocation = address => async (dispatch, getState) => {
 
   if (!isAddressValid(address)) {
     // Open address modal if address is not valid
-    dispatch(openAddressModal())
+    // dispatch(openAddressModal())
+  } else if (!getState().user.userId) {  // No user created so far
+    await dispatch(createUser())
   } else {
-    if (!getState().user.userId) {  // No user created so far
-      await dispatch(createUser())
-    } else {
-      await dispatch(updateUser(getState().user.user))
-    }
-
-    // Update prices
-    dispatch(createPriceRequest())
-  }
-}
-
-export const reviewOrder = form => async (dispatch, getState) => {
-  const user = getState().user.user
-  const oldShippingAddress = user.shippingAddress
-  const oldOffer = getState().price.selectedOffer
-  const newShippingAddress = form.shippingAddress
-
-  form.phoneNumber = normalizeTelephoneNumber(form.phoneNumber)
-
-  // Send user information to Mixpanel
-  peopleSet({
-    $name: `${form.shippingAddress.firstName} ${form.shippingAddress.lastName}`,
-    $city: form.shippingAddress.city,
-    $country: form.shippingAddress.countryCode,
-    $email: form.emailAddress,
-    raw: form
-  })
-
-  setUserContext({
-    email: form.emailAddress,
-    id: getState().user.userId
-  })
-
-  dispatch(openFetchingPriceModal())
-  await dispatch(updateUser(form))
-  await dispatch(recalculateSelectedOffer())
-
-  const newOffer = getState().price.selectedOffer
-  const hasPriceChanged = oldOffer.totalPrice !== newOffer.totalPrice
-  const wasEstimatedPrice = oldOffer.priceEstimated
-
-  if (wasEstimatedPrice) {
-    dispatch(openPriceChangedModal())
-  } else if (hasPriceChanged) {
-    dispatch(openPriceLocationChangedModal(oldShippingAddress, newShippingAddress))
-  } else {
-    dispatch(goToCart())
+    await dispatch(updateUser(getState().user.user))
   }
 }

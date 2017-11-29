@@ -1,0 +1,21 @@
+.widget-header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: $color-bg-white-overlay;
+  padding: 5px 28px;
+  transition: flex $transition-duration $transition-easing;
+
+  &--expanded {
+    flex: 1;
+  }
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &--thick-background {
+    background-color: $color-bg-white-overlay-thick;
+  }
+}

@@ -4,24 +4,30 @@ import {reducer as formReducer} from 'redux-form'
 
 import app from './app'
 import user from './user'
-import modal from './modal'
-import model from './model'
 import material from './material'
 import price from './price'
 import order from './order'
 import configuration from './configuration'
+import display from './display'
+import model from './model'
+import payment from './payment'
+import init from './init'
+import error from './error'
 
 const rootReducer = combineReducers({
   app,
   user,
-  modal,
-  model,
   material,
   price,
   order,
   configuration,
+  display,
   routing: routerReducer,
-  form: formReducer
+  form: formReducer,
+  model,
+  payment,
+  init,
+  error
 })
 
 export default rootReducer

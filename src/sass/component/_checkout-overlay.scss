@@ -1,0 +1,17 @@
+.checkout-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: $color-bg-white-overlay-thick;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+
+  &__pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+  }
+}

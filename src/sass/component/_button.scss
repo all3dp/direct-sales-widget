@@ -5,7 +5,7 @@
   background-color: $color-primary;
   color: $color-invert-text;
   line-height: $field-height;
-  font-size: $font-size-l;
+  font-size: $font-size-base;
   border-radius: $border-radius;
   text-align: center;
   box-shadow: $box-shadow-base;
@@ -35,45 +35,7 @@
   &[disabled] {
     cursor: not-allowed;
     background-color: $color-gray-4;
-    color: $color-minor;
+    color: $color-white;
     box-shadow: none;
-  }
-
-  &--selected {
-    background-color: $color-gray-4;
-    color: $color-minor;
-    box-shadow: none;
-
-    & > .icon {
-      color: $color-green;
-    }
-
-    &:hover:not([disabled]),
-    &:focus:not([disabled]),
-    &:active:not([disabled]) {
-      background-color: $color-gray-4;
-      color: $color-minor;
-      box-shadow: none;
-    }
-  }
-
-  &--text {
-    padding: 0;
-    background-color: inherit;
-    color: $color-link;
-    box-shadow: none;
-
-    &:hover:not([disabled]),
-    &:focus:not([disabled]),
-    &:active:not([disabled]) {
-      background-color: inherit;
-      color: $color-link;
-      box-shadow: none;
-    }
-  }
-
-  &--block {
-    display: block;
-    width: 100%;
   }
 }

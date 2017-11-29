@@ -1,0 +1,28 @@
+.navigation-arrow {
+  display: block;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >svg {
+    width: 8px;
+  }
+
+  &--left {
+    transform: rotate(0deg);
+  }
+
+  &--right {
+    transform: rotate(180deg);
+  }
+
+  &--up {
+    transform: rotate(90deg);
+  }
+
+  &--down {
+    transform: rotate(-90deg);
+  }
+}

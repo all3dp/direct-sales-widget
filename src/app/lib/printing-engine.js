@@ -42,19 +42,27 @@ export const createShoppingCart = cart =>
 export const getFinalCartPrice = ({cartId}) =>
   requestJson(`${baseUrl}/cart/${cartId}`)
 
-export const order = ({userId, priceId, offerId, type, token}) =>
+export const order = ({userId, priceId, offerIds}) =>
   requestJson(`${baseUrl}/order`, {
     method: 'POST',
     body: {
       userId,
       priceId,
-      offerId,
-      payment: {
-        type,
-        token
-      }
+      offerIds
     }
   })
+
+export const createPaypalPayment = ({orderId, transactions}) => {
+  const payment = requestJson(`${baseUrl}/payment/paypal`, {
+    method: 'POST',
+    body: {
+      orderId,
+      transactions
+    }
+  })
+
+  return payment
+}
 
 export const createConfiguration = configuration =>
   requestJson(`${baseUrl}/configuration`, {

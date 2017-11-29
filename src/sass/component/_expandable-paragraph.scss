@@ -1,0 +1,43 @@
+.expandable-paragraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0;
+
+  .expandable-paragraph__content {
+    opacity: 0;
+    height: 0;
+    overflow-y: hidden;
+    transition: height $transition-duration $transition-easing, opacity $transition-duration-fast $transition-easing
+  }
+  .expandable-paragraph__button {
+    display: flex;
+    align-items: center;
+    color: $color-blue;
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .expandable-paragraph__icon {
+    margin-left: 12px;
+
+    >svg {
+      width: 8px;
+    }
+  }
+
+  &--expanded {
+    flex: 1;
+
+    .expandable-paragraph__content {
+      opacity: 1;
+      flex: 1;
+    }
+  }
+}
+

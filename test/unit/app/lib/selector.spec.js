@@ -7,8 +7,6 @@ import {
   selectCurrentMaterial,
   selectOffersForSelectedMaterialConfig,
   selectPrintingServiceRequests,
-  selectMaterialByMaterialConfigId,
-  selectedOfferMaterial,
   selectModelByModelId,
   selectOfferItems,
   selectAreAllUploadsFinished
@@ -512,97 +510,6 @@ describe('Selector lib', () => {
     it('returns null if offers is null', () => {
       state.price.offers = null
       expect(selectOffersForSelectedMaterialConfig(state), 'to equal', null)
-    })
-  })
-
-  describe('selectMaterialByMaterialConfigId', () => {
-    let state
-    let material
-    let materialConfig
-    let otherMaterialConfig
-
-    beforeEach(() => {
-      materialConfig = {
-        id: 'some-material-config-id'
-      }
-      otherMaterialConfig = {
-        id: 'some-other-material-config-id'
-      }
-      material = {
-        finishGroups: [{
-          materialConfigs: [
-            materialConfig,
-            otherMaterialConfig
-          ]
-        }]
-      }
-      state = {
-        material: {
-          materials: {
-            materialStructure: [{
-              materials: [material]
-            }]
-          }
-        }
-      }
-    })
-
-    it('selects the material by id and returns it together with finish group and material config', () => {
-      expect(selectMaterialByMaterialConfigId(state, 'some-other-material-config-id'), 'to equal', {
-        material,
-        finishGroup: {
-          materialConfigs: [
-            materialConfig,
-            otherMaterialConfig
-          ]
-        },
-        materialConfig: otherMaterialConfig
-      })
-    })
-
-    it('returns empty object if it does not find a materialConfig', () => {
-      expect(selectMaterialByMaterialConfigId(state, 'some-3rd-material-config-id'), 'to equal', {})
-    })
-  })
-
-  describe('selectedOfferMaterial', () => {
-    let state
-    let material
-    let materialConfig
-
-    beforeEach(() => {
-      materialConfig = {
-        id: 'some-material-config-id'
-      }
-      material = {
-        finishGroups: [{
-          materialConfigs: [materialConfig]
-        }]
-      }
-      state = {
-        price: {
-          selectedOffer: {
-            materialConfigId: 'some-material-config-id'
-          }
-        },
-        material: {
-          materials: {
-            materialStructure: [{
-              materials: [material]
-            }]
-          }
-        }
-      }
-    })
-
-    it('selects the material defined in the selectedOffer', () => {
-      expect(selectedOfferMaterial(state), 'to equal', {
-        material,
-        finishGroup: {
-          materialConfigs: [materialConfig]
-        },
-        materialConfig
-      })
     })
   })
 

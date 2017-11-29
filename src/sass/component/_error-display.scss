@@ -1,0 +1,32 @@
+.error-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $color-white;
+  width: 320px;
+  height: 280px;
+  padding: 32px;
+  text-align: center;
+}
+
+.error-display__message {
+  color: $color-red;
+  padding: 8px;
+  background-color: $color-red-light;
+}
+
+.error-display__action {
+  color: $color-blue;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.error-display__action:hover {
+  color: $color-blue-light;
+}
+
+.error-display__action:active {
+  color: $color-blue-very-light;
+}

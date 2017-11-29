@@ -1,17 +1,14 @@
 import React from 'react'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {Router, Route, browserHistory} from 'react-router'
-
-import CartPage from 'Container/cart-page'
-import ModelPage from 'Container/model-page'
+import DisplayPage from 'Container/display-page'
 import AddressPage from 'Container/address-page'
-import SuccessPage from 'Container/success-page'
-import ConfigurationPage from 'Container/configuration-page'
+import CheckOutPage from 'Container/checkout-page'
+import Initializer from 'Container/initializer'
+import ErrorPage from 'Container/error-page'
 
 const preventDeepLinking = store => (nextState, replace) => {
-  // It is only possible to reach other routes than the model page
-  // if an offer has been selected
-  if (!store.getState().price.selectedOffer) {
+  if (!store.getState().error.message) {
     replace('/')
   }
 }
@@ -23,11 +20,12 @@ export default ({store}) => {
 
   return (
     <Router history={history}>
-      <Route component={ModelPage} path="/" />
-      <Route component={AddressPage} path="/address" onEnter={preventDeepLinking(store)} />
-      <Route component={CartPage} path="/cart" onEnter={preventDeepLinking(store)} />
-      <Route component={SuccessPage} path="/success" onEnter={preventDeepLinking(store)} />
-      <Route component={ConfigurationPage} path="/configuration/:id" />
+      <Route component={Initializer}>
+        <Route component={DisplayPage} path="/" />
+        <Route component={AddressPage} path="/address" />
+        <Route component={CheckOutPage} path="/checkout" />
+      </Route>
+      <Route component={ErrorPage} path="/error" onEnter={preventDeepLinking(store)} />
     </Router>
   )
 }

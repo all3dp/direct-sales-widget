@@ -2,9 +2,12 @@
 // ---------------------------------------------------
 
 $font-family-base: 'Roboto', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
 
-$font-size-s: 12px;
-$font-size-base: 15px;
+$font-size-xs: 7px;
+$font-size-s: 14px;
+$font-size-base: 16px;
+$font-size-plus: 18px;
 $font-size-l: 20px;
 $font-size-xl: 25px;
 $font-size-xxl: 35px;
@@ -23,7 +26,7 @@ $color-gray-0: #333333;
 $color-gray-1: #666666;
 $color-gray-2: #999999;
 $color-gray-3: #cccccc;
-$color-gray-4: #f0f0f0;
+$color-gray-4: #d2d2d2;
 
 $color-blue-dark: #122732;
 $color-blue: #0277bd;
@@ -35,6 +38,9 @@ $color-red-light: #fcd1d1;
 $color-green: #559c03;
 $color-white: #ffffff;
 $color-black: #000000;
+
+$color-bg-white-overlay: rgba($color-white, 0.6);
+$color-bg-white-overlay-thick: rgba($color-white, 0.9);
 
 $color-bg: $color-gray-4;
 $color-bg-highlight: $color-white;
@@ -106,9 +112,9 @@ $mediaqueries: (
 // Misc
 // ---------------------------------------------------
 
-$field-height: 50px;
+$field-height: 32px;
 $compact-field-height: 40px;
-$border-radius: 5px;
+$border-radius: 3px;
 $model-item-height: 127px;
 $color-square-size: 20px;
 
@@ -119,5 +125,6 @@ $box-shadow-error: 0px 0px 4px 0 $color-error;
 
 $transition-duration: .4s;
 $transition-duration-fast: .15s;
+$transition-easing: cubic-bezier(.19,.99,.17,.99);
 
 $global-stacking: app, select-menu, tooltip, overlay;

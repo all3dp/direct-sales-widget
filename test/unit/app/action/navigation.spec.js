@@ -1,13 +1,11 @@
 import {routerActions} from 'react-router-redux'
 
 import {
-  goToCart,
-  goToSuccess,
   goToAddress,
-  goToHome
+  goToCheckout,
+  goToDisplay
 } from 'Action/navigation'
 import * as userActions from 'Action/user'
-import {resolveAsyncThunk} from '../../../helper'
 
 describe('Navigation actions', () => {
   let sandbox
@@ -26,13 +24,13 @@ describe('Navigation actions', () => {
     sandbox.restore()
   })
 
-  describe('goToCart()', () => {
+  describe('goToCheckout()', () => {
     it('calls router push with expected route', () => {
       routerActions.push
-        .withArgs('/cart')
+        .withArgs('/checkout')
         .returns({type: 'push'})
 
-      store.dispatch(goToCart())
+      store.dispatch(goToCheckout())
       expect(store.getActions(), 'to equal', [
         {type: 'push'}
       ])
@@ -52,47 +50,13 @@ describe('Navigation actions', () => {
     })
   })
 
-  describe('goToSuccess()', () => {
-    it('calls router push with expected route', async () => {
-      routerActions.push
-        .withArgs('/success')
-        .returns({type: 'push'})
-      userActions.createUser
-        .withArgs()
-        .returns(resolveAsyncThunk('some-user-created'))
-
-      await store.dispatch(goToSuccess())
-      expect(store.getActions(), 'to equal', [
-        {type: 'push'},
-        {type: 'some-user-created'}
-      ])
-    })
-  })
-
-  describe('goToHome()', () => {
+  describe('goToDisplay()', () => {
     it('calls router push with expected route', () => {
       routerActions.push
         .withArgs('/')
         .returns({type: 'push'})
 
-      store.dispatch(goToHome())
-      expect(store.getActions(), 'to equal', [
-        {type: 'push'}
-      ])
-    })
-
-    it('calls router push with expected route when in configuration mode', () => {
-      store = mockStore({
-        configuration: {
-          configurationId: 'some-config-id'
-        }
-      })
-
-      routerActions.push
-        .withArgs('/configuration/some-config-id')
-        .returns({type: 'push'})
-
-      store.dispatch(goToHome())
+      store.dispatch(goToDisplay())
       expect(store.getActions(), 'to equal', [
         {type: 'push'}
       ])

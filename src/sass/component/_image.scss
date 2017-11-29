@@ -1,4 +1,64 @@
-.image {
-  display: block;
-  max-width: 100%;
+.image-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
+
+@supports (object-fit: cover) {
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-duration $transition-easing;
+
+    &--zoomed-in {
+      transform: scale(1.15)
+    }
+  }
+}
+// IE specific selector
+@media all and (-ms-high-contrast:none) {
+  .image {
+    // cross browser alternative to object-fit: cover
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    transition: transform $transition-duration $transition-easing;
+
+    &--zoomed-in {
+      transform: scale(1.15)
+    }
+  }
+}
+
+@supports not (object-fit: cover) {
+  .image {
+    // cross browser alternative to object-fit: cover
+    position: absolute;
+    top: -9999px;
+    right: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+
+    transition: min-width $transition-duration $transition-easing, min-height $transition-duration $transition-easing;
+
+
+    &--zoomed-in {
+      min-width: 115%;
+      min-height: 115%;
+    }
+  }
+}
+

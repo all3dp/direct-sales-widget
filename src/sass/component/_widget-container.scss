@@ -1,0 +1,23 @@
+.widget {
+  position: relative;
+  width: 320px;
+  height: 280px;
+}
+
+.widget__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.widget__content {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

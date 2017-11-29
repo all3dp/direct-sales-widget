@@ -1,34 +1,29 @@
 .location-field {
   $field-space: 10px;
-  $button-size: 30px;
+  $button-size: 32px;
 
   position: relative;
 
   &__input {
+    background-color: transparent;
     display: block;
     width: 100%;
     height: $field-height;
     padding: 0 (2 * $field-space + $button-size) 0 $field-space;
-    border: 1px solid $color-border;
-    box-shadow: $box-shadow-base;
-    border-radius: $border-radius;
+    border: none;
+    border-bottom: 2px solid $color-blue;
     color: $color-text;
     font-size: $font-size-l;
+    line-height: $line-height-base;
     outline: 0;
 
     &:focus {
       border-color: $color-field-focus;
-      box-shadow: $box-shadow-focus;
-    }
-
-    &:active {
-      box-shadow: $box-shadow-active;
     }
 
     &:invalid {
       border-color: $color-error;
       color: $color-error;
-      box-shadow: $box-shadow-error;
     }
 
     &:placeholder {
@@ -39,8 +34,10 @@
   &__button {
     position: absolute;
     top: 0.5 * ($field-height - $button-size);
-    right: $field-space;
-    display: inline-block;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: $button-size;
     height: $button-size;
     color: $color-primary;
@@ -53,16 +50,21 @@
 
     & > .icon {
       display: block;
-      width: $button-size;
-      height: $button-size;
+      width: $button-size / 1.5;
+      height: $button-size / 1.5;
     }
   }
 
   & > .loading-indicator {
     position: absolute;
-    top: 0.5 * ($field-height - $button-size);
-    right: $field-space;
-    font-size: $button-size;
+    width: $button-size;
+    height: $button-size;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    font-size: $button-size / 1.5;
     line-height: $button-size;
   }
 
@@ -77,4 +79,9 @@
       box-shadow: $box-shadow-focus;
     }
   }
+}
+
+.pac-container {
+  height: 100px;
+  overflow-y: scroll;
 }
