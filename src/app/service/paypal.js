@@ -1,4 +1,8 @@
 import config from '../../../config'
+import {requestJson} from './http'
+import * as printingEngine from 'Lib/printing-engine'
+
+const PAYMENT_ENDPOINT = `${config.printingEngineBaseUrl}/payment/paypal`
 
 export function createPayment ({amount, currency, offerId}) {
   const paypal = global.paypal
@@ -15,10 +19,14 @@ export function createPayment ({amount, currency, offerId}) {
   return paypal.rest.payment.create(env, client, {transactions})
 }
 
-export async function executePayment ({actions}) {
-  if (!actions.payment) throw new Error('Payment failed')
-  await actions.payment.execute()
-  const payment = await actions.payment.get()
-  if (payment.state !== 'approved') throw new Error('PayPal payment not approved')
+export async function executePayment({data, paymentId}) {
+  if (!data.paymentID) throw new Error('Payment failed')
+
+  const payment = await printingEngine.executePaypalPayment({
+    payerId: data.payerID,
+    paymentId
+  })
+
+  if (!payment.status) throw new Error('PayPal payment not approved')
   return payment
 }

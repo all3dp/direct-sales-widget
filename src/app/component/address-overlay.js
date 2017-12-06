@@ -2,8 +2,8 @@ import React from 'react'
 
 import propTypes from 'Lib/prop-types'
 
-import Headline from 'Component/headline'
-import Paragraph from 'Component/paragraph'
+import WidgetHeadline from 'Component/widget-headline'
+import WidgetParagraph from 'Component/widget-paragraph'
 import LocationField from 'Component/location-field'
 
 import {
@@ -17,8 +17,8 @@ const AddressOverlay = ({
   address
 }) => (
   <div className="address-overlay">
-    <Headline label="Shipping address required" />
-    <Paragraph modifiers={['centered']}>We need your address to calculate the shipping prices!</Paragraph>
+    <WidgetHeadline label="Shipping address required" />
+    <WidgetParagraph modifiers={['centered']}>We need your address to calculate the shipping prices!</WidgetParagraph>
     <LocationField
       value={formatAddress(address)}
       placeholder="Set your location"

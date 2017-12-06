@@ -1,12 +1,12 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
 
-import Headline from 'Component/headline'
+import WidgetHeadline from 'Component/WidgetHeadline'
 
-storiesOf('Headline', module)
+storiesOf('WidgetHeadline', module)
   .add('default', () => (
-    <Headline label="Default Headline" />
+    <WidgetHeadline label="Default Headline" />
   ))
   .add('s', () => (
-    <Headline label="Small Headline" modifiers={['s']} />
+    <WidgetHeadline label="Small Headline" modifiers={['s']} />
   ))

@@ -6,11 +6,12 @@ import AddressPage from 'Container/address-page'
 import CheckOutPage from 'Container/checkout-page'
 import Initializer from 'Container/initializer'
 import ErrorPage from 'Container/error-page'
+import SuccessPage from 'Container/success-page'
 
 const preventDeepLinking = store => (nextState, replace) => {
-  if (!store.getState().error.message) {
-    replace('/')
-  }
+  // if (!store.getState().error.message) {
+  //   replace('/')
+  // }
 }
 
 /* eslint-disable react/prop-types */
@@ -25,6 +26,7 @@ export default ({store}) => {
         <Route component={AddressPage} path="/address" />
         <Route component={CheckOutPage} path="/checkout" />
       </Route>
+      <Route component={SuccessPage} path="/success/:paymentId"></Route>
       <Route component={ErrorPage} path="/error" onEnter={preventDeepLinking(store)} />
     </Router>
   )

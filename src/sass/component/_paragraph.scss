@@ -1,12 +1,8 @@
 .paragraph {
   margin: 0 0 $space-base;
-  font-size: $font-size-s;
-  color: $color-blue;
-  font-weight: 400;
-  text-align: justify;
-  line-height: $line-height-base;
 
-  &--centered {
-    text-align: center;
+  &--l {
+    font-size: $font-size-l;
+    margin: 0 0 $space-l;
   }
 }

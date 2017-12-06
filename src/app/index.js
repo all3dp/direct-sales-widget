@@ -25,6 +25,7 @@ render(
 
 const bootsplash = global.document.getElementById('bootsplash')
   // TODO: lets fade out the bootsplash, looks nicer
+  console.log(bootsplash)
 if (bootsplash) { // Otherwise hot reloading breaks
   bootsplash.remove()
 }
