@@ -7,10 +7,8 @@ import ErrorDisplay from '../component/error-display'
 const ErrorPage = ({
   errorMessage
 }) => (
-  <div>
-    <ErrorDisplay errorMessage={errorMessage} />
-  </div>
-  )
+  <ErrorDisplay errorMessage={errorMessage} />
+)
 
 const mapStateToProps = state => ({
   errorMessage: state.error.message

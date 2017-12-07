@@ -18,9 +18,13 @@ const ErrorDisplay = ({classNames, modifiers, errorMessage}) => (
   </div>
 )
 
+ErrorDisplay.defaultProps = {
+  errorMessage: 'No error message'
+}
+
 ErrorDisplay.propTypes = {
   ...propTypes.component,
-  errorMessage: PropTypes.string.isRequired
+  errorMessage: PropTypes.string
 }
 
 export default ErrorDisplay
