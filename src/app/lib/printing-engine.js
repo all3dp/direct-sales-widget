@@ -73,7 +73,6 @@ export const createConfiguration = configuration =>
 export const getConfiguration = configurationId =>
   requestJson(`${baseUrl}/configuration/${configurationId}`)
 
-
 export const executePaypalPayment = ({payerId, paymentId}) =>
   requestJson(`${baseUrl}/payment/paypal/${paymentId}`, {
     method: 'PUT',

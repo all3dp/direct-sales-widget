@@ -20,7 +20,7 @@ export default ({store}) => {
         <Route component={AddressPage} path="/address" />
         <Route component={CheckOutPage} path="/checkout" />
       </Route>
-      <Route component={SuccessPage} path="/success/:paymentId"></Route>
+      <Route component={SuccessPage} path="/success/:paymentId" />
       <Route component={ErrorPage} path="/error" />
     </Router>
   )

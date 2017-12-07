@@ -19,7 +19,7 @@ export function createPayment ({amount, currency, offerId}) {
   return paypal.rest.payment.create(env, client, {transactions})
 }
 
-export async function executePayment({data, paymentId}) {
+export async function executePayment ({data, paymentId}) {
   if (!data.paymentID) throw new Error('Payment failed')
 
   const payment = await printingEngine.executePaypalPayment({

@@ -9,13 +9,13 @@ import Link from 'Component/link'
 import Section from 'Component/section'
 import Headline from 'Component/headline'
 import Paragraph from 'Component/paragraph'
-import ProviderImage from 'Component/provider-image'
+// import ProviderImage from 'Component/provider-image'
 
 import AppLayout from './app-layout'
 
-class SuccessPage extends React.Component{
+class SuccessPage extends React.Component {
 
-  componentDidMount() {
+  componentDidMount () {
     const {
       location: {
         query: {
@@ -31,7 +31,7 @@ class SuccessPage extends React.Component{
   }
 
   render () {
-    const {location: { query } } = this.props
+    const {location: {query}} = this.props
 
     return (
       <AppLayout>

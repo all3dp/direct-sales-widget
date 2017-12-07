@@ -20,11 +20,11 @@ class StickyContainer extends React.Component {
     height: 0
   }
 
-  componentDidMount() {
+  componentDidMount () {
     global.addEventListener('scroll', this.updateSticky, false)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     global.removeEventListener('scroll', this.updateSticky, false)
   }
 
@@ -48,7 +48,7 @@ class StickyContainer extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const {sticky, height} = this.state
     const {children, classNames, modifiers} = this.props
     const finalModifiers = [{sticky}, ...modifiers]
@@ -56,13 +56,13 @@ class StickyContainer extends React.Component {
     return (
       <div
         className={buildClassName('sticky-container', finalModifiers, classNames)}
-        ref={el => {
+        ref={(el) => {
           this.el = el
         }}
       >
         <div
           className="sticky-container__child"
-          ref={el => {
+          ref={(el) => {
             this.childEl = el
           }}
         >
