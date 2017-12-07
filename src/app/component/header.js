@@ -6,7 +6,7 @@ import buildClassName from 'Lib/build-class-name'
 
 import Container from 'Component/container'
 
-import logoImage from 'Image/logo.svg'
+import logoImage from 'Image/logo-white.svg'
 
 const Header = ({classNames, modifiers, children, onClickIdentity = () => {}}) => (
   <header className={buildClassName('header', modifiers, classNames)}>
