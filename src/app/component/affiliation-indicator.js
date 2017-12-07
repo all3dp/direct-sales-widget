@@ -2,7 +2,7 @@ import React from 'react'
 
 import propTypes from 'Lib/prop-types'
 
-import logo from 'Image/logo.svg'
+import logo from 'Image/logo-grey.svg'
 
 const AffiliationIndicator = () => (
   <a className="affiliation-indicator" href="https://all3dp.com/" rel="noopener noreferrer" target="_blank" >

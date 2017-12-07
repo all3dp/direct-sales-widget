@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react'
 import {action} from '@storybook/addon-actions'
 
 import ExpandableParagraph from 'Component/expandable-paragraph'
-import Paragraph from 'Component/paragraph'
+import WidgetParagraph from 'Component/widget-paragraph'
 
 storiesOf('Expandable Paragraph', module)
   .add('default', () => (
@@ -11,21 +11,21 @@ storiesOf('Expandable Paragraph', module)
       expanded={false}
       toggleDescription={action('click')}
     >
-      <Paragraph>
+      <WidgetParagraph>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
         sed diam nonumy eirmod tempor invidunt ut labore et dolore
         magna aliquyam erat, sed diam voluptua. At vero eos et accusam
         et justo duo dolores et ea rebum.
-      </Paragraph>
+      </WidgetParagraph>
     </ExpandableParagraph>
   ))
   .add('expanded', () => (
     <ExpandableParagraph expanded>
-      <Paragraph>
+      <WidgetParagraph>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
         sed diam nonumy eirmod tempor invidunt ut labore et dolore
         magna aliquyam erat, sed diam voluptua. At vero eos et accusam
         et justo duo dolores et ea rebum.
-      </Paragraph>
+      </WidgetParagraph>
     </ExpandableParagraph>
   ))

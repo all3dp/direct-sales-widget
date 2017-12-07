@@ -1,0 +1,11 @@
+.widget-headline {
+  margin: 0 0 $space-base;
+  font-weight: $font-weight-bold;
+  color: $color-blue;
+  font-size: $font-size-l;
+
+  &--s {
+    font-size: $font-size-s;
+    font-weight: $font-weight-bold;
+  }
+}

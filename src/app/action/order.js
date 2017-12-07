@@ -2,6 +2,7 @@ import {createAction} from 'redux-actions'
 
 import * as printingEngine from 'Lib/printing-engine'
 import {selectBestOfferForSelectedMaterialOption, selectMaterialByMaterialConfigId} from 'Lib/selector'
+import * as paypal from '../service/paypal'
 
 import TYPE from '../action-type'
 
@@ -71,4 +72,13 @@ export const createPaymentWithPaypal = () => async (dispatch, getState) => {
   ]
 
   return await printingEngine.createPaypalPayment({orderId, transactions})
+}
+
+export const createOrderWithPaypal = (paypalPayerId, paypalPaymentId, paymentId) => async (
+) => {
+  const payment = await paypal.executePayment({
+    data: {payerID: paypalPayerId, paymentID: paypalPaymentId},
+    paymentId
+  })
+  return payment
 }

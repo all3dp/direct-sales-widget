@@ -3,9 +3,9 @@ import React from 'react'
 import propTypes from 'Lib/prop-types'
 import buildClassName from 'Lib/build-class-name'
 
-import Headline from 'Component/headline'
+import WidgetHeadline from 'Component/widget-headline'
 import ExpandableParagraph from 'Component/expandable-paragraph'
-import Paragraph from 'Component/paragraph'
+import WidgetParagraph from 'Component/widget-paragraph'
 
 const WidgetHeader = ({
   title,
@@ -25,12 +25,12 @@ const WidgetHeader = ({
 
   return (
     <div className={buildClassName('widget-header', finalModifiers, classNames)} >
-      <Headline label={title} />
+      <WidgetHeadline label={title} />
       <ExpandableParagraph
         expanded={descriptionExpanded}
         toggleDescription={toggleDescription}
       >
-        <Paragraph>{description}</Paragraph>
+        <WidgetParagraph>{description}</WidgetParagraph>
       </ExpandableParagraph>
     </div>
   )
