@@ -47,9 +47,9 @@ class SuccessPage extends React.Component {
           <Paragraph modifiers={['l']}>
             You should shortly receive an email confirming your order.
           </Paragraph>
-          <Paragraph modifiers={['l']}>
+          {/* <Paragraph modifiers={['l']}>
             Please note that your order will be produced and sent from:
-          </Paragraph>
+          </Paragraph> */}
           {/* <Paragraph modifiers={['l']}>
             <ProviderImage name={query.printingService} />
           </Paragraph> */}
