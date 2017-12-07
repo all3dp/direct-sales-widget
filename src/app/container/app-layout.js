@@ -14,10 +14,7 @@ import {goToHome, goToAddress} from 'Action/navigation'
 const AppLayout = ({
   children,
   configurationHeader,
-  currentStep,
-  isDirectSales,
-  onGoToHome,
-  onGoToAddress
+  onGoToHome
 }) => {
   const header = (
     <Header key="header" onClickIdentity={onGoToHome}>

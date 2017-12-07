@@ -31,7 +31,7 @@ class SuccessPage extends React.Component {
   }
 
   render () {
-    const {location: {query}} = this.props
+    // const {location: {query}} = this.props
 
     return (
       <AppLayout>

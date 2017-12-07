@@ -1,8 +1,5 @@
-import config from '../../../config'
-import {requestJson} from './http'
 import * as printingEngine from 'Lib/printing-engine'
-
-const PAYMENT_ENDPOINT = `${config.printingEngineBaseUrl}/payment/paypal`
+import config from '../../../config'
 
 export function createPayment ({amount, currency, offerId}) {
   const paypal = global.paypal
