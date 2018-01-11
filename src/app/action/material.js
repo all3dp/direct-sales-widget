@@ -1,10 +1,8 @@
 // @flow
 
-import cloneDeep from 'lodash/cloneDeep'
 import {createAction} from 'redux-actions'
 
 import * as printingEngine from 'Lib/printing-engine'
-import {generateMaterialIds} from 'Lib/material'
 
 import TYPE from '../action-type'
 
