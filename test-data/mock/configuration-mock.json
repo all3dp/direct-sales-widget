@@ -1,20 +1,16 @@
 {
-  "items": [
-	  {
-      "modelId": "c38263cc5ad8ffc05bd745ee1238a4421b00befd84f784720d7ceef1ed05f5ca",
-      "quantity": 1,
-      "title": "Multijet Fusion Helmet",
-      "description": "Bla bla bla blablabalbalbablababla b abla babal abalbalbalbab a l abllb alb ablaba.",
-      "materialOptions": [
-        {
-          "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/hp_multijet_fusion.jpg",
-          "materialConfigId": "108"
-        },
-        {
-          "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/hp_multijet_fusion.jpg",
-          "materialConfigId": "0"
-		    }
-	    ]
-	  }
-  ]
+  "_id": "3f80cd59-124e-43ad-9157-4d152fdaddf5",
+  "items": [{
+    "modelId": "c38263cc5ad8ffc05bd745ee1238a4421b00befd84f784720d7ceef1ed05f5ca",
+    "quantity": 1,
+    "title": "Multijet Fusion Helmet",
+    "description": "This helmet is so amazing it will blow your mind.",
+    "materialOptions": [{
+      "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/hp_multijet_fusion.jpg",
+      "materialConfigId": "cf9198db-c55a-521d-93ba-bc82f049f84d"
+    }, {
+      "displayImageUrl": "http://res.cloudinary.com/all3dp/image/upload/w_700,h_458,c_fill,q_90,f_auto/gallery/hp_multijet_fusion.jpg",
+      "materialConfigId": "6fb03cf4-0873-5f36-9986-b41cd5aabe65"
+    }]
+  }]
 }
