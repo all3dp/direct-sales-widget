@@ -26,11 +26,10 @@ describe('Material Integration Test', () => {
 
   describe('getMaterials()', () => {
     it('should work', async () => {
-      printingEngine.listMaterials.resolves('some-materials')
+      printingEngine.listMaterials.resolves({materialStructure: 'some-materials'})
 
       await store.dispatch(getMaterials())
 
-      expect(materialLib.generateMaterialIds, 'to have a call satisfying', ['some-materials'])
       expect(store.getState().material.materials, 'to equal', 'some-materials')
     })
   })
