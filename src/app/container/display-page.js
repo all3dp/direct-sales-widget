@@ -44,7 +44,7 @@ const DisplayPage = ({
       showControls={materialOptions.length > 1}
       modifiers={['thick-background']}
       zoomedIn={backgroundImageZoomed}
-      material={material.materialConfig.name}
+      material={material.materialConfig.name || 'asdasda'}
       buttonLabel={totalPrice ? `$${totalPrice} BUY` : 'Check Price'}
       handleButtonClick={totalPrice ? handleGoToCheckout : handleGoToAddress}
       handleChangeMaterialLeft={changeMaterialLeft}
@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
   modelDescription: state.model.description,
   selectedMaterial: state.model.selectedModelId,
   materialOptions: state.material.materialOptions,
-  material: selectMaterialByMaterialConfigId(state, state.material.selectedMaterialConfig),
+  material: selectMaterialByMaterialConfigId(state),
   descriptionExpanded: state.display.descriptionExpanded,
   backgroundImageZoomed: state.display.backgroundImageZoomed
 })

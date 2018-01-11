@@ -41,8 +41,6 @@ const materialReceived = createAction(TYPE.MATERIAL.RECEIVED, materials => mater
 
 // Async actions
 export const getMaterials = () => async (dispatch) => {
-  const materials = cloneDeep(await printingEngine.listMaterials())
-  generateMaterialIds(materials)
-
-  return dispatch(materialReceived(materials))
+  const materialResponse = await printingEngine.listMaterials()
+  return dispatch(materialReceived(materialResponse.materialStructure))
 }

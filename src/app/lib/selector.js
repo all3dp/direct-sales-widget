@@ -172,7 +172,8 @@ export const selectMaterialByMaterialConfigId = (state) => {
   let selectedMaterial
   let selectedFinishGroup
   let selectedMaterialConfig
-  materials.materialStructure.every((materialGroup) => {
+
+  materials.every((materialGroup) => {
     materialGroup.materials.every((material) => {
       material.finishGroups.every((finishGroup) => {
         finishGroup.materialConfigs.every((materialConfig) => {
