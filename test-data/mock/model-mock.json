@@ -1,0 +1,30 @@
+{
+  "_id": "c38263cc5ad8ffc05bd745ee1238a4421b00befd84f784720d7ceef1ed05f5ca",
+  "created": {
+    "$date": "2018-01-11T13:15:14.509+0000"
+  },
+  "fileName": "test-model.stl",
+  "fileUnit": "mm",
+  "dimensions": {
+    "x": 69.88224792480469,
+    "y": 34.520084381103516,
+    "z": 34.52690124511719
+  },
+  "area": 6919.494140625,
+  "volume": 36753.34375,
+  "printingService": {
+    "imaterialise": {
+      "modelId": "79aad364-21ff-4c3a-9fa8-bc397de785c0",
+      "requestComplete": true
+    },
+    "shapeways": {
+      "modelId": 7074079,
+      "requestComplete": true
+    },
+    "sculpteo": {
+      "modelId": "5nEGhx3F",
+      "requestComplete": true
+    }
+  },
+  "sceneId": "62a0356d-65ee-4a2e-8618-4f7fb0748dbc"
+}
